@@ -12,7 +12,7 @@ export default function Nav() {
             <NavItemList>
                 <NavItem title="Acerca de" href="/about"></NavItem>
                 <NavItem title="Iniciar sesión" href="/login"></NavItem>
-                <NavItem title="Registrarse"></NavItem>
+                <NavItem title="Registrarse" href="/register"></NavItem>
             </NavItemList>
         </div>
     </nav>);

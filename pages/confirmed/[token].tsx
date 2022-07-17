@@ -18,7 +18,7 @@ export default function Token( result : ResultServerProps) {
     </div>)
 }
 
-export const getServerSideProps: GetServerSideProps<ResultServerProps> = async ({params}) => {
+export const getServerSideProps = async ({params}) => {
     //
    const result = await confirmToken(params.token)
 

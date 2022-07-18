@@ -3,7 +3,9 @@ import Footer from "../components/Footer";
 import {Field, Form, Formik, FormikHelpers} from "formik";
 import InputBox from "../components/InputBox";
 import {register} from "../services/auth";
-import {Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
+import Link from "next/link";
+import {useRouter} from "next/router";
 
 interface Inputs {
     "name": string
@@ -42,43 +44,62 @@ function validateNames(name: string) {
 
 
 export default function Register() {
-
-
-    interface ResponseServer {
-        "msg": string
-        "error": boolean
+    interface RegisterState {
+        msg: string,
+        error: boolean
     }
 
-    const [registerState, setRegisterState]: [ResponseServer, Dispatch<SetStateAction<ResponseServer>>] = useState()
+    interface InputValues {
+        "name": string,
+        "lastName": string,
+        "password": string,
+        "repeatPassword": string,
+        "email": string
+    }
 
+    const [registerState, setRegisterState]: [RegisterState, Dispatch<SetStateAction<RegisterState>>] = useState()
     const RegistrationSuccess = () => {
+        const router = useRouter()
+
+        useEffect( () => {
+            const redirectToLogin = async () => {
+                setTimeout(()=>{
+                    router.push('/')
+                }, 5000)
+            }
+            redirectToLogin()
+        },[router])
+
         return (<div>
-            <p>De una perro!</p>
+            <h5 className="text-3xl p-5 text-center ">Genial! el registro fue un exito :)</h5>
+            <p className="text-xl p-2 text-center">Se envió un email de confirmacion a tu correo electrónico, chequeá tu inbox y segui los pasos ;)</p>
+            <p className="text-xl p-2 text-center">Redireccionando a la página de inicio...</p>
         </div>)
     }
     const RegistrationFailure = () => {
-        return (<div>
-            <p> efe brother :(</p>
+        return (<div className="flex flex-col">
+            <h5 className="text-3xl p-5 text-center ">Ups... ocurrió un error :(</h5>
+            <p className="text-xl p-2 text-center">El Email ingresado ya está vinculado a una cuenta.</p>
+            <p className="p-2">Utilizá otro email para crear una cuenta o <Link  href={'/login'}><span className="text-sky-600 underline hover:cursor-pointer">iniciá sesión</span></Link> con tus
+                credenciales.</p>
+            <button className="rounded border border-black p-3 mt-2" onClick={() => {
+                setRegisterState(undefined)
+            }}> Intentar de nuevo con otro email
+            </button>
         </div>)
     }
 
     const handleRegister = async (user: User) => {
-        const result = await register(user)
-        console.log(result)
-        setRegisterState(result.data)
+        const response = await register(user)
+        const serverResponseState: RegisterState = response.data
+        setRegisterState(serverResponseState)
     }
 
-    const RegisterForm = () => {
+    const RegisterForm = (initialValues: InputValues) => {
         return (<>
             <h5 className="text-3xl p-5">Registrarse es fácil! Completá tus datos y estas dentro :) </h5>
             <Formik
-                initialValues={{
-                    "name": '',
-                    "lastName": '',
-                    "password": '',
-                    "repeatPassword": '',
-                    "email": ''
-                }}
+                initialValues={initialValues}
                 onSubmit={(values: Inputs, {setSubmitting}: FormikHelpers<Inputs>) => {
                     handleRegister({
                         'name': values.name,
@@ -131,7 +152,13 @@ export default function Register() {
     return <div className="h-screen flex flex-col items-center">
         <Nav/>
         <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
-            {registerState ? (registerState.error ? <RegistrationFailure/> : <RegistrationSuccess/>) : <RegisterForm/>}
+            {registerState
+                ? (registerState.error
+                        ? <RegistrationFailure/>
+                        : <RegistrationSuccess/>
+                )
+                : <RegisterForm name='' lastName="" email="" password="" repeatPassword=""/>
+            }
         </main>
         <Footer/>
     </div>

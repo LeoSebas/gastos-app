@@ -15,10 +15,10 @@ LOCAL_API.interceptors.request.use((config) => {
 
 LOCAL_API.interceptors.response.use(
     (response) => {
-        return response.data;
+        return response;
     },
     (error) => {
-        return error.response.data;
+        return error.response;
     }
 );
 

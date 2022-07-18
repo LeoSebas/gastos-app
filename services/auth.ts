@@ -1,6 +1,12 @@
 import {LOCAL_API} from "./localAPI";
+import {AxiosResponse} from "axios";
 
-export function register(user) {
+interface ResponseState {
+    msg: string,
+    error: boolean
+}
+
+export function register(user) : Promise<AxiosResponse<ResponseState>> {
     return LOCAL_API.post('api/user', user)
 }
 

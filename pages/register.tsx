@@ -107,6 +107,7 @@ export default function Register() {
                         "password": values.password,
                         "email": values.email
                     })
+
                 }}>{({isSubmitting, errors, touched}) => (
                 <Form className="flex flex-col w-10/12 sm:w-10/12 md:w-8/12 lg:w-6/12">
                     <div className="flex flex-col md:flex-row lg:flex-row ">

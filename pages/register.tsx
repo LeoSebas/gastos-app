@@ -67,11 +67,11 @@ export default function Register() {
 
     /// Effect y  router de redireccion si el usuario ya está logueado
     const router = useRouter()
-    useEffect(()=>{
-        if (currentUser) {
-            router.push('/home')
-        }
-    })
+
+    if (currentUser) {
+        router.push('/home')
+        return <></>
+    }
 
     /// Componente para registro exitoso
     const RegistrationSuccess = () => {

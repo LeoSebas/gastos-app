@@ -16,22 +16,16 @@ interface Credentials {
 }
 
 export default function Login() {
+    /// Selector para consultar el user
+    const currentUser = useSelector((state: AppState) => state.user)
+    const router = useRouter()
     /// Dispach para actualizar el user
     const dispatch = useDispatch()
 
-    /// Selector para consultar el user
-    const currentUser = useSelector((state: AppState) => state.user)
-
-
-
-    /// Effect y  router de redireccion si el usuario ya está logueado
-    const router = useRouter()
-    useEffect(()=>{
-        if (currentUser) {
-            router.push('/home')
-        }
-    })
-
+    if (currentUser) {
+        router.push('/home')
+       return <></>
+    }
 
     const signIn = async (credentials: Credentials) => {
         const response = await loginUser(credentials)

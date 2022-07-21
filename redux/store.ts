@@ -1,10 +1,22 @@
-import {configureStore, createSlice} from "@reduxjs/toolkit";
+import { configureStore, createSlice } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+
+const persistConfig = {
+    key: 'root',
+    storage
+}
+
 enum AppTheme {
     light,
     dark
 }
+
+/// Recupero el usuario del LocalStorage si existe
+const initialUser = null
+
 const initialState: AppState = {
-    user: null,
+    user: initialUser,
     theme: AppTheme.light,
 }
 
@@ -24,13 +36,15 @@ export const appSlice = createSlice({
     initialState,
     reducers: {
         userChanged: (state, action) => {
-            return {...state, user: action.payload}
+            const user = action.payload
+            return {...state, user: user}
         },
         appThemeChanged: (state) => {
             return {...state, theme: state.theme === AppTheme.light ? AppTheme.dark : AppTheme.light}
         }
     }
 })
+const persistedReducer = persistReducer(persistConfig, appSlice.reducer)
 
-export const appStore = configureStore({reducer: appSlice.reducer})
-export {}
+export let appStore = configureStore({reducer: persistedReducer})
+export let persistor = persistStore(appStore)

@@ -3,11 +3,22 @@ enum AppTheme {
     light,
     dark
 }
-const initialState = {
+const initialState: AppState = {
     user: null,
     theme: AppTheme.light,
 }
 
+interface User {
+    _id: string
+    name: string,
+    lastName: string,
+    email: string
+}
+
+export interface AppState{
+    user?: User,
+    theme: AppTheme
+}
 export const appSlice = createSlice({
     name: "AppState",
     initialState,

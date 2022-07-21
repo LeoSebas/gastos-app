@@ -4,10 +4,11 @@ import {Field, Form, Formik} from "formik";
 import InputBox from "../components/InputBox";
 import ActionButton from "../components/ActionButton";
 import {loginUser} from "../services/auth";
-import {useDispatch} from "react-redux";
-import {appSlice} from "../redux";
+import {useDispatch, useSelector} from "react-redux";
+import {appSlice, AppState} from "../redux";
 import * as Yup from 'yup'
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 
 interface Credentials {
     email: string,
@@ -18,10 +19,27 @@ export default function Login() {
     /// Dispach para actualizar el user
     const dispatch = useDispatch()
 
+    /// Selector para consultar el user
+    const currentUser = useSelector((state: AppState) => state.user)
+
+
+
+    /// Effect y  router de redireccion si el usuario ya está logueado
+    const router = useRouter()
+    useEffect(()=>{
+        if (currentUser) {
+            router.push('/home')
+        }
+    })
+
 
     const signIn = async (credentials: Credentials) => {
         const response = await loginUser(credentials)
-        console.log(response)
+        if("error" in response.data) {
+            console.log(response.data.msg)
+        } else {
+            dispatch(appSlice.actions.userChanged(response.data))
+        }
     }
 
     const LoginForm = () => {
@@ -39,9 +57,9 @@ export default function Login() {
         return <>
             <h5 className="text-3xl p-5">Iniciar sesión</h5>
             <Formik initialValues={{"email": '', "password": ''}}
-                    onSubmit={ async (values: Credentials) => {
-                        const response = await loginUser(values)
-                        dispatch(appSlice.actions.userChanged(response.data))
+                    onSubmit={(values: Credentials, {setSubmitting}) => {
+                        signIn(values);
+                        setSubmitting(false)
                     }}
                     validationSchema={loginSchema}
             >

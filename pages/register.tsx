@@ -8,6 +8,8 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import ActionButton from "../components/ActionButton";
 import * as Yup from 'yup'
+import {useSelector} from "react-redux";
+import {AppState} from "../redux";
 
 interface Inputs {
     "name": string
@@ -60,25 +62,36 @@ export default function Register() {
     /* State que controla el flujo de registro */
     const [registerState, setRegisterState]: [RegisterState, Dispatch<SetStateAction<RegisterState>>] = useState()
 
+    /// Selector para consultar el user
+    const currentUser = useSelector((state: AppState) => state.user)
+
+    /// Effect y  router de redireccion si el usuario ya está logueado
+    const router = useRouter()
+    useEffect(()=>{
+        if (currentUser) {
+            router.push('/home')
+        }
+    })
+
     /// Componente para registro exitoso
     const RegistrationSuccess = () => {
-        const router = useRouter()
+            const router = useRouter()
 
-        useEffect(() => {
-            const redirectToLogin = async () => {
-                setTimeout(() => {
-                    router.push('/')
-                }, 5000)
-            }
-            redirectToLogin()
-        }, [router])
+            useEffect(() => {
+                const redirectToLogin = async () => {
+                    setTimeout(() => {
+                        router.push('/')
+                    }, 5000)
+                }
+                redirectToLogin()
+            }, [router])
 
-        return (<div>
-            <h5 className="text-3xl p-5 text-center ">Genial! el registro fue un exito :)</h5>
-            <p className="text-xl p-2 text-center">Se envió un email de confirmacion a tu correo electrónico, chequeá tu
-                inbox y segui los pasos ;)</p>
-            <p className="text-xl p-2 text-center">Redireccionando a la página de inicio...</p>
-        </div>)
+            return (<div>
+                <h5 className="text-3xl p-5 text-center ">Genial! el registro fue un exito :)</h5>
+                <p className="text-xl p-2 text-center">Se envió un email de confirmacion a tu correo electrónico, chequeá tu
+                    inbox y segui los pasos ;)</p>
+                <p className="text-xl p-2 text-center">Redireccionando a la página de inicio...</p>
+            </div>)
     }
 
     /// Componente para registro fallido
@@ -107,16 +120,19 @@ export default function Register() {
 
     /// Componente Formulario para el registro con Formik.
     const RegisterForm = (initialValues: InputValues) => {
+
         const registerSchema = Yup.object().shape({
             name: Yup.string().min(2, 'Muy corto!').max(50, 'Muy largo!').required('Este campo es obligatorio')
                 .matches(/(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+))(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+))?$/, 'Sin números'),
-            lastName: Yup.string().min(2, 'Muy corto!').max(50, 'Muy largo!').required('Este campo es obligatorio'),
+            lastName: Yup.string().min(2, 'Muy corto!').max(50, 'Muy largo!').required('Este campo es obligatorio')
+                .matches(/(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+))(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+))?$/, 'Sin números'),
             password: Yup.string().min(8, 'La contraseña es muy corta').max(100, 'Creo que ya es muy larga, no?').required('Este campo es obligatorio'),
             repeatPassword: Yup.string().ensure().test('password-match', 'Las contraseñas deben coincidir', function (repeatPassword) {
                 return this.parent.password === repeatPassword
             }),
             email: Yup.string().email('¿El email esta bien escrito?')
         })
+
         return (<>
             <h5 className="text-3xl p-5">Registrarse es fácil! Completá tus datos y estas dentro :) </h5>
             <Formik

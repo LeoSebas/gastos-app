@@ -22,4 +22,27 @@ LOCAL_API.interceptors.response.use(
     }
 );
 
-export {LOCAL_API}
+const HEROKU_API = axios.create({
+    baseURL: "https://quiet-oasis-06107.herokuapp.com",
+    timeout: 5000
+})
+
+HEROKU_API.interceptors.request.use((config) => {
+    config.headers = {...config.headers, "user-auth": "token"}
+    return config
+}, () => {
+
+    }
+)
+
+HEROKU_API.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    (error) => {
+        return error.response;
+    }
+);
+
+
+export {LOCAL_API, HEROKU_API}

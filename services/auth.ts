@@ -1,4 +1,4 @@
-import {LOCAL_API} from "./localAPI";
+import {LOCAL_API, HEROKU_API} from "./localAPI";
 import {AxiosResponse} from "axios";
 
 export interface ResponseState {
@@ -19,13 +19,13 @@ interface Credentials {
 }
 
 export function register(user) : Promise<AxiosResponse<ResponseState>> {
-    return LOCAL_API.post('api/user', user)
+    return HEROKU_API.post('api/user', user)
 }
 
 export function confirmToken(token) {
-    return LOCAL_API.get(`api/user/confirmed/${token}`)
+    return HEROKU_API.get(`api/user/confirmed/${token}`)
 }
 
 export function loginUser(credentials: Credentials) : Promise<AxiosResponse<ResponseState | ResponseLogin>> {
-    return LOCAL_API.post('api/user/login', credentials)
+    return HEROKU_API.post('api/user/login', credentials)
 }

@@ -6,10 +6,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {appSlice, AppState} from "../../redux";
 import {useRefreshRoot} from "next/dist/client/streaming/refresh";
 import {useRouter} from "next/router";
+import NavItemUserProfile from "./NavItemUserProfile";
 
 export default function Nav() {
     const currentUser = useSelector((state: AppState) => state.user)
-    const dispatch = useDispatch()
+
     const router = useRouter()
 
     return (<nav className="w-full  flex flex-col items-center border">
@@ -20,9 +21,8 @@ export default function Nav() {
             <NavItemList>
                 <NavItem title="Acerca de" href="/about"></NavItem>
                 {currentUser
-                    ? <NavItem title="Cerrar sesión" onClick={() => {
-                        dispatch(appSlice.actions.userChanged(null))
-                    }}></NavItem>
+                    ? <><NavItemUserProfile user={currentUser}/>
+                    </>
                     : <>
                         <NavItem title="Iniciar sesión" href="/login"></NavItem>
                         <NavItem title="Registrarse" href="/register"></NavItem>

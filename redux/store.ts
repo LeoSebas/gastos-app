@@ -20,7 +20,8 @@ const initialState: AppState = {
     theme: AppTheme.light,
 }
 
-interface User {
+
+export interface User {
     _id: string
     name: string,
     lastName: string,

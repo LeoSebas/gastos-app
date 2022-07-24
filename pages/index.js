@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Nav from "../components/Nav";
 import Footer from "../components/Footer";
+import Image from "next/image";
 
 export default function Home() {
     return (
@@ -11,20 +12,23 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <Nav/>
-            <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
+            <main className="container h-full p-4 flex flex-1 flex-col">
 
-                <h1 className="m-0 text-7xl">
-                    Bienvenido a <span className="font-bold">Ahorrar +</span> !!!
-                </h1>
+                <section className="my-16 text-3xl flex flex-col">
+                    <div className="fixed">
+                        <Image src="/bg-main-description.svg" width={800} height={600} />
 
-                <section className="my-16 text-3xl">
-                    <p>
-                        Una app perfecta para que gestiones tus consumos y gastos personales.
-                    </p>
-                    <p>
-                        Agregá gastos, separálos por categorias y analizá tus consumos históricos por semanas, meses,
-                        incluso años! :)
-                    </p>
+                    </div>
+                    <div className="fixed ">
+                        <p>
+                            Una app perfecta para que gestiones tus consumos y gastos personales.
+                        </p>
+                        <p>
+                            Agregá gastos, separálos por categorias y analizá tus consumos históricos por semanas, meses,
+                            incluso años! :)
+                        </p>
+                    </div>
+
                 </section>
 
             </main>

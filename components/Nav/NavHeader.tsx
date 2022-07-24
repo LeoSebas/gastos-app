@@ -1,5 +1,5 @@
 export default function NavHeader({children}) {
-    return (<div className="text-3xl font-bold hover:cursor-pointer">
+    return (<div className="flex justify-center hover:cursor-pointer">
         {children}
     </div>)
 }

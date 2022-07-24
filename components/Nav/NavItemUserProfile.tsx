@@ -2,6 +2,8 @@ import {appSlice, User} from "../../redux";
 import {useState} from "react";
 import NavItem from "./NavItem";
 import {useDispatch} from "react-redux";
+import userPhoto from "../../public/user-photo.png"
+import Image from "next/image";
 
 export default function NavItemUserProfile({user}: { user: User }) {
     const [showOptions, setShowOptions] = useState(false)
@@ -11,7 +13,7 @@ export default function NavItemUserProfile({user}: { user: User }) {
         setShowOptions(!showOptions)
     }
     const UserOptions = () => {
-        return <div className="fixed">
+        return <div className="absolute ">
             <NavItem title="Inicio" href="/home"/>
             <NavItem title="Cerrar sesión" onClick={() => {
                 dispatch(appSlice.actions.userChanged(null))
@@ -19,9 +21,12 @@ export default function NavItemUserProfile({user}: { user: User }) {
         </div>
     }
     return <>
-        <div className="hover:cursor-pointer rounded-xl border border-black">
-            <div className="p-3" onClick={handleOnClick}>
-                <span className="">{`Hola! ${user.name} :)`}</span>
+        <div className=" hover:cursor-pointer rounded-2xl border border-black">
+            <div className=" p-1 flex justify-center  items-center" onClick={handleOnClick}>
+                <span className=" flex justify-center items-center">
+                    <Image src="/user-photo.png" width={40} height={40} className="rounded-xl"></Image>
+                </span>
+                <span className="ml-2"><p className="m-0">{`Hola! ${user.name} :)`}</p></span>
             </div>
             {showOptions ? <UserOptions/> :<></>}
         </div>

@@ -13,7 +13,8 @@ export default function Nav() {
 
     const router = useRouter()
 
-    return (<nav className="w-full  flex flex-col items-center border">
+    return (
+    <nav className="w-full  flex flex-col items-center border">
         <div className="container h-[70px] flex justify-between items-center ">
             <NavHeader>
                 <Link href="/"><p>Ahorrar+</p></Link>

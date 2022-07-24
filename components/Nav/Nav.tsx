@@ -15,10 +15,9 @@ export default function Nav() {
 
     return (<nav className="w-full  flex flex-col items-center border ">
         <div className="container h-[70px] flex justify-between items-center ">
+
             <NavHeader>
-                <Link href="/">
                     <Image src="/logo.svg" width={60} height={60} />
-                </Link>
             </NavHeader>
             <NavItemList>
                 <NavItem title="Acerca de" href="/about"></NavItem>

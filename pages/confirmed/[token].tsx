@@ -1,5 +1,3 @@
-import Nav from "../../components/Nav";
-import Footer from "../../components/Footer";
 import {GetServerSideProps} from "next";
 import {confirmToken} from "../../services/auth";
 import {useEffect, useState} from "react";
@@ -49,11 +47,9 @@ export default function Token({ data } : {data : ResultServerProps}) {
     }
 
     return (<div className="h-screen flex flex-col items-center">
-        <Nav/>
         <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
             {tokenState === 'pure' ? <span>Aguarde un momento...</span> : (tokenState === 'success' ? <TokenSuccess/> : <TokenFailure/>)}
         </main>
-        <Footer/>
     </div>)
 }
 

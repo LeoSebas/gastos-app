@@ -9,7 +9,7 @@ export default function MainDescription() {
 
     const MobileMode = () => {
         return <section className="h-[650px] w-full -z-10">
-            <div className="relative flex items-stretch h-full w-full overflow-hidden">
+            <div className="relative h-[650px] flex items-stretch h-full w-full">
                 <div className="mt-[200px] absolute w-full -z-10 flex justify-end">
                     <div className="flex justify-end">
                         <Image src={imgMainDescr}/>
@@ -38,14 +38,15 @@ export default function MainDescription() {
                         <Image src={bgMainDescr}/>
                     </div>
                 </div>
-
             </div>
         </section>
     }
 
-    return (breakpoint === 'xs' ? <MobileMode /> :
-            <section className="h-[300px] w-full sm:h-[350px] md:h-[450px] lg:h-[550px] xl:h-[700px] 2xl:h-[800px] -z-10">
-                <div className="relative flex items-center h-full w-full overflow-hidden ">
+    return (breakpoint === 'xs' ? <MobileMode/> :
+            <section
+                className="h-[300px] w-full sm:h-[350px] md:h-[450px] lg:h-[550px] xl:h-[700px] 2xl:h-[800px] -z-10">
+                <div
+                    className="relative h-[300px] w-full sm:h-[350px] md:h-[450px] lg:h-[550px] xl:h-[700px] 2xl:h-[800px] flex items-center h-full w-full overflow-hidden ">
                     <div className="absolute w-full">
                         <div className="z-0 w-8/12">
                             <Image src={bgMainDescr}/>

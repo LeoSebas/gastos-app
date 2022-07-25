@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         'userphoto' : 'center no-repeat url("/user-photo.png")',
-        'maindescription':'center no-repeat url("/bg-main-description.svg")'
+        'footer':'center no-repeat url("/bg-footer.svg")'
       }
     },
   },

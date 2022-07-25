@@ -21,7 +21,7 @@ export default function Login() {
     const dispatch = useDispatch()
 
     if (currentUser) {
-        router.push('/home')
+        router.push('/private/home')
        return <></>
     }
 

@@ -18,7 +18,9 @@ export default function PrivateLayout ({children}){
                 <div className={style.PrivateLayout__nav}>
                 <Nav/>
                 </div>
-                {children}
+                <div className={style.PrivateLayout__children}>
+                    {children}
+                </div>
                 <Footer/>
             </div >
         </div>:

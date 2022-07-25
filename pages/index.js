@@ -1,6 +1,4 @@
 import Head from 'next/head'
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import MainDescription from "../components/MainDescription";
 import MainCoreFeatures from "../components/MainCoreFeatures/MainCoreFeatures";
 

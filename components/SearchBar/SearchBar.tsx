@@ -11,17 +11,18 @@ export default function SearchBar (){
     const userCategories = useSelector((state: AppState) => state.categories)
     const currentUser = useSelector((state: AppState) => state.user)
     const [results, setResults] = useState({})
-    const search = useRef();
-    const minValue = useRef()
-    const maxValue = useRef()
-    const minDate = useRef()
-    const maxDate = useRef()
-    const category = useRef()
-    const sortBy = useRef()
-    const itemsPerPage = useRef()
-    const fetchSearch = async (token, queryParams) => {
+    const search = useRef<HTMLInputElement>(null);
+    const minValue = useRef<HTMLInputElement>(null);
+    const maxValue = useRef<HTMLInputElement>(null);
+    const minDate = useRef<HTMLInputElement>(null);
+    const maxDate = useRef<HTMLInputElement>(null);
+    const category = useRef<HTMLSelectElement>(null);
+    const sortBy = useRef<HTMLSelectElement>(null);
+    const itemsPerPage = useRef<HTMLSelectElement>(null);
+    
+    const fetchSearch = async (token:string, queryParams:object):Promise<any> => {
         const response = await searchExpenses(token, queryParams)
-        if( !response || response?.data.error) {
+        if( !response || response?.data?.error) {
             console.log(response)
         } else {
             setResults(response.data)
@@ -33,6 +34,7 @@ export default function SearchBar (){
     const handleSubmit = event => {
         event.preventDefault();
         var results
+        console.log(search)
         var queryParams = {
             search: search.current.value,
             minValue: minValue.current.value,

@@ -5,7 +5,7 @@ import { AppState } from "../redux";
 
 
 
-export function searchExpenses(token, queryParams) : Promise<AxiosResponse> {
+export function searchExpenses(token:string, queryParams:any) : Promise<AxiosResponse> {
     var {search,
         minValue,
         maxValue,
@@ -18,6 +18,5 @@ export function searchExpenses(token, queryParams) : Promise<AxiosResponse> {
     let config = {
         headers:{"Authorization": "Bearer " + token}
     }
-    console.log("queryParams")
     return HEROKU_API.get(`api/expenses/search?search=${search}&minValue=${minValue}&maxValue=${maxValue}&page=&limit=${itemsPerPage}&sortBy=${sortBy}&desc=&minDate=${minDate}&maxDate=${maxDate}&categoryID=${category}`, config)
 }

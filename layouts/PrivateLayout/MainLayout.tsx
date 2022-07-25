@@ -4,11 +4,15 @@ import Sidebar from "../../components/Sidebar"
 import style from "./PrivateLayout.module.css"
 
 export default function PrivateLayout ({children}){
+    if (window.location.pathname.slice(1,8)==="private"){
+        var isPrivate = true
+    }
     return (
+        (isPrivate)?
         <div className={style.PrivateLayout}>
-            <div className={style.PrivateLayout__sidebar}>
+            {<div className={style.PrivateLayout__sidebar}>
                 <Sidebar/>
-            </div >
+            </div >}
 
             <div className={style.PrivateLayout__main}>
                 <div className={style.PrivateLayout__nav}>
@@ -17,7 +21,13 @@ export default function PrivateLayout ({children}){
                 {children}
                 <Footer/>
             </div >
-        </div>
+        </div>:
+        <>
+        <Nav/>
+        {children}
+        <Footer/>
+        </>
+
     )
 }
 

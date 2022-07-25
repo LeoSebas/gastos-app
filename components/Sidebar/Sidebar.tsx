@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { useState } from "react"
 import Button from "./Button"
 import Hamburger from "./Hamburger"
@@ -12,10 +13,10 @@ export default function Sidebar() {
 
                 <div className={styles.Sidebar__hamburger__container} onClick={()=>setSideOpen(!sideOpen)}><Hamburger isOpen={sideOpen}/></div>
                 <div className={styles.Sidebar__list}>
-                    <Button text="Home" link="/home"/>
-                    <Button text="Gastos" link="/"/>
-                    <Button text="Categorias" link="/"/>
-                    <Button text="Perfil" link="/"/>
+                    <Button text="Home" link="home"/>
+                    <Button text="Gastos" link="search"/>
+                    <Button text="Categorias" link=""/>
+                    <Button text="Perfil" link=""/>
                 </div>
             </nav>
     )

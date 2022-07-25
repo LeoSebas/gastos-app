@@ -1,5 +1,3 @@
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import {Field, Form, Formik} from "formik";
 import InputBox from "../components/InputBox";
 import ActionButton from "../components/ActionButton";
@@ -23,7 +21,7 @@ export default function Login() {
     const dispatch = useDispatch()
 
     if (currentUser) {
-        router.push('/home')
+        router.push('/private/home')
        return <></>
     }
 
@@ -82,10 +80,8 @@ export default function Login() {
     }
 
     return <div className="h-screen flex flex-col items-center">
-        <Nav/>
         <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
             {<LoginForm/>}
         </main>
-        <Footer/>
     </div>
 }

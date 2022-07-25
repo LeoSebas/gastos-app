@@ -1,21 +1,37 @@
 import {useDispatch, useSelector} from "react-redux";
-import {AppState} from "../../redux";
+import {appSlice, AppState} from "../../../redux";
 import {useRouter} from "next/router";
-import PrivateLayout from "../../layouts/PrivateLayout/PrivateLayout";
+import { getCategories } from "../../../services/categories";
+import { useEffect } from "react";
+
 
 export default function Home() {
     /// Selector para consultar el user
     const currentUser = useSelector((state: AppState) => state.user)
     const router = useRouter()
+    const categories = async () => {
+        const response = await getCategories(currentUser.token)
+        console.log(response)
+        if( !response || response?.data.error) {
+            console.log(response)
+        } else {
+            dispatch(appSlice.actions.setCategories(response.data.categories))
+        }
+    }
+
     /// Dispach para actualizar el user
     const dispatch = useDispatch()
-
+    
     if (!currentUser) {
         router.push('/login')
         return <></>
     }
+
+    useEffect(() => {
+      categories()
+    }, [])
+    
     return (
-        <PrivateLayout>
             <div className="flex flex-col items-center">
                 <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
                     <section>
@@ -23,6 +39,6 @@ export default function Home() {
                     </section>
                 </main>
             </div>
-        </PrivateLayout>
     )
 }
+

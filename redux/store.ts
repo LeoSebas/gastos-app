@@ -18,19 +18,28 @@ const initialUser = null
 const initialState: AppState = {
     user: initialUser,
     theme: AppTheme.light,
+    categories: []
+}
+
+export interface LibraryItem {
+    _id: string,
+    name: string,
+    color: string,
 }
 
 
 export interface User {
-    _id: string
+    _id: string,
     name: string,
     lastName: string,
-    email: string
+    email: string,
+    token: string
 }
 
 export interface AppState{
     user?: User,
-    theme: AppTheme
+    theme: AppTheme,
+    categories: Array<LibraryItem>
 }
 export const appSlice = createSlice({
     name: "AppState",
@@ -42,6 +51,10 @@ export const appSlice = createSlice({
         },
         appThemeChanged: (state) => {
             return {...state, theme: state.theme === AppTheme.light ? AppTheme.dark : AppTheme.light}
+        },
+        setCategories:(state, action) => {
+            const categories = action.payload
+            return { ...state, categories: categories}
         }
     }
 })

@@ -8,19 +8,18 @@ import { useEffect } from "react";
 export default function Home() {
     /// Selector para consultar el user
     const currentUser = useSelector((state: AppState) => state.user)
+    const dispatch = useDispatch()
     const router = useRouter()
     const categories = async () => {
         const response = await getCategories(currentUser.token)
         console.log(response)
         if( !response || response?.data.error) {
-            console.log(response)
+            console.log(response.data.msg)
         } else {
             dispatch(appSlice.actions.setCategories(response.data.categories))
         }
     }
-
-    /// Dispach para actualizar el user
-    const dispatch = useDispatch()
+    
     useEffect(() => {
         categories()
       }, [])

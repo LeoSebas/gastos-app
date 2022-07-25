@@ -1,0 +1,45 @@
+.hamburger__container{
+    cursor: pointer;
+    padding: 1em;
+    display: flex;
+    position: fixed;
+    left: 0;
+    z-index: 200;
+    transition: all 845ms ease-in-out;
+  }
+
+  .hamburger { /*Ojo, cualquier transform aplicado sobre esta clase afecta al after y before */
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+  }
+  
+  .hamburger,
+  .hamburger::before,
+  .hamburger::after { /* Son las 3 lineas que componen el hamburger */
+    background-color: black;
+    width: 2em;
+    height: 4px;
+    border-radius: 1em;
+    transition: transform 1200ms ease-in-out;
+    margin-block: 3px;
+  }
+  .hamburger::before,
+  .hamburger::after {
+    content: "";/* Necesario si no tienen contenido no aparecen */
+    position: absolute;
+  }
+  .hamburger::before { /* posicionamiento */
+    top: 6px;
+  }
+  .hamburger::after { /* posicionamiento */
+    bottom: 6px;
+  }
+
+  .conOpen .hamburger::before {
+    transform: rotate(-393deg) scaleX(0.7) translateX(-13px);
+  }
+
+  .conOpen .hamburger::after {
+    transform: rotate(393deg) scaleX(0.7) translateX(-13px) ; /* En si los unicos que manejan la animación son estos dos ultimos. Y el transition dentro del hamburger */
+  }

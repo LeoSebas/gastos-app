@@ -1,0 +1,30 @@
+.PrivateLayout{
+    all: unset;
+    display: grid;
+    grid-template-areas: 
+    "sidebar main"
+    ;
+    grid-auto-columns: min-content auto;
+
+    
+}
+
+.PrivateLayout__main{
+    display: flex;
+    flex-direction: column;
+    grid-area: main;
+    height: min-content;
+    justify-content: space-between;
+    min-height: 100vh;
+}
+
+
+
+.PrivateLayout__main footer{
+    bottom: 0;
+}
+
+.PrivateLayout__nav{
+    padding-left: 4em;
+    padding-right: 1em;
+}

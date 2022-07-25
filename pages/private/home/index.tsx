@@ -21,16 +21,16 @@ export default function Home() {
 
     /// Dispach para actualizar el user
     const dispatch = useDispatch()
-    
+    useEffect(() => {
+        categories()
+      }, [])
+
+
     if (!currentUser) {
         router.push('/login')
         return <></>
     }
 
-    useEffect(() => {
-      categories()
-    }, [])
-    
     return (
             <div className="flex flex-col items-center">
                 <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">

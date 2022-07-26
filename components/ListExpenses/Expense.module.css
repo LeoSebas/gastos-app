@@ -2,11 +2,15 @@
 
 .Expense{
     display: flex;
-    padding-inline: 1em;
-    height: 2em;
+    height: 2.5em;
     align-items: center;
-    width: 100%;
-    
+    justify-content: space-between;
+    background-color: red;
+    width: 90vw;
+    margin: 0.5em;
+    border-radius: 15px;
+    padding-inline: 1em;
+
     
 }
 
@@ -28,12 +32,9 @@
 }
 
 .Expense__options{
-    width: 15%;
     display: flex;
-}
-
-.Expense__options__icons{
-    width: 10px !important;
+    right: 0;
+    margin-left: auto;
 }
 
 .Expense__delete, .Expense__edit  {

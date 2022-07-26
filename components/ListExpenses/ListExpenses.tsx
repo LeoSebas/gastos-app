@@ -16,7 +16,7 @@ export default function ListExpenses(props){
         <div className={style.ListExpenses}>
             <div className={style.ListExpenses__list}>
                 <Expense name="Name" date="Date" value="Value" category="Category"/>
-                {results.expenses?.map((expense)=> <Expense name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategoryName(expense.categoryID)}/>)}
+                {results.expenses?.map((expense)=> <Expense key={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategoryName(expense.categoryID)}/>)}
             </div>
             <Pagination totalItems={results.totalItems}/>
         </div>

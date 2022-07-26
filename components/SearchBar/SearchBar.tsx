@@ -7,10 +7,9 @@ import style from "./SearchBar.module.css"
 
 
 
-export default function SearchBar (){
-    const userCategories = useSelector((state: AppState) => state.categories)
+export default function SearchBar (props){
+    const {setResults, userCategories} = props
     const currentUser = useSelector((state: AppState) => state.user)
-    const [results, setResults] = useState({})
     const search = useRef<HTMLInputElement>(null);
     const minValue = useRef<HTMLInputElement>(null);
     const maxValue = useRef<HTMLInputElement>(null);
@@ -33,8 +32,6 @@ export default function SearchBar (){
 
     const handleSubmit = event => {
         event.preventDefault();
-        var results
-        console.log(search)
         var queryParams = {
             search: search.current.value,
             minValue: minValue.current.value,
@@ -47,8 +44,6 @@ export default function SearchBar (){
         }
         fetchSearch(currentUser.token, queryParams)
     }
-
-    console.log(results)
 
     return (
         <>

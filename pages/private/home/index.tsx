@@ -14,7 +14,7 @@ export default function Home() {
         const response = await getCategories(currentUser.token)
         console.log(response)
         if( !response || response?.data.error) {
-            console.log(response.data.msg)
+            console.log(response?.data?.msg)
         } else {
             dispatch(appSlice.actions.setCategories(response.data.categories))
         }

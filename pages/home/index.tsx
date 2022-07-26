@@ -14,6 +14,7 @@ export default function Home() {
         router.push('/login')
         return <></>
     }
+
     return (
         <PrivateLayout>
             <div className="flex flex-col items-center">

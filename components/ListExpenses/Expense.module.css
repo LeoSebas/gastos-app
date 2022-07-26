@@ -1,0 +1,43 @@
+
+
+.Expense{
+    display: flex;
+    padding-inline: 1em;
+    height: 2em;
+    align-items: center;
+    width: 100%;
+    
+    
+}
+
+
+.Expense__name{
+    width: 30%;
+}
+
+.Expense__date{
+    width: 25%;
+}
+
+.Expense__value{
+    width: 15%;
+}
+
+.Expense__category{
+    width: 15%;
+}
+
+.Expense__options{
+    width: 15%;
+    display: flex;
+}
+
+.Expense__options__icons{
+    width: 10px !important;
+}
+
+.Expense__delete, .Expense__edit  {
+    width: 30px;
+    margin: 1em;
+    cursor: pointer;
+}

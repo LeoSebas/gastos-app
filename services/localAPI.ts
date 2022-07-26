@@ -8,7 +8,6 @@ const LOCAL_API = axios.create({
 
 LOCAL_API.interceptors.request.use((config) => {
     var token = getToken()
-    console.log("token")
     config.headers = {...config.headers, "user-auth": "Bearer " + token}
     return config
 }, () => {
@@ -46,16 +45,5 @@ HEROKU_API.interceptors.response.use(
         return error.response;
     }
 );
-
-HEROKU_API.interceptors.request.use(request => {
-    console.log(request)
-   
-    return request
-}, () => {
-
-    }
-)
-
-
 
 export {LOCAL_API, HEROKU_API}

@@ -1,5 +1,3 @@
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
 import {Field, Form, Formik, FormikHelpers} from "formik";
 import InputBox from "../components/InputBox";
 import {register} from "../services/auth";
@@ -194,7 +192,6 @@ export default function Register() {
 
 
     return <div className="h-screen flex flex-col items-center">
-        <Nav/>
         <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
             {registerState
                 ? (registerState.error
@@ -204,6 +201,5 @@ export default function Register() {
                 : <RegisterForm name='' lastName="" email="" password="" repeatPassword=""/>
             }
         </main>
-        <Footer/>
     </div>
 }

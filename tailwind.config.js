@@ -9,6 +9,9 @@ module.exports = {
       backgroundImage: {
         'userphoto' : 'center no-repeat url("/user-photo.png")',
         'footer':'center no-repeat url("/bg-footer.svg")'
+      },
+      fontFamily : {
+        'fedora' : "Fredoka One, cursive"
       }
     },
   },

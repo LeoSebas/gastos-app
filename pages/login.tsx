@@ -7,6 +7,7 @@ import {appSlice, AppState} from "../redux";
 import * as Yup from 'yup'
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
+import CustomHead from "../components/CustomHead";
 
 interface Credentials {
     email: string,
@@ -80,6 +81,7 @@ export default function Login() {
     }
 
     return <div className="h-screen flex flex-col items-center">
+        <CustomHead title="Ahorrar + - Iniciar sesión" />
         <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
             {<LoginForm/>}
         </main>

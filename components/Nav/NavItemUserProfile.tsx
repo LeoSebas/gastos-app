@@ -14,7 +14,7 @@ export default function NavItemUserProfile({user}: { user: User }) {
     }
     const UserOptions = () => {
         return <div className="absolute ">
-            <NavItem title="Inicio" href="/home"/>
+            <NavItem title="Inicio" href="/private/home"/>
             <NavItem title="Cerrar sesión" onClick={() => {
                 dispatch(appSlice.actions.userChanged(null))
             }}></NavItem>
@@ -24,7 +24,7 @@ export default function NavItemUserProfile({user}: { user: User }) {
         <div className=" hover:cursor-pointer rounded-2xl border border-black">
             <div className=" p-1 flex justify-center  items-center" onClick={handleOnClick}>
                 <span className=" flex justify-center items-center">
-                    <Image src="/user-photo.png" width={40} height={40} className="rounded-xl"></Image>
+                    <Image src={userPhoto} width={40} height={40} className="rounded-xl"></Image>
                 </span>
                 <span className="ml-2"><p className="m-0">{`Hola! ${user.name} :)`}</p></span>
             </div>

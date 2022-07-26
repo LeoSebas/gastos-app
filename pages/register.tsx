@@ -8,6 +8,7 @@ import ActionButton from "../components/ActionButton";
 import * as Yup from 'yup'
 import {useSelector} from "react-redux";
 import {AppState} from "../redux";
+import CustomHead from "../components/CustomHead";
 
 interface Inputs {
     "name": string
@@ -192,6 +193,7 @@ export default function Register() {
 
 
     return <div className="h-screen flex flex-col items-center">
+        <CustomHead title="Ahorrar + - Registrarse" />
         <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
             {registerState
                 ? (registerState.error

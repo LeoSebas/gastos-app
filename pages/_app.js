@@ -6,14 +6,7 @@ import PrivateLayout from "../layouts/PrivateLayout/MainLayout";
 import { useSelector } from "react-redux";
 import { AppState } from "../redux";
 
-
-
-
-
 function MyApp({Component, pageProps}) {
-
-
-
 
     return (
         <Provider store={appStore}>

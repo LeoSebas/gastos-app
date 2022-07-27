@@ -1,7 +1,7 @@
 import UserOpinionItem from "./UserOpinionItem";
 
 export default function MainUsersOpinions() {
-    return <section className="p-10">
+    return <section className=" flex flex-col items-center p-10">
         <h1 className="text-3xl p-5">Lo que los usuarios piensan acerca de Ahorrar +</h1>
         <div className="flex flex-col justify-evenly lg:flex-row xl:flex-row 2xl:flex-row">
             <UserOpinionItem userName="Bill Gates" stars={4}

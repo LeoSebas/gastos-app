@@ -5,9 +5,10 @@ export default function ActionButton({
                                          children,
                                          className,
                                          type,
-                                         disabled
-                                     }: { children, className?: string, type: ButtonType, disabled?: boolean }) {
+                                         disabled,
+                                         onClick,
+                                     }: { children, className?: string, type: ButtonType, disabled?: boolean, onClick?: () => void }) {
     return (<button className={`text-xl p-3 rounded border border-black m-3 ${className}`} type={type}
-                    disabled={disabled}>{children}
+                    disabled={disabled} onClick={onClick}>{children}
     </button>)
 }

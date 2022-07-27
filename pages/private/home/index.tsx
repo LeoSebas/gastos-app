@@ -1,8 +1,10 @@
 import {useDispatch, useSelector} from "react-redux";
 import {appSlice, AppState} from "../../../redux";
 import {useRouter} from "next/router";
-import { getCategories } from "../../../services/categories";
-import { useEffect } from "react";
+import {getCategories} from "../../../services/categories";
+import {useEffect} from "react";
+import ExpenseForm from "../../../components/ExpenceForm";
+import {ExpenseFormAction} from "../../../components/ExpenceForm/ExpenseForm";
 
 
 export default function Home() {
@@ -35,6 +37,7 @@ export default function Home() {
                 <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
                     <section>
                         <p>Pagina de inicio</p>
+                        <ExpenseForm action={ExpenseFormAction.create}></ExpenseForm>
                     </section>
                 </main>
             </div>

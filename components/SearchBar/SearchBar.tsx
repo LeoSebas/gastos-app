@@ -39,10 +39,9 @@ export default function SearchBar (props){
         } else {
             setError("")
             setResults(response.data)
-            
         }
     }
-    
+
     const handleSubmit = event => {
         event.preventDefault();
         setPage(1)

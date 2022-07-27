@@ -15,17 +15,13 @@
     grid-area: main;
     height: min-content;
     
-    min-height: 100vh;
+    min-height: 80vh;
 }
-
-
-
 
 .PrivateLayout__main footer{
     bottom: 0;
     justify-self: flex-end;
     margin-top: auto;
-    width: 100%;
 }
 
 .PrivateLayout__nav{

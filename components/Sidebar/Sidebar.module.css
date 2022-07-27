@@ -2,12 +2,17 @@
 .Sidebar{
     position: fixed;
     width: 0px;
-    height: 100%;
+    height: 100vh;
     transform: translateX(-100vw);
     transition: all 400ms ease-in-out;
     z-index: 10;
     background-color: white;
     box-shadow: rgba(50, 50, 93, 0.20) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.2) 0px 18px 36px -18px inset;
+}
+
+.pusher{
+    display: none;
+    width: 250px;
 }
 
 .Sidebar__open{
@@ -34,8 +39,23 @@
 }
 
 @media (min-width:762px) {
+
+    .pusherOpen{
+        display: block;
+        width: 250px;
+        visibility: hidden;
+        transition: all 400ms ease-in-out;
+    }
+
+    .pusher{
+        display: block;
+        width: 0;
+        visibility: hidden;
+        transition: all 400ms ease-in-out;
+    }
+
     .Sidebar{
-        position: relative;
+        position: fixed;
         grid-area: sidebar;
         transform: none;
         width: 0;
@@ -56,5 +76,6 @@
         position: fixed;
         transition: all 400ms ease-in-out;
     }
+
 
 }

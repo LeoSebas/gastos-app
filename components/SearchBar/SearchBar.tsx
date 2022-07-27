@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { AppState } from "../../redux"
 import { searchExpenses } from "../../services/expenses"
@@ -8,7 +8,7 @@ import style from "./SearchBar.module.css"
 
 
 export default function SearchBar (props){
-    const {setResults, userCategories} = props
+    const {setResults, userCategories, page, setPage, setError} = props
     const currentUser = useSelector((state: AppState) => state.user)
     const search = useRef<HTMLInputElement>(null);
     const minValue = useRef<HTMLInputElement>(null);
@@ -16,34 +16,47 @@ export default function SearchBar (props){
     const minDate = useRef<HTMLInputElement>(null);
     const maxDate = useRef<HTMLInputElement>(null);
     const category = useRef<HTMLSelectElement>(null);
-    const sortBy = useRef<HTMLSelectElement>(null);
-    const itemsPerPage = useRef<HTMLSelectElement>(null);
+    const [itemsPerPage, setItemsPerPage] = useState(5)
+    const [sortBy, setSortBy] = useState("name")
     
-    const fetchSearch = async (token:string, queryParams:object):Promise<any> => {
+    const fetchSearch = async (token:string):Promise<any> => {
+        var queryParams = {
+        search: search.current.value,
+        minValue: minValue.current?.value,
+        maxValue: maxValue.current?.value,
+        minDate: minDate.current?.value,
+        maxDate: maxDate.current?.value,
+        category: category.current?.value,
+        sortBy: sortBy,
+        itemsPerPage: itemsPerPage,
+        page: page
+        }
         const response = await searchExpenses(token, queryParams)
         if( !response || response?.data?.error) {
+            setResults({totalItems:0, totalPages:0})
             console.log(response)
+            setError(response.data.msg)
         } else {
+            setError("")
             setResults(response.data)
         }
     }
 
-
-
     const handleSubmit = event => {
         event.preventDefault();
-        var queryParams = {
-            search: search.current.value,
-            minValue: minValue.current.value,
-            maxValue: maxValue.current.value,
-            minDate: minDate.current.value,
-            maxDate: maxDate.current.value,
-            category: category.current.value,
-            sortBy: sortBy.current.value,
-            itemsPerPage: itemsPerPage.current.value
-        }
-        fetchSearch(currentUser.token, queryParams)
+        setPage(1)
+        fetchSearch(currentUser.token)
     }
+
+    useEffect(() => {
+        fetchSearch(currentUser.token)
+    }, [page])
+    
+    useEffect(() => {
+        setPage(1)
+        fetchSearch(currentUser.token)
+    }, [sortBy, itemsPerPage])
+
 
     return (
         <>
@@ -65,14 +78,14 @@ export default function SearchBar (props){
             
             <div className={style.resultSorter}>
                 <p>Items por página:</p>
-                <select name="itemsPerPage" id="itemsPerPage" form="searchForm" ref={itemsPerPage}>
+                <select name="itemsPerPage" id="itemsPerPage" form="searchForm" value={itemsPerPage} onChange={d => setItemsPerPage((parseInt(d.target.value)))}>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
                     <option value={15}>15</option>
                     <option value={20}>20</option>
                 </select>
                 <p>Ordenar por:</p>
-                <select name="sortBy" id="sortBy" form="searchForm" ref={sortBy}>
+                <select name="sortBy" id="sortBy" form="searchForm" value={sortBy} onChange={e => setSortBy((e.target.value))}>
                     <option value={"name"}>Nombre</option>
                     <option value={"date"}>Fecha</option>
                     <option value={"value"}>Importe</option>

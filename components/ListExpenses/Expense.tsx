@@ -13,11 +13,11 @@ export function Expense (props) {
             <p className={style.Expense__date}>{date}</p>
             <p className={style.Expense__value}>{value}</p>
             <p className={style.Expense__category}>{category}</p>
-            {(options) && 
+            {(options) ?
                 <div className={style.Expense__options}>
                     <div className={style.Expense__edit}><Image src={editIcon} /></div>
                     <div className={style.Expense__delete}><Image src={deleteIcon} /> </div>
-                </div>
+                </div>: <div className={style.Expense__options}></div> //Esto no me agradaaaa
             }
         </div>
     )

@@ -1,0 +1,16 @@
+
+
+.Pagination{
+    align-self: center;
+    display: flex;
+    align-items: center;
+}
+
+
+.Pagination__numbers{
+    padding: 0.5em;
+}
+
+.Pagination__current{
+    color: red;
+}

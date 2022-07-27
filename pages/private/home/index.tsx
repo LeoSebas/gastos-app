@@ -14,7 +14,6 @@ export default function Home() {
     const router = useRouter()
     const categories = async () => {
         const response = await getCategories(currentUser.token)
-        console.log(response)
         if( !response || response?.data.error) {
             console.log(response?.data?.msg)
         } else {

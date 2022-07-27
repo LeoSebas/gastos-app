@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'primary' : 'cyan-300'
+      },
       backgroundImage: {
         'userphoto' : 'center no-repeat url("/user-photo.png")',
         'footer':'center no-repeat url("/bg-footer.svg")'

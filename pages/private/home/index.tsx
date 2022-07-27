@@ -2,9 +2,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {appSlice, AppState} from "../../../redux";
 import {useRouter} from "next/router";
 import {getCategories} from "../../../services/categories";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import ExpenseForm from "../../../components/ExpenceForm";
 import {ExpenseFormAction} from "../../../components/ExpenceForm/ExpenseForm";
+import {Fab, Modal, Box} from "@mui/material";
+import AddIcon from '@mui/icons-material/Add';
 
 
 export default function Home() {
@@ -21,6 +23,8 @@ export default function Home() {
             dispatch(appSlice.actions.setCategories(response.data.categories))
         }
     }
+
+    const [showAddExpense, setShowAddSpence] = useState(false)
     
     useEffect(() => {
         categories()
@@ -31,13 +35,28 @@ export default function Home() {
         router.push('/login')
         return <></>
     }
+    const handleAddExpenseModal = () => {
+        setShowAddSpence(true)
+    }
+    const handleClose = () => {
+        setShowAddSpence(false);
+    };
 
     return (
             <div className="flex flex-col items-center">
-                <main className="container h-full p-4 flex flex-1 flex-col items-center justify-center">
+                <main className="container p-4 flex flex-1 flex-col items-center justify-center">
                     <section>
                         <p>Pagina de inicio</p>
-                        <ExpenseForm action={ExpenseFormAction.create}></ExpenseForm>
+
+                        <Fab color="primary" variant="extended" aria-label="add" onClick={handleAddExpenseModal}>
+                            <AddIcon /> Agregar Gasto
+                        </Fab>
+                        <Modal open={showAddExpense}   aria-labelledby="parent-modal-title"
+                               aria-describedby="parent-modal-description" onClose={handleClose}>
+                            <section className="absolute h-screen w-full flex items-center justify-center ">
+                                <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose}></ExpenseForm>
+                            </section>
+                        </Modal>
                     </section>
                 </main>
             </div>

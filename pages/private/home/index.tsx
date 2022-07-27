@@ -16,7 +16,7 @@ export default function Home() {
     const router = useRouter()
     const categories = async () => {
         const response = await getCategories(currentUser.token)
-        if( !response || response?.data.error) {
+        if (!response || response?.data.error) {
             console.log(response?.data?.msg)
         } else {
             dispatch(appSlice.actions.setCategories(response.data.categories))
@@ -24,10 +24,10 @@ export default function Home() {
     }
 
     const [showAddExpense, setShowAddSpence] = useState(false)
-    
+
     useEffect(() => {
         categories()
-      }, [])
+    }, [])
 
 
     if (!currentUser) {
@@ -42,23 +42,28 @@ export default function Home() {
     };
 
     return (
-            <div className="flex flex-col items-center">
-                <main className="container p-4 flex flex-1 flex-col items-center justify-center">
-                    <section>
-                        <p>Pagina de inicio</p>
-
+        <div className="flex flex-col items-center">
+            <main className="container p-4 flex flex-1 flex-col items-center justify-center">
+                <section className="w-full">
+                    <p>Pagina de inicio</p>
+                    <div className="w-full flex justify-end">
+                            
                         <Fab color="primary" variant="extended" aria-label="add" onClick={handleAddExpenseModal}>
-                            <AddIcon /> Agregar Gasto
+                            <AddIcon/> Agregar Gasto
                         </Fab>
-                        <Modal open={showAddExpense}   aria-labelledby="parent-modal-title"
-                               aria-describedby="parent-modal-description" onClose={handleClose}>
-                            <section className="absolute h-screen w-full flex items-center justify-center ">
-                                <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose}></ExpenseForm>
-                            </section>
-                        </Modal>
-                    </section>
-                </main>
-            </div>
+
+
+                    </div>
+
+                    <Modal open={showAddExpense} aria-labelledby="parent-modal-title"
+                           aria-describedby="parent-modal-description" onClose={handleClose}>
+                        <section className="absolute h-screen w-full flex items-start justify-center overflow-scroll">
+                            <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose}></ExpenseForm>
+                        </section>
+                    </Modal>
+                </section>
+            </main>
+        </div>
     )
 }
 

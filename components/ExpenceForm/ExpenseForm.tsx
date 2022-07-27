@@ -13,6 +13,7 @@ import InputBox from "../InputBox";
 import CustomField from "../CustomField";
 import {useState} from "react";
 import ActionButton from "../ActionButton";
+
 export enum ExpenseFormAction {
     create,
     modify
@@ -30,12 +31,14 @@ enum FormStates {
 }
 
 
-
-
-export default function ExpenseForm({action, expense, dismiss}: { action: ExpenseFormAction, expense?: Expense, dismiss: () => void}) {
+export default function ExpenseForm({
+                                        action,
+                                        expense,
+                                        dismiss
+                                    }: { action: ExpenseFormAction, expense?: Expense, dismiss: () => void }) {
 
     interface FormState {
-        status : FormStates,
+        status: FormStates,
         serverResponse?: ServerResponse
     }
 
@@ -49,7 +52,7 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
     ///Setear valores iniciales del form para edicion
     const initialValues: ExpenseInput = {
         categoryName: expense ? categories.find((value) => value._id === expense.categoryID).name : '',
-        expenseDate: expense ? expense.date : new Date(Date.now()),
+        expenseDate: expense ? expense.date : Date.now(),
         expenseName: expense ? expense.name : '',
         expenseValue: expense ? expense.value : 0
     }
@@ -64,7 +67,7 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
             dismiss()
         }
 
-        return <div >
+        return <div>
             <h2>{formState.serverResponse.msg}</h2>
             {action === ExpenseFormAction.create ? <>
                     <ActionButton type="button" onClick={handleResetForm}>Agregar otro gasto</ActionButton>
@@ -81,25 +84,30 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
             dismiss()
         }
 
-        return <div >
+        return <div>
             <h2>Ups... Ocurrió un error :(</h2>
             <p>{formState.serverResponse.msg}</p>
             <ActionButton type="button" onClick={handleDismiss}>Regresar</ActionButton>
         </div>
     }
 
-    const submitExpenseInput = async (expense: ExpenseInput ) => {
+    const submitExpenseInput = async (expense: ExpenseInput) => {
         const serverResponse = await addExpense(expense, token)
-        console.log(serverResponse.data)
-        setFormState({status: serverResponse.data.error ? FormStates.failure : FormStates.success, serverResponse: serverResponse.data})
+        setFormState({
+            status: serverResponse.data.error ? FormStates.failure : FormStates.success,
+            serverResponse: serverResponse.data
+        })
     }
-    const submitExpenseModify = async (expense: ExpenseModify ) => {
-        const serverResponse = await modifyExpense(expense,token)
-        setFormState({status: serverResponse.data.error ? FormStates.failure : FormStates.success, serverResponse: serverResponse.data})
+    const submitExpenseModify = async (expense: ExpenseModify) => {
+        const serverResponse = await modifyExpense(expense, token)
+        setFormState({
+            status: serverResponse.data.error ? FormStates.failure : FormStates.success,
+            serverResponse: serverResponse.data
+        })
     }
 
     const ExpenseFormInput = () => {
-        return <div className="p-3">
+        return <div className="">
             <h5>{ActionTitles[action]}</h5>
             <Formik initialValues={initialValues}
                     onSubmit={(values) => {
@@ -113,9 +121,10 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
                             newExpenseValue: values.expenseValue,
                             newExpenseName: values.expenseName,
                             expenseID: expense._id,
-                            newCategory: values.categoryName})
+                            newCategory: values.categoryName
+                        })
 
-            }}>
+                    }}>
                 {
                     ({isSubmitting, touched, errors, values, handleChange}) => (
                         <Form className="flex flex-col">
@@ -132,14 +141,15 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
                             </InputBox>
                             <InputBox>
                                 <label>¿Cuándo hisiste el gasto?</label>
-                                <CustomField id={"expenseDateInput"} name="expenseDate"
-                                             value={values.expenseDate.toString()} onChange={handleChange}
-                                             type="datetime-local" required={true} />
+                                <CustomField id={"expenseDateInput"} name="expenseDate" value={values.expenseDate}
+                                             onChange={handleChange}
+                                             type="datetime-local" required={true}/>
                             </InputBox>
 
                             <InputBox>
                                 <label htmlFor="expenseCategoryInput">Categoria</label>
-                                <CustomField id="expenseCategoryInput" name="categoryName" value={values.categoryName} onChange={handleChange} component="select">
+                                <CustomField id="expenseCategoryInput" name="categoryName" value={values.categoryName}
+                                             onChange={handleChange} component="select">
                                     {categories.map((category, index) => {
                                         return <option value={category.name} key={index}>{category.name}</option>
                                     })
@@ -147,8 +157,10 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
                                 </CustomField>
                             </InputBox>
                             <InputBox>
-                                <ActionButton type="submit" disabled={isSubmitting}><span>Agregar gasto</span></ActionButton>
-                                <ActionButton type="button" disabled={isSubmitting} onClick={dismiss}><span>Cerrar</span></ActionButton>
+                                <ActionButton type="submit"
+                                              disabled={isSubmitting}><span>Agregar gasto</span></ActionButton>
+                                <ActionButton type="button" disabled={isSubmitting}
+                                              onClick={dismiss}><span>Cerrar</span></ActionButton>
                             </InputBox>
 
                         </Form>
@@ -158,7 +170,8 @@ export default function ExpenseForm({action, expense, dismiss}: { action: Expens
         </div>
     }
 
-    return <div className="bg-white rounded-3xl max-h-min max-w-min ">
-        {(formState.status === FormStates.pure ? <ExpenseFormInput/> : (formState.status === FormStates.success ? <ExpenseSuccess /> : <ExpenseFailure />))}
+    return <div className="bg-white rounded-3xl max-h-min max-w-min p-3">
+        {(formState.status === FormStates.pure ? <ExpenseFormInput/> : (formState.status === FormStates.success ?
+            <ExpenseSuccess/> : <ExpenseFailure/>))}
     </div>
 }

@@ -6,14 +6,14 @@ import { AppState } from "../redux";
 export interface ExpenseInput {
     "expenseName" : string,
     "expenseValue" : number,
-    "expenseDate" : Date,
+    "expenseDate" : Date| number
     "categoryName" : string
 }
 
 export interface ExpenseModify {
     "expenseID": string,
     "newCategory": string,
-    "newExpenseDate": Date,
+    "newExpenseDate": Date |number,
     "newExpenseName": string,
     "newExpenseValue": number
 }

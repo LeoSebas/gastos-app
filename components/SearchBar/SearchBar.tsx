@@ -1,8 +1,10 @@
+import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { useSelector } from "react-redux"
 import { AppState } from "../../redux"
 import { searchExpenses } from "../../services/expenses"
 import style from "./SearchBar.module.css"
+import sortArrow from "/public/icons/sortByArrow.svg"
 
 
 
@@ -18,6 +20,7 @@ export default function SearchBar (props){
     const category = useRef<HTMLSelectElement>(null);
     const [itemsPerPage, setItemsPerPage] = useState(5)
     const [sortBy, setSortBy] = useState("name")
+    const [desc, setDesc] = useState(1)
     
     const fetchSearch = async (token:string):Promise<any> => {
         var queryParams = {
@@ -29,10 +32,14 @@ export default function SearchBar (props){
         category: category.current?.value,
         sortBy: sortBy,
         itemsPerPage: itemsPerPage,
-        page: page
+        page: page,
+        desc: desc
         }
         const response = await searchExpenses(token, queryParams)
-        if( !response || response?.data?.error) {
+        if(!response) {
+            setError("Ha ocurrido un error")
+            setResults({totalItems:0, totalPages:0})
+        } else if (response.data.error){
             setResults({totalItems:0, totalPages:0})
             console.log(response)
             setError(response.data.msg)
@@ -55,7 +62,7 @@ export default function SearchBar (props){
     useEffect(() => {
         setPage(1)
         fetchSearch(currentUser.token)
-    }, [sortBy, itemsPerPage])
+    }, [sortBy, itemsPerPage, desc])
 
 
     return (
@@ -90,6 +97,8 @@ export default function SearchBar (props){
                     <option value={"date"}>Fecha</option>
                     <option value={"value"}>Importe</option>
                 </select>
+                <Image src={sortArrow} className={style.arrowSort} onClick={()=>setDesc(1)}/>
+                <Image src={sortArrow} className={style.arrowSortDown} onClick={()=>setDesc(-1)}/>
             </div>
         </>
     )

@@ -4,7 +4,7 @@ import deleteIcon from "/public/icons/delete.svg"
 import editIcon from "/public/icons/edit.svg"
 
 
-export function Expense (props) {
+export function ExpenseRow (props) {
     const {name, value, date, _id, category, options, handleModify, handleDelete} = props
 
     return (

@@ -1,10 +1,11 @@
-import {Expense} from "./Expense"
+import {ExpenseRow} from "./ExpenseRow"
 import style from "./ListExpenses.module.css"
 import {useState} from "react";
-import {Modal} from "@mui/material";
+import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Modal} from "@mui/material";
 import ExpenseForm from "../ExpenceForm";
 import {ExpenseFormAction} from "../ExpenceForm/ExpenseForm";
-import ActionButton from "../ActionButton";
+import DeleteExpenseDialog from "../DeleteExpenseDialog";
+import {Expense} from "../../services/expenses";
 
 
 export default function ListExpenses(props){
@@ -15,7 +16,7 @@ export default function ListExpenses(props){
     const [showDeleteExpense, setShowDeleteExpense] = useState<boolean>(false)
 
     /// State que contiene la Expense seleccionada
-    const [expense, setExpense] = useState()
+    const [expense, setExpense] = useState<Expense | undefined>()
     const handleClickModifyExpense = (_id) => {
         const currentExpense = results?.expenses?.find((e) => {return e._id === _id})
         setExpense({...currentExpense, date: currentExpense.date.slice(0,16) })
@@ -42,21 +43,17 @@ export default function ListExpenses(props){
     return (
         <div className={style.ListExpenses}>
             <div className={style.ListExpenses__list}>
-                <Expense name="Name" date="Date" value="Value" category="Category"/>
-                {results?.expenses?.map((expense)=> <Expense key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategoryName(expense.categoryID)} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
+                <ExpenseRow name="Name" date="Date" value="Value" category="Category"/>
+                {results?.expenses?.map((expense)=> <ExpenseRow key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategoryName(expense.categoryID)} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
             </div>
-            <Modal open={showModifyExpense}   aria-labelledby="parent-modal-title"
-                   aria-describedby="parent-modal-description" onClose={handleClose}>
-                <section className="absolute h-screen w-full flex items-start justify-center overflow-scroll">
-                    <ExpenseForm action={ExpenseFormAction.modify} expense={expense} dismiss={handleClose} />
-                </section>
-            </Modal>
-            <Modal open={showDeleteExpense}   aria-labelledby="parent-modal-title"
-                   aria-describedby="parent-modal-description" onClose={handleClose}>
-                <section className="absolute h-screen w-full flex items-center justify-center ">
-                    <ActionButton type="button" onClick={handleClose}><span>Regresar</span></ActionButton>
-                </section>
-            </Modal>
+            <Dialog open={showModifyExpense} aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description" onClose={handleClose}>
+                <ExpenseForm action={ExpenseFormAction.modify} expense={expense} dismiss={handleClose} />
+            </Dialog>
+            <Dialog open={showDeleteExpense} aria-labelledby="parent-modal-title"
+                    aria-describedby="parent-modal-description" onClose={handleClose}>
+                <DeleteExpenseDialog expense={{expenseID:expense?._id}} handleClose={handleClose} />
+            </Dialog>
         </div>
     )
 }

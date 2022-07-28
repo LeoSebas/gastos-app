@@ -13,6 +13,7 @@ import InputBox from "../InputBox";
 import CustomField from "../CustomField";
 import {useState} from "react";
 import ActionButton from "../ActionButton";
+import {DialogContent, DialogTitle} from "@mui/material";
 
 export enum ExpenseFormAction {
     create,
@@ -20,8 +21,8 @@ export enum ExpenseFormAction {
 }
 
 const ActionTitles = {
-    0: 'Agregar un nuevo gasto',
-    1: 'Editar un gasto'
+    0: {title: 'Agregar un nuevo gasto', actionButton: 'Agregar gasto'},
+    1: {title: 'Editar un gasto', actionButton: 'Modificar'},
 }
 
 enum FormStates {
@@ -52,7 +53,7 @@ export default function ExpenseForm({
     ///Setear valores iniciales del form para edicion
     const initialValues: ExpenseInput = {
         categoryName: expense ? categories.find((value) => value._id === expense.categoryID).name : '',
-        expenseDate: expense ? expense.date : Date.now(),
+        expenseDate: expense ? expense.date : new Date(),
         expenseName: expense ? expense.name : '',
         expenseValue: expense ? expense.value : 0
     }
@@ -108,65 +109,70 @@ export default function ExpenseForm({
 
     const ExpenseFormInput = () => {
         return <div className="">
-            <h5>{ActionTitles[action]}</h5>
-            <Formik initialValues={initialValues}
-                    onSubmit={(values) => {
-                        action === ExpenseFormAction.create ? submitExpenseInput({
-                            categoryName: values.categoryName,
-                            expenseName: values.expenseName,
-                            expenseValue: values.expenseValue,
-                            expenseDate: values.expenseDate,
-                        }) : submitExpenseModify({
-                            newExpenseDate: values.expenseDate,
-                            newExpenseValue: values.expenseValue,
-                            newExpenseName: values.expenseName,
-                            expenseID: expense._id,
-                            newCategory: values.categoryName
-                        })
+            <DialogTitle>{ActionTitles[action].title}</DialogTitle>
+            <DialogContent>
+                <Formik initialValues={initialValues}
+                        onSubmit={(values) => {
+                            action === ExpenseFormAction.create ? submitExpenseInput({
+                                categoryName: values.categoryName,
+                                expenseName: values.expenseName,
+                                expenseValue: values.expenseValue,
+                                expenseDate: values.expenseDate,
+                            }) : submitExpenseModify({
+                                newExpenseDate: values.expenseDate,
+                                newExpenseValue: values.expenseValue,
+                                newExpenseName: values.expenseName,
+                                expenseID: expense._id,
+                                newCategory: values.categoryName
+                            })
 
-                    }}>
-                {
-                    ({isSubmitting, touched, errors, values, handleChange}) => (
-                        <Form className="flex flex-col">
-                            <InputBox>
-                                <label htmlFor="expenseNameInput">Descripción del gasto:</label>
-                                <CustomField id={"expenseNameInput"} name="expenseName" value={values.expenseName}
-                                             onChange={handleChange} type="text" required={true}/>
-                            </InputBox>
-                            <InputBox>
-                                <label htmlFor="expenseNameValue">Importe:</label>
-                                <CustomField id={"expenseNameInput"} name="expenseValue"
-                                             value={values.expenseValue} onChange={handleChange}
-                                             type="number" required={true}/>
-                            </InputBox>
-                            <InputBox>
-                                <label>¿Cuándo hisiste el gasto?</label>
-                                <CustomField id={"expenseDateInput"} name="expenseDate" value={values.expenseDate}
-                                             onChange={handleChange}
-                                             type="datetime-local" required={true}/>
-                            </InputBox>
+                        }}>
+                    {
+                        ({isSubmitting, touched, errors, values, handleChange}) => (
+                            <Form className="flex flex-col">
+                                <InputBox>
+                                    <label htmlFor="expenseNameInput">Descripción del gasto:</label>
+                                    <CustomField id={"expenseNameInput"} name="expenseName" value={values.expenseName}
+                                                 onChange={handleChange} type="text" required={true}/>
+                                </InputBox>
+                                <InputBox>
+                                    <label htmlFor="expenseNameValue">Importe:</label>
+                                    <CustomField id={"expenseNameInput"} name="expenseValue"
+                                                 value={values.expenseValue} onChange={handleChange}
+                                                 type="number" required={true}/>
+                                </InputBox>
+                                <InputBox>
+                                    <label>¿Cuándo hisiste el gasto?</label>
+                                    <CustomField id={"expenseDateInput"}
+                                                 name="expenseDate"
+                                                 value={values.expenseDate}
+                                                 onChange={handleChange}
+                                                 type="datetime-local" required={true}/>
+                                </InputBox>
 
-                            <InputBox>
-                                <label htmlFor="expenseCategoryInput">Categoria</label>
-                                <CustomField id="expenseCategoryInput" name="categoryName" value={values.categoryName}
-                                             onChange={handleChange} component="select">
-                                    {categories.map((category, index) => {
-                                        return <option value={category.name} key={index}>{category.name}</option>
-                                    })
-                                    }
-                                </CustomField>
-                            </InputBox>
-                            <InputBox>
-                                <ActionButton type="submit"
-                                              disabled={isSubmitting}><span>Agregar gasto</span></ActionButton>
-                                <ActionButton type="button" disabled={isSubmitting}
-                                              onClick={dismiss}><span>Cerrar</span></ActionButton>
-                            </InputBox>
+                                <InputBox>
+                                    <label htmlFor="expenseCategoryInput">Categoria</label>
+                                    <CustomField id="expenseCategoryInput" name="categoryName" value={values.categoryName}
+                                                 onChange={handleChange} component="select">
+                                        {categories.map((category, index) => {
+                                            return <option value={category.name} key={index}>{category.name}</option>
+                                        })
+                                        }
+                                    </CustomField>
+                                </InputBox>
+                                <InputBox>
+                                    <ActionButton type="submit"
+                                                  disabled={isSubmitting}><span>{ActionTitles[action].actionButton}</span></ActionButton>
+                                    <ActionButton type="button" disabled={isSubmitting}
+                                                  onClick={dismiss}><span>Cerrar</span></ActionButton>
+                                </InputBox>
 
-                        </Form>
-                    )
-                }
-            </Formik>
+                            </Form>
+                        )
+                    }
+                </Formik>
+            </DialogContent>
+
         </div>
     }
 

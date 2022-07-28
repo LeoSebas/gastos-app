@@ -12,11 +12,10 @@ export default function CustomField({
                                         onChange,
                                         children,
                                         component,
-                                        valueAsNumber,
                                     }: { className?: string, required?: boolean, placeholder?: string, id: string, name?: string, type?: string, value?: string | number | Date,
-    onChange?: { (e: ChangeEvent<any>): void, <T = string | ChangeEvent<any>>(field: T): T extends ChangeEvent<any> ? void : ((e: (string | ChangeEvent<any>)) => void) } , children?: any , component?: any, valueAsNumber?:number| Date}) {
+    onChange?: { (e: ChangeEvent<any>): void, <T = string | ChangeEvent<any>>(field: T): T extends ChangeEvent<any> ? void : ((e: (string | ChangeEvent<any>)) => void) } , children?: any , component?: any}) {
     return <Field className={`text-xl p-3 bg-blue-200 rounded-lg ${className}`} required={required}
-                  placeholder={placeholder} id={id} name={name} type={type} value={value} onChange={onChange} component={component} valueAsNumber={valueAsNumber}>
+                  placeholder={placeholder} id={id} name={name} type={type} value={value} onChange={onChange} component={component} >
         {children}
     </Field>
 }

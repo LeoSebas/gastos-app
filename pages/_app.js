@@ -3,8 +3,6 @@ import {Provider} from "react-redux";
 import {appStore, persistor} from "../redux";
 import {PersistGate} from "redux-persist/integration/react";
 import PrivateLayout from "../layouts/PrivateLayout/MainLayout";
-import { useSelector } from "react-redux";
-import { AppState } from "../redux";
 
 function MyApp({Component, pageProps}) {
 

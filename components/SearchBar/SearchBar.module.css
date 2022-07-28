@@ -25,3 +25,18 @@
 .SearchBar__values{
     width: 3em;
 }
+
+.arrowSort{
+    cursor: pointer;
+}
+
+.arrowSortDown{
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+.arrowSortDown:hover{
+    transform: scale(1.1) rotate(180deg);
+}
+.arrowSort:hover {
+    transform: scale(1.1);
+}

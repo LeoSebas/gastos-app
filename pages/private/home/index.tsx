@@ -57,7 +57,7 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
-                <section className="w-full">
+                <section className="">
                     <p>Pagina de inicio</p>
                     <section>
                         <ListExpenses results={recentAddedExpenses} userCategories={currentCategories}></ListExpenses>

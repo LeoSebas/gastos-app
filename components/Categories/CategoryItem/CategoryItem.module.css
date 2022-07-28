@@ -15,7 +15,7 @@
     transform:perspective(800px) rotateY(0);
     transition:0.5s;
     margin: 1em;
-    width: 20%;
+    width: max-content;
 }
 
 .CategoryItem__options{
@@ -23,12 +23,12 @@
     align-items: center;
     gap: 1em;
     justify-content: flex-end;
-
 }
 
 .CategoryItem__options_item{
-    width: 20%;
+    width: 2.5em;
     cursor: pointer;
+    
 }
 
 .CategoryItem:hover{

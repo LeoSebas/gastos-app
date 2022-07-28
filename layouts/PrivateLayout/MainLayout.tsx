@@ -23,7 +23,9 @@ export default function PrivateLayout({children}) {
                     <div className={style.PrivateLayout__children}>
                         {children}
                     </div>
+                    <div className={style.PrivateLayout__footer}>
                     <Footer/>
+                    </div>
                 </div>
             </div>
 :

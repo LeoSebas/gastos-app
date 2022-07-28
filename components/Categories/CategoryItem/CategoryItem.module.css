@@ -1,8 +1,36 @@
 
 
 .CategoryItem{
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-around;
     gap: 1em;
+    border-radius: 15px;
+    padding: 1em;
+    justify-content: space-between;
+    height: 4em;
+    transition: all 250ms ease-in-out;
+    -webkit-box-reflect:below 2px linear-gradient(transparent, transparent, #0004);
+    border: 1px solid black;
+    transform-origin:left;
+    transform:perspective(800px) rotateY(0);
+    transition:0.5s;
+    margin: 1em;
+    width: 20%;
+}
+
+.CategoryItem__options{
+    display: flex;  
+    align-items: center;
+    gap: 1em;
+    justify-content: flex-end;
+
+}
+
+.CategoryItem__options_item{
+    width: 20%;
+    cursor: pointer;
+}
+
+.CategoryItem:hover{
+    transform: perspective(800px)  rotateY(-25deg) scale(1.05);
 }

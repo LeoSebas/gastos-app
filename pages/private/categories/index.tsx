@@ -11,6 +11,8 @@ export default function Categories (){
 
     return (
         <div className={style.Categories}>
+
+            <h2 className={style.Categories__title}>Categorias</h2>
             <ListCategories userCategories={userCategories}/>
 
 

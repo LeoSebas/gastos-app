@@ -1,0 +1,7 @@
+.ListCategories{
+    display: flex;
+    justify-content: space-around;
+    gap: 1em;
+    padding: 2em;
+    flex-wrap: wrap;
+}

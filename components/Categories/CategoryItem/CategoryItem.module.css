@@ -16,6 +16,9 @@
     transition:0.5s;
     margin: 1em;
     width: max-content;
+    color: black;
+    mix-blend-mode: difference;
+    background-blend-mode: screen;
 }
 
 .CategoryItem__options{

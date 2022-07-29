@@ -10,11 +10,11 @@ export function ExpenseRow (props) {
     const formattedTime = new Date(date).toLocaleTimeString().replace(/(.*)\D\d+/, '$1');
 
     return (
-        <div className={style.Expense} style={{"background":color}}>
+        <div className={style.Expense} >
             <p className={style.Expense__name}>{name}</p>
             <p className={style.Expense__date}>{options?formattedDate + " " + formattedTime:date}</p>
             <p className={style.Expense__value}>{value}</p>
-            <p className={style.Expense__category}>{category}</p>
+            <p className={style.Expense__category} style={{"background":color}}>{category}</p>
             {(options) ?
                 <div className={style.Expense__options}>
                     <div className={style.Expense__edit} onClick={()=>handleModify(_id)}><Image src={editIcon} /></div>

@@ -27,4 +27,6 @@
     justify-self: flex-end;
     bottom: 0;
     margin-top: auto;
+    overflow-y: hidden;
+    min-height: 10em;
 }

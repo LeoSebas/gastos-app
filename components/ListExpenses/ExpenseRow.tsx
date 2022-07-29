@@ -5,12 +5,14 @@ import editIcon from "/public/icons/edit.svg"
 
 
 export function ExpenseRow (props) {
-    const {name, value, date, _id, category, options, handleModify, handleDelete} = props
+    const {name, value, date, _id, category, options, handleModify, handleDelete, color} = props
+    const formattedDate = new Date(date).toLocaleDateString()
+    const formattedTime = new Date(date).toLocaleTimeString().replace(/(.*)\D\d+/, '$1');
 
     return (
-        <div className={style.Expense}>
+        <div className={style.Expense} style={{"background":color}}>
             <p className={style.Expense__name}>{name}</p>
-            <p className={style.Expense__date}>{date}</p>
+            <p className={style.Expense__date}>{options?formattedDate + " " + formattedTime:date}</p>
             <p className={style.Expense__value}>{value}</p>
             <p className={style.Expense__category}>{category}</p>
             {(options) ?

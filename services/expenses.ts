@@ -44,12 +44,13 @@ export function searchExpenses(token:string, queryParams:any) : Promise<AxiosRes
         category,
         sortBy,
         itemsPerPage,
-        page} = queryParams
+        page, 
+        desc} = queryParams
 
     let config = {
         headers:{"Authorization": "Bearer " + token}
     }
-    return HEROKU_API.get(`api/expenses/search?search=${search}&minValue=${minValue}&maxValue=${maxValue}&page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&desc=&minDate=${minDate}&maxDate=${maxDate}&categoryID=${category}`, config)
+    return HEROKU_API.get(`api/expenses/search?search=${search}&minValue=${minValue}&maxValue=${maxValue}&page=${page}&limit=${itemsPerPage}&sortBy=${sortBy}&desc=${desc}&minDate=${minDate}&maxDate=${maxDate}&categoryID=${category}`, config)
 }
 
 export function addExpense(expense : ExpenseInput, token: string) : Promise<AxiosResponse<ServerResponse>> {

@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import ListExpenses from "../../../components/ListExpenses";
 import { Pagination } from "../../../components/ListExpenses/Pagination";
 import SearchBar from "../../../components/SearchBar";
-import PrivateLayout from "../../../layouts/PrivateLayout/MainLayout";
 import { AppState } from "../../../redux";
 import style from "./search.module.css"
 

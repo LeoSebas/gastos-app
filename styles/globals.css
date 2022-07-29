@@ -18,3 +18,9 @@ a {
 * {
   box-sizing: border-box;
 }
+
+@layer components {
+  .bg-primary {
+    @apply bg-cyan-300
+  }
+}

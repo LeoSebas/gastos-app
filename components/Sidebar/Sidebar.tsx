@@ -14,7 +14,7 @@ export default function Sidebar() {
                     <div className={styles.Sidebar__list}>
                         <Button text="Home" link="home"/>
                         <Button text="Gastos" link="search"/>
-                        <Button text="Categorias" link=""/>
+                        <Button text="Categorias" link="categories"/>
                         <Button text="Perfil" link=""/>
                     </div>
                 </nav>

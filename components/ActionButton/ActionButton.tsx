@@ -7,8 +7,8 @@ export default function ActionButton({
                                          type,
                                          disabled,
                                          onClick,
-                                     }: { children, className?: string, type: ButtonType, disabled?: boolean, onClick?: () => void }) {
-    return (<button className={`text-xl p-3 rounded border border-black m-3 ${className}`} type={type}
+                                     }: { children:any, className?: string, type: ButtonType, disabled?: boolean, onClick?: () => void }) {
+    return (<button className={`text-xl p-3 rounded border border-black m-3 ${className ?? ''}`} type={type}
                     disabled={disabled} onClick={onClick}>{children}
     </button>)
 }

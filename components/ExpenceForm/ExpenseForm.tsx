@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+
 import {AppState} from "../../redux";
 import {
     addExpense,
@@ -14,6 +14,7 @@ import CustomField from "../CustomField";
 import {useState} from "react";
 import ActionButton from "../ActionButton";
 import {DialogContent, DialogTitle} from "@mui/material";
+import {useSelector} from "react-redux";
 
 export enum ExpenseFormAction {
     create,
@@ -128,7 +129,7 @@ export default function ExpenseForm({
 
                         }}>
                     {
-                        ({isSubmitting, touched, errors, values, handleChange}) => (
+                        ({isSubmitting, values, handleChange}) => (
                             <Form className="flex flex-col">
                                 <InputBox>
                                     <label htmlFor="expenseNameInput">Descripción del gasto:</label>
@@ -161,7 +162,7 @@ export default function ExpenseForm({
                                     </CustomField>
                                 </InputBox>
                                 <InputBox>
-                                    <ActionButton type="submit"
+                                    <ActionButton className="bg-primary" type="submit"
                                                   disabled={isSubmitting}><span>{ActionTitles[action].actionButton}</span></ActionButton>
                                     <ActionButton type="button" disabled={isSubmitting}
                                                   onClick={dismiss}><span>Cerrar</span></ActionButton>

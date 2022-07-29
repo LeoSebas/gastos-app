@@ -7,6 +7,8 @@ export default function About() {
             <section>
                 <p>Somos un grupo de desarrolladores que participamos del Bootcamp ReactJs proporcionado por la empresa Devligths</p>
             </section>
+
+
         </main>
     </div>)
 }

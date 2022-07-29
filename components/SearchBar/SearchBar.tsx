@@ -5,6 +5,7 @@ import { AppState } from "../../redux"
 import { searchExpenses } from "../../services/expenses"
 import style from "./SearchBar.module.css"
 import sortArrow from "/public/icons/sortByArrow.svg"
+import SvgSearchIcon from "./SearchIcon"
 
 
 
@@ -68,10 +69,10 @@ export default function SearchBar (props){
     return (
         <>
             <div className={style.SearchBar} id="searchForm">
-                <form id="searchForm" onSubmit={handleSubmit}>
-                    <input type="submit"></input>
-                </form>
-                <input placeholder="Busque en sus gastos" form="searchForm" ref={search} id="search"/>
+                <div className={style.SearchBar__searchInput}>
+                    <SvgSearchIcon className={style.searchIcon} stroke={"black"} fill={"white"}/>
+                    <input placeholder="Busque en sus gastos" form="searchForm" ref={search} id="search"/>
+                </div>
                 <input type="number" name="minValue" min={0} id="minValue" className={style.SearchBar__values} form="searchForm" ref={minValue}/>
                 <input type="number" name="maxValue" min={0} id="maxValue" className={style.SearchBar__values} form="searchForm" ref={maxValue}/>
                 <input type="date" name="minDate" min={0} id="minDate" className={style.SearchBar__dates} form="searchForm" ref={minDate}/>

@@ -14,8 +14,6 @@ export default function Search (){
     const [page, setPage] = useState(1)
     const [error, setError] = useState('')
     const userCategories = useSelector((state: AppState) => state.categories)
-    console.log(error)
-
     return (
             <div className={style.Search}>
                 <SearchBar setResults={setResults} userCategories={userCategories} page={page} setPage={setPage} setError={setError}/>

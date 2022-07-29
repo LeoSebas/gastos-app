@@ -33,10 +33,10 @@ export default function ListExpenses(props){
         setShowModifyExpense(false)
     }
 
-    function getCategoryName(id:string){
+    function getCategory(id:string){
         return userCategories[userCategories.findIndex(category =>{
             return category._id === id
-        })].name
+        })]
     }
     
 
@@ -44,7 +44,7 @@ export default function ListExpenses(props){
         <div className={style.ListExpenses}>
             <div className={style.ListExpenses__list}>
                 <ExpenseRow name="Name" date="Date" value="Value" category="Category"/>
-                {results?.expenses?.map((expense)=> <ExpenseRow key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategoryName(expense.categoryID)} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
+                {results?.expenses?.map((expense)=> <ExpenseRow key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategory(expense.categoryID).name}  color={getCategory(expense.categoryID).color} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
             </div>
             <Dialog open={showModifyExpense} aria-labelledby="parent-modal-title"
                     aria-describedby="parent-modal-description" onClose={handleClose}>

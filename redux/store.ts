@@ -18,13 +18,27 @@ const initialUser = null
 const initialState: AppState = {
     user: initialUser,
     theme: AppTheme.light,
-    categories: []
+    categories: [],
+    expensesQueryParams: {}
 }
 
 export interface LibraryItem {
     _id: string,
     name: string,
     color: string,
+}
+
+export interface ExpensesQueryParams {
+    search?: string,
+    minValue?: string,
+    maxValue?: string,
+    minDate?: string,
+    maxDate?: string,
+    category?: string,
+    sortBy?: string,
+    itemsPerPage?: number,
+    page?: number,
+    desc?: number
 }
 
 
@@ -40,7 +54,9 @@ export interface AppState{
     user?: User,
     theme: AppTheme,
     categories: Array<LibraryItem>
+    expensesQueryParams: ExpensesQueryParams
 }
+
 export const appSlice = createSlice({
     name: "AppState",
     initialState,
@@ -55,9 +71,13 @@ export const appSlice = createSlice({
         setCategories:(state, action) => {
             const categories = action.payload
             return { ...state, categories: categories}
+        },
+        setQueryParams: (state, action) => {
+            return {...state, expensesQueryParams: action.payload}
         }
     }
 })
+
 const persistedReducer = persistReducer(persistConfig, appSlice.reducer)
 
 export let appStore = configureStore({

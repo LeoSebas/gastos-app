@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
-import { useSelector } from "react-redux"
-import { AppState } from "../../redux"
+import {useDispatch, useSelector} from "react-redux"
+import {appSlice, AppState, ExpensesQueryParams} from "../../redux"
 import { searchExpenses } from "../../services/expenses"
 import style from "./SearchBar.module.css"
 import sortArrow from "/public/icons/sortByArrow.svg"
@@ -13,6 +13,7 @@ import SvgSearchIcon from "./SearchIcon"
 export default function SearchBar (props){
     const {setResults, userCategories, page, setPage, setError} = props
     const currentUser = useSelector((state: AppState) => state.user)
+    const dispatch = useDispatch()
     const search = useRef<HTMLInputElement>(null);
     const minValue = useRef<HTMLInputElement>(null);
     const maxValue = useRef<HTMLInputElement>(null);
@@ -24,7 +25,7 @@ export default function SearchBar (props){
     const [desc, setDesc] = useState(1)
     
     const fetchSearch = async (token:string):Promise<any> => {
-        var queryParams = {
+        var queryParams : ExpensesQueryParams = {
         search: search.current.value,
         minValue: minValue.current?.value,
         maxValue: maxValue.current?.value,
@@ -46,6 +47,7 @@ export default function SearchBar (props){
         } else {
             setError("")
             setResults(response.data)
+            dispatch(appSlice.actions.setQueryParams(queryParams))
         }
     }
 

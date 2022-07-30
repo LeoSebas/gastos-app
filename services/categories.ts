@@ -16,8 +16,8 @@ export interface CategoryInput {
 
 export interface CategoryModify {
     "categoryName": string,
-    "newCategoryName": string,
-    "newCategoryColor": string
+    "newCategoryName"?: string,
+    "newCategoryColor"?: string
 }
 
 export interface  CategoryDelete {

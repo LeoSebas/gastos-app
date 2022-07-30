@@ -62,7 +62,7 @@ export default function Home() {
                     <section>
                         <ListExpenses results={recentAddedExpenses} userCategories={currentCategories}></ListExpenses>
                     </section>
-                    <div className="w-full flex justify-end">
+                    <div className="w-full flex justify-end z-10">
                             
                         <Fab color="primary" variant="extended" aria-label="add" onClick={handleAddExpenseModal}>
                             <AddIcon/> Agregar Gasto

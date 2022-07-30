@@ -5,7 +5,7 @@ import {
     Category,
     CategoryInput,
     CategoryModify,
-    deleteCategory,
+    deleteCategory, getCategories,
     modifyCategory
 } from "../../../services/categories";
 import {DialogContent, DialogContentText, DialogTitle} from "@mui/material";
@@ -13,8 +13,8 @@ import InputBox from "../../InputBox";
 import ActionButton from "../../ActionButton";
 import {Form, Formik} from "formik";
 import CustomField from "../../CustomField";
-import {useSelector} from "react-redux";
-import {AppState} from "../../../redux";
+import {useDispatch, useSelector} from "react-redux";
+import {appSlice, AppState} from "../../../redux";
 
 
 enum CategoryFormStatus {
@@ -33,6 +33,7 @@ export enum CategoryFormAction {
     modify,
     delete
 }
+
 const CategoryActionText = {
     0: {title: "Agregar una nueva categoria", actionButton: "Agregar categoria"},
     1: {title: "Editar una categoria", actionButton: "Editar categoria"},
@@ -46,6 +47,7 @@ export default function CategoryForm({
     /// State del formulario
     const [categoryFormState, setCategoryFormState] = useState<CategoryFormState>({status: CategoryFormStatus.pure})
     const currentUser = useSelector((state: AppState) => state.user)
+    const dispatch = useDispatch()
 
 
     const CategoryFormInput = () => {
@@ -61,6 +63,8 @@ export default function CategoryForm({
                 status: response.data.error ? CategoryFormStatus.failure : CategoryFormStatus.success,
                 serverResponse: response.data
             })
+            const updatedCategories = await getCategories(currentUser.token)
+            dispatch(appSlice.actions.setCategories(updatedCategories.data.categories))
         }
 
         const handleModifyCategory = async (category: CategoryModify) => {
@@ -69,17 +73,19 @@ export default function CategoryForm({
                 status: response.data.error ? CategoryFormStatus.failure : CategoryFormStatus.success,
                 serverResponse: response.data
             })
+            const updatedCategories = await getCategories(currentUser.token)
+            dispatch(appSlice.actions.setCategories(updatedCategories.data.categories))
         }
 
         return <Formik initialValues={initialValues} onSubmit={(values, formikHelpers) => {
             action === CategoryFormAction.create ? handleAddCategory({
                 categoryName: values.categoryName,
                 categoryColor: values.categoryColor
-            }) : handleModifyCategory({
+            }) : handleModifyCategory((category.name !== values.categoryName) ? {
                 categoryName: category.name,
                 newCategoryName: values.categoryName,
                 newCategoryColor: values.categoryColor
-            })
+            } : {categoryName: category.name, newCategoryColor: values.categoryColor    })
         }}>
             {
                 ({isSubmitting, values, handleChange}) => (
@@ -139,7 +145,7 @@ export default function CategoryForm({
     return <div className="bg-white rounded-3xl max-h-min max-w-min p-3">
         {(categoryFormState.status === CategoryFormStatus.pure)
             ? (<DialogContent>
-                   <CategoryFormInput />
+                    <CategoryFormInput/>
                 </DialogContent>
             )
             : (categoryFormState.status === CategoryFormStatus.success

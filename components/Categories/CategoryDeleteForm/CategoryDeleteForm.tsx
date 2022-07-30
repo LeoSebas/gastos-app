@@ -1,12 +1,12 @@
-import {Category, deleteCategory} from "../../../services/categories";
+import {Category, deleteCategory, getCategories} from "../../../services/categories";
 import {DialogContent, DialogContentText} from "@mui/material";
 import InputBox from "../../InputBox";
 import ActionButton from "../../ActionButton";
 import {CategoryFormAction} from "../CategoryForm/CategoryForm";
 import {ServerResponse} from "../../../services/expenses";
 import {useState} from "react";
-import {useSelector} from "react-redux";
-import {AppState} from "../../../redux";
+import {useDispatch, useSelector} from "react-redux";
+import {appSlice, AppState} from "../../../redux";
 
 enum CategoryDeleteStatus {
     pure,
@@ -22,6 +22,7 @@ interface CategoryDeleteState {
 export default function CategoryDeleteForm({category, handleClose} : {category: Category,handleClose: () => void}) {
     const [categoryDeleteState, setCategoryDeleteState] = useState<CategoryDeleteState>({status: CategoryDeleteStatus.pure})
     const currentUser = useSelector((state: AppState) => state.user)
+    const dispatch = useDispatch()
 
     const CategoryFormSuccess = () => {
         const handleCloseForm = () => {
@@ -56,6 +57,8 @@ export default function CategoryDeleteForm({category, handleClose} : {category: 
                 status: response.data.error ? CategoryDeleteStatus.failure : CategoryDeleteStatus.success,
                 serverResponse: response.data
             })
+            const updatedCategories = await getCategories(currentUser.token)
+            dispatch(appSlice.actions.setCategories(updatedCategories.data.categories))
         }
 
         return <><DialogContentText>

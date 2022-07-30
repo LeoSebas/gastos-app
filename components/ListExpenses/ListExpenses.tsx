@@ -9,7 +9,7 @@ import {Expense} from "../../services/expenses";
 
 
 export default function ListExpenses(props){
-    const {results, userCategories} = props
+    const {results, userCategories ,handleReload } = props
 
     /// State y handlers para los modals de las opciones
     const [showModifyExpense, setShowModifyExpense] = useState<boolean>(false)

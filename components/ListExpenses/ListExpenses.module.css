@@ -6,6 +6,7 @@
     align-items: center;
     font-weight: 400;
     color: black;
+    min-height: 45vh; 	
 }
 
 .ListExpenses__list:first-of-type(div) {

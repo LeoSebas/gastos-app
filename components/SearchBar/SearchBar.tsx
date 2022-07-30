@@ -50,8 +50,7 @@ export default function SearchBar (props){
         }
     }
 
-    const handleSubmit = event => {
-        event.preventDefault();
+    function handleClick (){
         setPage(1)
         fetchSearch(currentUser.token)
     }
@@ -70,8 +69,12 @@ export default function SearchBar (props){
         <>
             <div className={style.SearchBar} id="searchForm">
                 <div className={style.SearchBar__searchInput}>
-                    <SvgSearchIcon className={style.searchIcon} stroke={"black"} fill={"white"}/>
-                    <input placeholder="Busque en sus gastos" form="searchForm" ref={search} id="search"/>
+                    <SvgSearchIcon className={style.searchIcon} stroke={"black"} fill={"white"} onClick={()=>handleClick()}/>
+                    <input placeholder="Busque en sus gastos" form="searchForm" ref={search} id="search" onKeyPress={(e) => {
+                        if (e.key === "Enter") {
+                          handleClick()
+                        }
+                    }}/>
                 </div>
                 <input type="number" name="minValue" min={0} id="minValue" className={style.SearchBar__values} form="searchForm" ref={minValue}/>
                 <input type="number" name="maxValue" min={0} id="maxValue" className={style.SearchBar__values} form="searchForm" ref={maxValue}/>

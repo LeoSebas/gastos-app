@@ -32,7 +32,7 @@ export default function Home() {
         }
         const getRecentAddedExpensesList = async () => {
             const response = await getRecentAddedExpenses(currentUser.token)
-            setRecentAddedExpenses(response.data)
+            setRecentAddedExpenses(response?.data)
         }
 
         categories()

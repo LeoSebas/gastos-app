@@ -2,12 +2,12 @@
 
 .Pagination{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
     font-size: larger;
     margin: 1em;
     background-color: hsla(191, 99%, 55%, 0.213);
     border-radius: 15px;
+    justify-content: space-between;
 }
 
 .Pagination__rightArrow{

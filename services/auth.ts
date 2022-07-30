@@ -3,7 +3,8 @@ import {AxiosResponse} from "axios";
 
 export interface ResponseState {
     msg: string,
-    error: boolean
+    error: boolean,
+    notLogged: boolean
 }
 
 export interface ResponseLogin {
@@ -28,4 +29,12 @@ export function confirmToken(token) {
 
 export function loginUser(credentials: Credentials) : Promise<AxiosResponse<ResponseState | ResponseLogin>> {
     return HEROKU_API.post('api/user/login', credentials)
+}
+
+export function checkToken(token) : Promise<AxiosResponse<ResponseState>> {
+
+    let config = {
+        headers:{"Authorization": "Bearer " + token}
+    }
+    return HEROKU_API.get('api/user/checkToken', config)
 }

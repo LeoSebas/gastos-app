@@ -3,11 +3,39 @@ import Nav from "../../components/Nav"
 import Sidebar from "../../components/Sidebar"
 import style from "./PrivateLayout.module.css"
 import Head from "next/head";
+import { useDispatch, useSelector } from "react-redux";
+import { appSlice, AppState } from "../../redux";
+import {useRouter} from "next/router";
+import { checkToken } from "../../services/auth";
+
 
 export default function PrivateLayout({children}) {
+    const router = useRouter()
+    const dispatch = useDispatch()
     if (window.location.pathname.slice(1, 8) === "private") {
         var isPrivate = true
+        const currentUser = useSelector((state: AppState) => state.user)
+        console.log(currentUser)
+        if (!currentUser || !currentUser.token) {
+            router.push('/login')
+            return <></>
+        }
+        const userStatus = async () => {
+            const response = await checkToken(currentUser.token)
+            console.log(response)
+            if (!response) {
+                console.log(response?.data?.msg)
+            } else if(response.data.notLogged){
+                dispatch(appSlice.actions.userChanged(null))
+                dispatch(appSlice.actions.setCategories(null))
+                router.push('/login')
+            }
+        }
+        userStatus()
+
     }
+
+    
     return (
         (isPrivate) ?
             <div className={style.PrivateLayout}>

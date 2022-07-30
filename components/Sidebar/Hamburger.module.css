@@ -21,7 +21,7 @@
     width: 2em;
     height: 4px;
     border-radius: 1em;
-    transition: transform 1200ms ease-in-out;
+    transition: transform 600ms ease-in-out;
     margin-block: 3px;
   }
   .hamburger::before,
@@ -37,9 +37,9 @@
   }
 
   .conOpen .hamburger::before {
-    transform: rotate(-393deg) scaleX(0.7) translateX(-13px);
+    transform: rotate(-33deg) scaleX(0.7) translateX(-13px);
   }
 
   .conOpen .hamburger::after {
-    transform: rotate(393deg) scaleX(0.7) translateX(-13px) ; /* En si los unicos que manejan la animación son estos dos ultimos. Y el transition dentro del hamburger */
+    transform: rotate(33deg) scaleX(0.7) translateX(-13px) ; /* En si los unicos que manejan la animación son estos dos ultimos. Y el transition dentro del hamburger */
   }

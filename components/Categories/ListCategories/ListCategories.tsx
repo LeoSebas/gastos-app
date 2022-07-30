@@ -43,7 +43,6 @@ export default function ListCategories(props) {
         setShowDeleteDialog(true)
     }
 
-    console.log(userCategories)
     return (<section>
             <div className={style.ListCategories}>
                 {userCategories?.map((category) => <CategoryItem key={category._id} categoryID={category._id}

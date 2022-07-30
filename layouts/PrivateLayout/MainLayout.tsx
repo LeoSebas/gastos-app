@@ -15,20 +15,19 @@ export default function PrivateLayout({children}) {
     if (window.location.pathname.slice(1, 8) === "private") {
         var isPrivate = true
         const currentUser = useSelector((state: AppState) => state.user)
-        console.log(currentUser)
         if (!currentUser || !currentUser.token) {
             router.push('/login')
             return <></>
         }
         const userStatus = async () => {
             const response = await checkToken(currentUser.token)
-            console.log(response)
             if (!response) {
                 console.log(response?.data?.msg)
             } else if(response.data.notLogged){
                 dispatch(appSlice.actions.userChanged(null))
                 dispatch(appSlice.actions.setCategories(null))
                 router.push('/login')
+                return <></>
             }
         }
         userStatus()

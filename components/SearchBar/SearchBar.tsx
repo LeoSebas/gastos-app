@@ -42,7 +42,6 @@ export default function SearchBar (props){
             setResults({totalItems:0, totalPages:0})
         } else if (response.data.error){
             setResults({totalItems:0, totalPages:0})
-            console.log(response)
             setError(response.data.msg)
         } else {
             setError("")

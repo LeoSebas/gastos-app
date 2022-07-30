@@ -7,7 +7,6 @@ import styles from  "./Sidebar.module.css"
 export default function Sidebar() {
     const [sideOpen, setSideOpen] = useState(false)
     window.addEventListener('locationchange', function () {
-        console.log("change")
         setSideOpen(false)
     });
 

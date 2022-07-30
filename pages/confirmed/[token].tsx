@@ -13,7 +13,6 @@ export default function Token({ data } : {data : ResultServerProps}) {
     const [tokenState, setTokenState] = useState('pure')
 
     useEffect(() => {
-        console.log(data.error)
         const currentTokenState = data.error ? 'failure' : 'success'
         setTokenState(currentTokenState)
     }, [setTokenState, data])

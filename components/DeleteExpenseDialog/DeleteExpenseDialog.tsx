@@ -2,7 +2,7 @@ import {useState} from "react";
 import {DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import InputBox from "../InputBox";
 import ActionButton from "../ActionButton";
-import {deleteExpense, ExpenseDelete, ServerResponse} from "../../services/expenses";
+import {deleteExpense, ExpenseDelete, searchExpenses, ServerResponse} from "../../services/expenses";
 import {useSelector} from "react-redux";
 import {AppState} from "../../redux";
 
@@ -15,16 +15,18 @@ interface DeleteDialogState {
     status: DeleteDialogStatus,
     serverResponse?: ServerResponse
 }
-export default function DeleteExpenseDialog({expense,handleClose}: { expense:ExpenseDelete, handleClose: () => void }) {
+export default function DeleteExpenseDialog({expense,handleClose, handleReload}: { expense:ExpenseDelete, handleClose: () => void ,handleReload: (expenses)=>void}) {
     const [deleteDialogState, setDeleteDialogState] = useState<DeleteDialogState>({status: DeleteDialogStatus.pure})
-    const token = useSelector((state: AppState) => state.user.token)
+    const {user, expensesQueryParams} = useSelector((state: AppState) => state)
 
     const handleDeleteExpense = async () => {
-        const response = await deleteExpense(expense, token)
+        const response = await deleteExpense(expense, user.token)
         setDeleteDialogState({
             status: response.data.error ? DeleteDialogStatus.failure : DeleteDialogStatus.success,
             serverResponse: response.data
         })
+        const responseExpenses = await searchExpenses(user.token, expensesQueryParams)
+        handleReload(responseExpenses.data.expenses)
     }
 
     const DeleteDialogConfimation = () => {

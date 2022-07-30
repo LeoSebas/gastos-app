@@ -5,7 +5,7 @@ import {
     Expense,
     ExpenseInput,
     ExpenseModify,
-    modifyExpense,
+    modifyExpense, searchExpenses,
     ServerResponse
 } from "../../services/expenses";
 import {Form, Formik} from "formik";
@@ -36,8 +36,9 @@ enum FormStates {
 export default function ExpenseForm({
                                         action,
                                         expense,
-                                        dismiss
-                                    }: { action: ExpenseFormAction, expense?: Expense, dismiss: () => void }) {
+                                        dismiss,
+                                        handleReload,
+                                    }: { action: ExpenseFormAction, expense?: Expense, dismiss: () => void , handleReload: (expenses: any)=>void}) {
 
     interface FormState {
         status: FormStates,
@@ -49,7 +50,7 @@ export default function ExpenseForm({
 
     const categories = useSelector((state: AppState) => state.categories)
 
-    const token = useSelector((state: AppState) => state.user.token)
+    const {user, expensesQueryParams} = useSelector((state: AppState) => state)
 
     ///Setear valores iniciales del form para edicion
     const initialValues: ExpenseInput = {
@@ -94,18 +95,22 @@ export default function ExpenseForm({
     }
 
     const submitExpenseInput = async (expense: ExpenseInput) => {
-        const serverResponse = await addExpense(expense, token)
+        const serverResponse = await addExpense(expense, user.token)
         setFormState({
             status: serverResponse.data.error ? FormStates.failure : FormStates.success,
             serverResponse: serverResponse.data
         })
+
     }
     const submitExpenseModify = async (expense: ExpenseModify) => {
-        const serverResponse = await modifyExpense(expense, token)
+        const serverResponse = await modifyExpense(expense, user.token)
         setFormState({
             status: serverResponse.data.error ? FormStates.failure : FormStates.success,
             serverResponse: serverResponse.data
         })
+
+        const response = await searchExpenses(user.token, expensesQueryParams)
+        handleReload(response.data.expenses)
     }
 
     const ExpenseFormInput = () => {

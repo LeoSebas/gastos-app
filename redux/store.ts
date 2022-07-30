@@ -83,7 +83,7 @@ const persistedReducer = persistReducer(persistConfig, appSlice.reducer)
 export let appStore = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({serializableCheck: false,
+      getDefaultMiddleware({serializableCheck: false,
     })
 })
 export let persistor = persistStore(appStore)

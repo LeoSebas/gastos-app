@@ -5,7 +5,6 @@ import { Pagination } from "../../../components/ListExpenses/Pagination";
 import SearchBar from "../../../components/SearchBar";
 import { AppState } from "../../../redux";
 import style from "./search.module.css"
-import {searchExpenses} from "../../../services/expenses";
 
 
 
@@ -14,12 +13,9 @@ export default function Search (){
     const [page, setPage] = useState(1)
     const [error, setError] = useState('')
     const userCategories = useSelector((state: AppState) => state.categories)
-    const {expensesQueryParams , user}= useSelector((state: AppState) => state)
 
-    const reloadCurrentExpenses = async () => {
-        const response = await searchExpenses(user.token, expensesQueryParams)
-        setResults(response.data)
-    }
+
+
 
 
     return (
@@ -28,7 +24,7 @@ export default function Search (){
                 {(error)&& <p>{error}</p>}
                 {   results?.totalPages!==0 && //La paginación no se muestra si no hay páginas. El backend devuelve el resultado de totalItems/limit redondeado hacia arriba. Por ahi es mejor que esto se haga en el frontend, por una cuestion de performance, pero dudo que afecte mucho.
                     <>
-                        <ListExpenses results={results} userCategories={userCategories} handleReload={reloadCurrentExpenses}/>
+                        <ListExpenses results={results} userCategories={userCategories} />
                         <Pagination totalItems={results?.totalItems} totalPages={results?.totalPages} page={page} setPage={setPage}/>
                     </>
                 }

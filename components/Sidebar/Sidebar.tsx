@@ -19,7 +19,7 @@ export default function Sidebar() {
                         <Button text="Home" link="home" setSideOpen={setSideOpen}/>
                         <Button text="Gastos" link="search" setSideOpen={setSideOpen}/>
                         <Button text="Categorias" link="categories" setSideOpen={setSideOpen}/>
-                        <Button text="Perfil" link="" setSideOpen={setSideOpen}/>
+                        <Button text="Perfil" link="profile" setSideOpen={setSideOpen}/>
                     </div>
                 </nav>
             </>

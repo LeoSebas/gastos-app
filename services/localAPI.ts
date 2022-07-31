@@ -1,5 +1,4 @@
 import axios from "axios";
-import getToken from "../pages/_app.js"
 
 const LOCAL_API = axios.create({
     baseURL: "http://localhost:4000",
@@ -7,8 +6,6 @@ const LOCAL_API = axios.create({
 })
 
 LOCAL_API.interceptors.request.use((config) => {
-    var token = getToken()
-    config.headers = {...config.headers, "user-auth": "Bearer " + token}
     return config
 }, () => {
 

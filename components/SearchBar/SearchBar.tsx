@@ -24,7 +24,6 @@ export default function SearchBar (props){
     const [sortBy, setSortBy] = useState("name")
     const [desc, setDesc] = useState(1)
     const [advancedOpen, setAdvancedOpen] = useState(false)
-    console.log(advancedOpen)
     
     const fetchSearch = async (token:string):Promise<any> => { //Esta es la funcion que manda a realizar la request
         var queryParams : ExpensesQueryParams = {

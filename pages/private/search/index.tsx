@@ -13,18 +13,18 @@ export default function Search (){
     const [page, setPage] = useState(1)
     const [error, setError] = useState('')
     const userCategories = useSelector((state: AppState) => state.categories)
-
+    const [reload, setReload] = useState(false)
 
 
 
 
     return (
             <div className={style.Search}>
-                <SearchBar setResults={setResults} userCategories={userCategories} page={page} setPage={setPage} setError={setError}/>
+                <SearchBar setResults={setResults} userCategories={userCategories} page={page} setPage={setPage} setError={setError} reload={reload}/>
                 {(error)&& <p>{error}</p>}
                 {   results?.totalPages!==0 && //La paginación no se muestra si no hay páginas. El backend devuelve el resultado de totalItems/limit redondeado hacia arriba. Por ahi es mejor que esto se haga en el frontend, por una cuestion de performance, pero dudo que afecte mucho.
                     <>
-                        <ListExpenses results={results} userCategories={userCategories} />
+                        <ListExpenses results={results} userCategories={userCategories} setReload={setReload} reload={reload}/>
                         <Pagination totalItems={results?.totalItems} totalPages={results?.totalPages} page={page} setPage={setPage}/>
                     </>
                 }

@@ -34,7 +34,7 @@ export default function Home() {
         }
 
         categories()
-    })
+    }, [user, dispatch])
 
     useEffect(() => {
         const getRecentAddedExpensesList = async () => {

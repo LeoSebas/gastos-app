@@ -5,7 +5,7 @@ import {
     Expense,
     ExpenseInput,
     ExpenseModify,
-    modifyExpense, searchExpenses,
+    modifyExpense,
     ServerResponse
 } from "../../services/expenses";
 import {Form, Formik} from "formik";
@@ -38,7 +38,7 @@ export default function ExpenseForm({
                                         expense,
                                         dismiss,
                                         handleReload,
-                                    }: { action: ExpenseFormAction, expense?: Expense, dismiss: () => void , handleReload: (expenses: any)=>void}) {
+                                    }: { action: ExpenseFormAction, expense?: Expense, dismiss: () => void , handleReload: ()=>void}) {
 
     interface FormState {
         status: FormStates,
@@ -50,7 +50,7 @@ export default function ExpenseForm({
 
     const categories = useSelector((state: AppState) => state.categories)
 
-    const {user, expensesQueryParams} = useSelector((state: AppState) => state)
+    const {user} = useSelector((state: AppState) => state)
 
     ///Setear valores iniciales del form para edicion
     const initialValues: ExpenseInput = {
@@ -100,7 +100,7 @@ export default function ExpenseForm({
             status: serverResponse.data.error ? FormStates.failure : FormStates.success,
             serverResponse: serverResponse.data
         })
-
+        handleReload()
     }
     const submitExpenseModify = async (expense: ExpenseModify) => {
         const serverResponse = await modifyExpense(expense, user.token)
@@ -108,9 +108,7 @@ export default function ExpenseForm({
             status: serverResponse.data.error ? FormStates.failure : FormStates.success,
             serverResponse: serverResponse.data
         })
-
-        const response = await searchExpenses(user.token, expensesQueryParams)
-        handleReload(response.data.expenses)
+        handleReload()
     }
 
     const ExpenseFormInput = () => {

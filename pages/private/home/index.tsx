@@ -5,45 +5,60 @@ import {getCategories} from "../../../services/categories";
 import {useEffect, useState} from "react";
 import ExpenseForm from "../../../components/ExpenceForm";
 import {ExpenseFormAction} from "../../../components/ExpenceForm/ExpenseForm";
-import {Fab, Modal, Box, Dialog} from "@mui/material";
+import {Fab, Dialog} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ListExpenses from "../../../components/ListExpenses";
 import {AxiosResponse} from "axios";
-import {getRecentAddedExpenses} from "../../../services/expenses";
+import {searchExpenses} from "../../../services/expenses";
 
 
 export default function Home() {
     /// Selector para consultar el user
-    const currentUser = useSelector((state: AppState) => state.user)
+    const {user} = useSelector((state: AppState) => state)
     const dispatch = useDispatch()
     const router = useRouter()
 
 
     const [showAddExpense, setShowAddSpence] = useState(false)
 
+    const [reload, setReload] = useState(false)
+
     useEffect(() => {
         const categories = async () => {
-            const response = await getCategories(currentUser.token)
+            const response = await getCategories(user.token)
             if (!response || response?.data.error) {
                 console.log(response?.data?.msg)
             } else {
                 dispatch(appSlice.actions.setCategories(response.data.categories))
             }
         }
-        const getRecentAddedExpensesList = async () => {
-            const response = await getRecentAddedExpenses(currentUser.token)
-            setRecentAddedExpenses(response?.data)
-        }
 
         categories()
-        getRecentAddedExpensesList()
+    })
 
-    }, [currentUser])
+    useEffect(() => {
+        const getRecentAddedExpensesList = async () => {
+            const response = await searchExpenses(user.token, {
+                search:'',
+                minValue: '',
+                maxValue:'',
+                minDate:'',
+                maxDate: '',
+                category:'',
+                page: 1,
+                itemsPerPage:10,
+                sortBy: "date",
+                desc:-1
+            })
+            setRecentAddedExpenses(response?.data)
+        }
+        getRecentAddedExpensesList()
+    }, [reload, user.token])
 
     const currentCategories = useSelector((state: AppState) => state.categories)
     const [recentAddedExpenses, setRecentAddedExpenses] = useState<AxiosResponse | undefined>(undefined)
 
-    if (!currentUser) {
+    if (!user) {
         router.push('/login')
         return <></>
     }
@@ -60,7 +75,7 @@ export default function Home() {
                 <section className="">
                     <p>Pagina de inicio</p>
                     <section>
-                        <ListExpenses results={recentAddedExpenses} userCategories={currentCategories}></ListExpenses>
+                        <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
                     </section>
                     <div className="w-full flex justify-end z-10">
                             
@@ -72,7 +87,7 @@ export default function Home() {
                     </div>
                     <Dialog open={showAddExpense} aria-labelledby="parent-modal-title"
                             aria-describedby="parent-modal-description" onClose={handleClose}>
-                        <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose}></ExpenseForm>
+                        <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose}  handleReload={() => {setReload(!reload)}}></ExpenseForm>
                     </Dialog>
 
                 </section>

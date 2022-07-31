@@ -28,6 +28,5 @@
     bottom: 0;
     margin-top: auto;
     overflow-y: hidden;
-    height: 20vh;
-    min-height: 10em;
+    max-height: 12em;
 }

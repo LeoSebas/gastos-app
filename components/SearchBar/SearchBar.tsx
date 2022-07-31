@@ -11,7 +11,8 @@ import SvgSearchIcon from "./SearchIcon"
 
 
 export default function SearchBar (props){
-    const {setResults, userCategories, page, setPage, setError} = props
+    const {setResults, userCategories, page, setPage, setError, reload} = props
+    console.log(reload)
     const currentUser = useSelector((state: AppState) => state.user)
     const dispatch = useDispatch()
     const search = useRef<HTMLInputElement>(null);
@@ -58,7 +59,7 @@ export default function SearchBar (props){
 
     useEffect(() => {
         fetchSearch(currentUser.token)
-    }, [page])
+    }, [page, reload])
     
     useEffect(() => {
         setPage(1)

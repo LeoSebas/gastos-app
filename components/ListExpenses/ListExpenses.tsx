@@ -10,16 +10,14 @@ import {Expense} from "../../services/expenses";
 
 
 export default function ListExpenses(props){
-    const {results, userCategories  } = props
+    const {results, userCategories, setReload, reload  } = props
 
     /// State y handlers para los modals de las opciones
     const [showModifyExpense, setShowModifyExpense] = useState<boolean>(false)
     const [showDeleteExpense, setShowDeleteExpense] = useState<boolean>(false)
 
-    const [expensesList, setExpensesList] = useState<Array<Expense>>(results?.expenses)
-
-    const reloadExpenses =  (updatedExpenses) => {
-        setExpensesList(updatedExpenses)
+    function reloadExpenses () {
+        setReload(!reload)
     }
 
     /// State que contiene la Expense seleccionada
@@ -51,7 +49,7 @@ export default function ListExpenses(props){
         <div className={style.ListExpenses}>
             <div className={style.ListExpenses__list}>
                 <ExpenseRow name="Name" date="Date" value="Value" category="Category"/>
-                {expensesList?.map((expense)=> <ExpenseRow key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategory(expense.categoryID).name}  color={getCategory(expense.categoryID).color} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
+                {results?.expenses.map((expense)=> <ExpenseRow key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategory(expense.categoryID).name}  color={getCategory(expense.categoryID).color} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
             </div>
             <Dialog open={showModifyExpense} aria-labelledby="parent-modal-title"
                     aria-describedby="parent-modal-description" onClose={handleClose}>

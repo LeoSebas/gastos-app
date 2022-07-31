@@ -49,7 +49,7 @@
     box-shadow: 7px 7px rgba(0,0,0,.25);
     width: 50%;
     font-size: x-large;
-    transition: all 250ms ease-in-out;
+    transition: all 150ms ease-in-out;
 }
 
 .Sidebar__list button:hover {
@@ -58,7 +58,7 @@
 }
 
 .Sidebar__list button:active{
-    transform: scale(1.1) translate(5px);
+    transform: scale(1.1) translateX(5px) translateY(5px);
     box-shadow: 7px 7px rgba(0,0,0,.20);
 }
 

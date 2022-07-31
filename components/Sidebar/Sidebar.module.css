@@ -58,7 +58,7 @@
 }
 
 .Sidebar__list button:active{
-    transform: scale(1.1) translateX(5px) translateY(5px);
+    transform: scale(1.05);
     box-shadow: 7px 7px rgba(0,0,0,.20);
 }
 

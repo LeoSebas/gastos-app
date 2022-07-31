@@ -18,7 +18,6 @@ export default function Home() {
     const dispatch = useDispatch()
     const router = useRouter()
 
-
     const [showAddExpense, setShowAddSpence] = useState(false)
 
     const [reload, setReload] = useState(false)

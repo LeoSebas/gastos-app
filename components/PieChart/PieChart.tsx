@@ -10,7 +10,7 @@ export default function PieChart (props){
 
 
     const fetchTotals = async (token:string):Promise<any> => {
-        const response = await getTotalCategory(token, null)
+        const response = await getTotalCategory(token)
         if(!response) {
             setError("Ha ocurrido un error") //Si no hay ninguna respuesta, algo fallo horriblemente
         } else if (response.data.error){//Si hay error, mostrame porque fallo. Esto muestra si los datos puestos son errorneos.

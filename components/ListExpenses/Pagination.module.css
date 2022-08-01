@@ -8,6 +8,7 @@
     background-color: hsla(191, 99%, 55%, 0.213);
     border-radius: 15px;
     width: fit-content;
+    align-self: center;
 }
 
 .Pagination__rightArrow{

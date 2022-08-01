@@ -23,10 +23,13 @@ export default function Search (){
                 <SearchBar setResults={setResults} userCategories={userCategories} page={page} setPage={setPage} setError={setError} reload={reload}/>
                 {(error)&& <p>{error}</p>}
                 {   results?.totalPages!==0 && //La paginación no se muestra si no hay páginas. El backend devuelve el resultado de totalItems/limit redondeado hacia arriba. Por ahi es mejor que esto se haga en el frontend, por una cuestion de performance, pero dudo que afecte mucho.
-                    <>
+                    <section className="w-11/12 lg:w-10/12 xl:w-10/12 2xl:w-8/12">
                         <ListExpenses results={results} userCategories={userCategories} setReload={setReload} reload={reload}/>
-                        <Pagination totalItems={results?.totalItems} totalPages={results?.totalPages} page={page} setPage={setPage}/>
-                    </>
+                        <div className="max-w-min">
+                            <Pagination totalItems={results?.totalItems} totalPages={results?.totalPages} page={page} setPage={setPage}/>
+                        </div>
+
+                    </section>
                 }
             </div>
 

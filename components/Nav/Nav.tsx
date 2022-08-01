@@ -1,7 +1,6 @@
 import NavHeader from "./NavHeader";
 import NavItemList from "./NavItemList";
 import NavItem from "./NavItem";
-import Link from "next/link";
 import { useSelector } from "react-redux";
 import { AppState } from "../../redux";
 import {useRouter} from "next/router";
@@ -14,7 +13,7 @@ export default function Nav() {
     const router = useRouter()
 
     return (
-    <nav className="w-full  flex flex-col items-center border">
+    <nav className="sticky w-full  flex flex-col items-center">
         <div className="container h-[70px] flex justify-between items-center ">
 
             <NavHeader>

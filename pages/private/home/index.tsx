@@ -71,9 +71,9 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
-                <section className="">
+                <section className="w-full">
                     <p>Pagina de inicio</p>
-                    <section>
+                    <section className="w-full" >
                         <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
                     </section>
                     <div className="w-full flex justify-end z-10">

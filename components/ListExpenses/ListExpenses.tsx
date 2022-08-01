@@ -21,19 +21,19 @@ export default function ListExpenses(props){
     }
 
     /// State que contiene la Expense seleccionada
-    const [expense, setExpense] = useState<Expense | undefined>()
+    const [selectedExpense, setSelectedExpense] = useState<Expense | undefined>()
     const handleClickModifyExpense = (_id) => {
         const currentExpense = results?.expenses?.find((e) => {return e._id === _id})
-        setExpense({...currentExpense, date: currentExpense.date.slice(0,16) })
+        setSelectedExpense({...currentExpense, date: currentExpense.date.slice(0,16) })
         setShowModifyExpense(true)
     }
     const handleClickDeleteExpense = (_id) => {
-        setExpense(results?.expenses?.find((e) => {return e._id === _id}))
+        setSelectedExpense(results?.expenses?.find((e) => {return e._id === _id}))
         setShowDeleteExpense(true)
     }
 
     const handleClose = () => {
-        setExpense(undefined)
+        setSelectedExpense(undefined)
         setShowDeleteExpense(false)
         setShowModifyExpense(false)
     }
@@ -43,21 +43,24 @@ export default function ListExpenses(props){
             return category._id === id
         })]
     }
-    
+    const ExpenseHeader = ( ) => {
+        return <ExpenseRow name="Nombre" date="Fecha" value="Importe" category="Categoría"/>
+    }
+
 
     return (
         <div className={style.ListExpenses}>
             <div className={style.ListExpenses__list}>
-                <ExpenseRow name="Name" date="Date" value="Value" category="Category"/>
-                {results?.expenses.map((expense)=> <ExpenseRow key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategory(expense.categoryID).name}  color={getCategory(expense.categoryID).color} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
+                <ExpenseHeader />
+                {results?.expenses.map((expense)=> <ExpenseRow open={(showDeleteExpense || showModifyExpense) && expense._id === selectedExpense._id} key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value} options={true} category={getCategory(expense.categoryID).name}  color={getCategory(expense.categoryID).color} handleModify={handleClickModifyExpense} handleDelete={handleClickDeleteExpense}/>)}
             </div>
             <Dialog open={showModifyExpense} aria-labelledby="parent-modal-title"
                     aria-describedby="parent-modal-description" onClose={handleClose}>
-                <ExpenseForm action={ExpenseFormAction.modify} expense={expense} dismiss={handleClose} handleReload={reloadExpenses} />
+                <ExpenseForm action={ExpenseFormAction.modify} expense={selectedExpense} dismiss={handleClose} handleReload={reloadExpenses} />
             </Dialog>
             <Dialog open={showDeleteExpense} aria-labelledby="parent-modal-title"
                     aria-describedby="parent-modal-description" onClose={handleClose}>
-                <DeleteExpenseDialog expense={{expenseID:expense?._id}} handleClose={handleClose} handleReload={reloadExpenses}/>
+                <DeleteExpenseDialog expense={{expenseID:selectedExpense?._id}} handleClose={handleClose} handleReload={reloadExpenses}/>
             </Dialog>
         </div>
     )

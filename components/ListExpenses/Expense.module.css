@@ -6,8 +6,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: var(--clr-mainLight);
-    width: 90vw;
-    min-width: 70vw;
+    width: 100%;
     margin-block: 0.5em;
     border-radius: 15px;
     padding-inline: 2%;
@@ -58,6 +57,7 @@
     cursor: pointer;
     transition: all 250ms ease-in-out;
     border-radius: 25px;
+    align-self: center;
 }
 
 

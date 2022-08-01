@@ -86,3 +86,12 @@ export function getRecentAddedExpenses(token) : Promise<AxiosResponse<any>>{
     const page = 1
     return HEROKU_API.get(`api/expenses/search?limit=${limit}&page=${page}`, config)
 }
+
+
+export function getTotalCategory(token:string) : Promise<AxiosResponse> {
+
+    let config = {
+        headers:{"Authorization": "Bearer " + token}
+    }
+    return HEROKU_API.get(`api/expenses/getExpenses?minDate=&maxDate=&categoryID=`, config)
+}

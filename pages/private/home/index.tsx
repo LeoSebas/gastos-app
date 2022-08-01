@@ -10,6 +10,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ListExpenses from "../../../components/ListExpenses";
 import {AxiosResponse} from "axios";
 import {searchExpenses} from "../../../services/expenses";
+import PieChart from "../../../components/PieChart/PieChart";
 
 
 export default function Home() {

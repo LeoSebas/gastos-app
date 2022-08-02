@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react"
-import { getTotalCategory } from "../../services/expenses"
+import { getTotalCategory } from "../../../services/expenses"
 import style from "./PieChart.module.css"
 import Chart from "react-google-charts";
 
-interface Results {
+export interface Results {
     _id:string,
     totalExpenses:number
 }
 
 
-interface Color{
+export interface Color{
     color:string
 }
 
-interface ChartData {
+export interface ChartData {
     colors: Array<Color>
     values: Array<Array<string|number>>
 }
@@ -39,9 +39,6 @@ export default function PieChart (props){
         }
     }
 
- 
-    
-
     function getCategory(id:string){
         return currentCategories[currentCategories.findIndex(category =>{
             return category._id === id
@@ -54,7 +51,6 @@ export default function PieChart (props){
         array.push(["Categoria", "Gastos"])
         results?.map(element => {
             let category = getCategory(element._id)
-            console.log(category)
             array.push([category.name, element.totalExpenses])
             color.push({color:category.color})
         })
@@ -62,10 +58,6 @@ export default function PieChart (props){
 
 
     }
-    console.log(chartData)
-    console.log(error || results)
-    
-
     useEffect(() => {
         createChartData()
     }, [results])
@@ -91,30 +83,26 @@ export default function PieChart (props){
             isHtml:true
         },
         chartArea: {
-          left: 0,
-          top: 0,
-          width: "100%",
-          height: "80%"
+            left: 0,
+            top: 0,
+            width:"100%",
+            height: "80%"
         }
        
       };
 
-
-      console.log(chartData.values)
-
-
-
     return <div className={style.PieChart}>
-        
-        <Chart
-          chartType="PieChart"
-          data={chartData.values}
-          options={pieOptions}
-          graph_id="PieChart"
-          width={"100%"}
-          className={style.PieChart__chart}
-          height={"400px"}
-          legend_toggle
-        />
+        <div>
+            <Chart
+            chartType="PieChart"
+            data={chartData.values}
+            options={pieOptions}
+            graph_id="PieChart"
+            width="100%"
+            className={style.PieChart__chart}
+            height={"400px"}
+            legend_toggle
+            />
+        </div>
     </div>
 }

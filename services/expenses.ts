@@ -95,3 +95,11 @@ export function getTotalCategory(token:string) : Promise<AxiosResponse> {
     }
     return HEROKU_API.get(`api/expenses/getExpenses?minDate=&maxDate=&categoryID=`, config)
 }
+
+export function getTotalPerMonth(token:string) : Promise<AxiosResponse> {
+
+    let config = {
+        headers:{"Authorization": "Bearer " + token}
+    }
+    return HEROKU_API.get(`api/expenses/getExpensesPerMonth`, config)
+}

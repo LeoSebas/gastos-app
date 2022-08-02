@@ -22,11 +22,11 @@ export function ExpenseRow(props) {
         return <div className="flex flex-col w-full z-10 h-35">
             <div className={style.Expense}>
                 <p className={style.Expense__name}>{name}</p>
-                <p className={style.Expense__value}>{value}</p>
+                {options ? <p className={style.Expense__value}>${value}</p> : <p className={style.Expense__value}>{value}</p>}
                 {options ? <div className="hover: cursor-pointer p-2" onClick={() => {
                     setShowMore(!showMore)
                 }}>⋮
-                </div> : <></>}
+                </div> : <p className=""></p>}
             </div>
             {showMore
                 ? <div className="flex h-25 p-2 pt-5 -mt-8 -z-10 rounded-2xl overflow-hidden transition-[margin] ease-in-out delay-150 duration-500 hover:-mt-5 "

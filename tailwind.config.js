@@ -12,6 +12,9 @@ module.exports = {
       },
       fontFamily : {
         'fedora' : "Fredoka One, cursive"
+      },
+      colors : {
+        "primary" : "cyan-200"
       }
     },
   },

@@ -2,7 +2,7 @@
 import {useSelector} from "react-redux";
 import {AppState} from "../../../redux";
 import CategoryPageHeader from "../../../components/Categories/CategoryPageHeader";
-import { sub } from "date-fns";
+import {add, sub} from "date-fns";
 import {getTotalExpenses} from "../../../services/expenses";
 import {useEffect, useState} from "react";
 
@@ -17,12 +17,12 @@ export default function Category({ categoryName }) {
 
     const setTotales = async () => {
         const today = new Date(Date.now())
-        const aSevenDaysAgo = sub(today, {days: 7})
-        const aThirtyDaysAgo  = sub(today, {days: 30})
+        const aSevenDaysAgo = sub(today, {days: 6})
+        const aThirtyDaysAgo  = sub(today, {days: 29})
 
         /// obtengo los resultados para los ultimos 7 días:
         const initialDate = aSevenDaysAgo.toISOString().slice(0,10)
-        const lastDate = today.toISOString().slice(0,10)
+        const lastDate = add(today, {days:1}).toISOString().slice(0,10)
         const response = await getTotalExpenses(initialDate, lastDate, category._id, user.token)
         if ("expenses" in response.data) {
             setTotalWeek(response.data.expenses.find((element) => element._id === category._id)?.totalExpenses ?? null)
@@ -31,7 +31,7 @@ export default function Category({ categoryName }) {
 
         /// obtengo los resultados para los ultimos 30 días:
         const initialDateThirty = aThirtyDaysAgo.toISOString().slice(0,10)
-        const lastDateThirty = today.toISOString().slice(0,10)
+        const lastDateThirty = add(today, {days:1}).toISOString().slice(0,10)
         const responseThirty = await getTotalExpenses(initialDateThirty, lastDateThirty, category._id, user.token)
         if ("expenses" in responseThirty.data) {
             setTotalMonth( responseThirty.data.expenses.find((element) => element._id === category._id)?.totalExpenses ?? null)

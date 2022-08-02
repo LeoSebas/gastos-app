@@ -2,7 +2,6 @@ import {Category, deleteCategory, getCategories} from "../../../services/categor
 import {DialogContent, DialogContentText} from "@mui/material";
 import InputBox from "../../InputBox";
 import ActionButton from "../../ActionButton";
-import {CategoryFormAction} from "../CategoryForm/CategoryForm";
 import {ServerResponse} from "../../../services/expenses";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -65,7 +64,7 @@ export default function CategoryDeleteForm({category, handleClose} : {category: 
             {`¿Esta seguro que desea borrar la categoria?`}
         </DialogContentText>
             <InputBox>
-                <ActionButton type="button"
+                <ActionButton type="button" className="bg-primary"
                               onClick={handleDeleteCategory}><span>Sí, borrar categoria</span></ActionButton>
                 <ActionButton type="button" onClick={() => {
                     handleClose()

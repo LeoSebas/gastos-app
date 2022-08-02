@@ -79,6 +79,7 @@ export default function Home() {
                     <p>Pagina de inicio</p>
                     <PieChart token={user.token} currentCategories={currentCategories}/>
                     <section className="w-full" >
+                        <h1>Gastos recientes: </h1>
                         <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
                     </section>
                     <div className="w-full flex justify-end z-10">

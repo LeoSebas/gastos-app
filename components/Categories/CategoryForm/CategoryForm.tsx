@@ -4,11 +4,10 @@ import {
     addCategory,
     Category,
     CategoryInput,
-    CategoryModify,
-    deleteCategory, getCategories,
+    CategoryModify, getCategories,
     modifyCategory
 } from "../../../services/categories";
-import {DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {DialogContent, DialogContentText} from "@mui/material";
 import InputBox from "../../InputBox";
 import ActionButton from "../../ActionButton";
 import {Form, Formik} from "formik";
@@ -77,7 +76,7 @@ export default function CategoryForm({
             dispatch(appSlice.actions.setCategories(updatedCategories.data.categories))
         }
 
-        return <Formik initialValues={initialValues} onSubmit={(values, formikHelpers) => {
+        return <Formik initialValues={initialValues} onSubmit={(values) => {
             action === CategoryFormAction.create ? handleAddCategory({
                 categoryName: values.categoryName,
                 categoryColor: values.categoryColor
@@ -95,13 +94,13 @@ export default function CategoryForm({
                             <CustomField id="categoryName" name="categoryName" value={values.categoryName}
                                          onChange={handleChange} type="text" required={true}/>
                         </InputBox>
-                        <InputBox>
+                        <InputBox >
                             <label>Color</label>
-                            <CustomField id="categoryColor" name="categoryColor" value={values.categoryColor}
+                            <CustomField className="w-full h-16" id="categoryColor" name="categoryColor" value={values.categoryColor}
                                          onChange={handleChange} type="color" required={true}/>
                         </InputBox>
                         <InputBox>
-                            <ActionButton type="submit"
+                            <ActionButton type="submit" className="bg-primary"
                                           disabled={isSubmitting}><span>{CategoryActionText[action]?.actionButton}</span></ActionButton>
                             <ActionButton type="button" onClick={handleClose}><span>Regresar</span></ActionButton>
                         </InputBox>

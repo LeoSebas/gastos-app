@@ -102,3 +102,12 @@ export function getTotalExpenses(initialDate: string, lastDate: string, category
 
     return HEROKU_API.get(`/api/expenses/getExpenses?minDate=${initialDate}&maxDate=${lastDate}&categoryID=${categoryId}`, config)
 }
+
+export function getTotalCategory(token:string) : Promise<AxiosResponse> {
+
+    let config = {
+        headers:{"Authorization": "Bearer " + token}
+    }
+    return HEROKU_API.get(`api/expenses/getExpenses?minDate=&maxDate=&categoryID=`, config)
+}
+

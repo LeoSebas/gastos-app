@@ -8,6 +8,7 @@ body {
   margin: 0;
   font-family: -apple-system,  'Fira Sans', sans-serif,'Fredoka One', cursive;
   font-weight: 600;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -24,11 +25,34 @@ a {
   --clr-dark: hsl(240, 5%, 11%); /* Color oscuro */
   --clr-main: #61efeb;
   --clr-mainLight: hsl(179, 92%, 90%);
-
-
 }
+
+
+
+
+
 @layer components {
   .bg-primary {
     @apply bg-cyan-300
   }
+}
+
+/* Ancho */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Base */
+::-webkit-scrollbar-track {
+  background: var(--clr-mainLight);
+}
+
+/* Scroll */
+::-webkit-scrollbar-thumb {
+  background: lightseagreen;
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkcyan;
 }

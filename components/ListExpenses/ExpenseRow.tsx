@@ -1,7 +1,7 @@
 import Image from "next/image";
 import style from "./Expense.module.css";
-import deleteIcon from "/public/icons/delete.svg"
-import editIcon from "/public/icons/edit.svg"
+import deleteIcon from "/public/icons/icons8-delete-64.png"
+import editIcon from "/public/icons/icons8-edit-64.png"
 import useBreakpoint from "../../hooks/useBreakpoint";
 import {useEffect, useState} from "react";
 

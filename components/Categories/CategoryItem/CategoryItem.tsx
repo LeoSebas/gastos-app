@@ -1,7 +1,7 @@
 import Image from "next/image"
 import style from "./CategoryItem.module.css"
-import deleteIcon from "/public/icons/delete.svg"
-import editIcon from "/public/icons/edit.svg"
+import deleteIcon from "/public/icons/icons8-delete-64.png"
+import editIcon from "/public/icons/icons8-edit-64.png"
 import {CategoryFormAction} from "../CategoryForm/CategoryForm";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ export default function CategoryItem(props) {
 
         <div className={style.CategoryItem} style={{"background": color}}>
             <Link href={`/private/categories/${name}`} >
-                <p className="hover:cursor-pointer">{name}</p>
+                <p className="hover:cursor-pointer text-xl p-3">{name}</p>
             </Link>
             <div className={style.CategoryItem__options}>
                 <div className={style.CategoryItem__options_item} onClick={() => {

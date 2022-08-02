@@ -73,7 +73,7 @@ export default function Home() {
         return <></>
     }
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center -z-10">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
                 <section className="w-full">
                     <p>Pagina de inicio</p>

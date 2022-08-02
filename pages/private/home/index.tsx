@@ -10,7 +10,9 @@ import AddIcon from '@mui/icons-material/Add';
 import ListExpenses from "../../../components/ListExpenses";
 import {AxiosResponse} from "axios";
 import {searchExpenses} from "../../../services/expenses";
-import PieChart from "../../../components/PieChart/PieChart";
+import PieChart from "../../../components/Charts/PieChart/PieChart";
+import BarChart from "../../../components/Charts/BarChart/BarChart";
+import style from "./Home.module.css"
 
 
 export default function Home() {
@@ -77,7 +79,10 @@ export default function Home() {
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
                 <section className="w-full">
                     <p>Pagina de inicio</p>
-                    <PieChart token={user.token} currentCategories={currentCategories}/>
+                    <div className={style.Home__charts}>
+                        <PieChart token={user.token} currentCategories={currentCategories}/>
+                        <BarChart token={user.token}/>
+                    </div>
                     <section className="w-full" >
                         <h1>Gastos recientes: </h1>
                         <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>

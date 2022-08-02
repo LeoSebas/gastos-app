@@ -17,10 +17,7 @@ export default function Home() {
     /// Selector para consultar el user
     const {user} = useSelector((state: AppState) => state)
     const router = useRouter()
-    if (!user) {
-        router.push('/login')
-        return <></>
-    }
+   
     const dispatch = useDispatch()
     
 
@@ -71,6 +68,10 @@ export default function Home() {
         setShowAddSpence(false);
     };
 
+    if (!user) {
+        router.push('/login')
+        return <></>
+    }
     return (
         <div className="flex flex-col items-center">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">

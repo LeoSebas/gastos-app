@@ -87,6 +87,8 @@ export default function PieChart (props){
           }
         },
         tooltip: {
+            ignoreBounds:true,
+            isHtml:true
         },
         chartArea: {
           left: 0,

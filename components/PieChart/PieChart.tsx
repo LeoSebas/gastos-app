@@ -23,7 +23,7 @@ interface ChartData {
 export default function PieChart (props){
     const {currentCategories, token} = props
     const [error, setError] = useState("")
-    const [results, setResults] = useState<Array<Results>>([])
+    const [results, setResults] = useState<Array<Results>>()
     const [chartData, setChartData] = useState<ChartData>({colors:[], values:[]})
 
 

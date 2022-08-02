@@ -1,6 +1,6 @@
 import Image from "next/image";
 import bgMainDescr from "/public/bg-main-description.svg"
-import imgMainDescr from "/public/img-main-description.svg"
+import imgMainDescr from "/public/img-she-bg.png"
 import useBreakpoint from "../../hooks/useBreakpoint";
 
 export default function MainDescription() {

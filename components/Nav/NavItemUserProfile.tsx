@@ -13,7 +13,7 @@ export default function NavItemUserProfile({user}: { user: User }) {
         setShowOptions(!showOptions)
     }
     const UserOptions = () => {
-        return <div className="absolute z-50 bg-white rounded-b-2xl border border-black flex flex-col ">
+        return <div className="absolute z-[1500] bg-white rounded-b-2xl border border-black flex flex-col ">
             <NavItem title="Inicio" href="/private/home"/>
             <NavItem title="Cerrar sesión" onClick={() => {
                 dispatch(appSlice.actions.userChanged(null))

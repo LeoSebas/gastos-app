@@ -16,8 +16,10 @@ import PieChart from "../../../components/PieChart/PieChart";
 export default function Home() {
     /// Selector para consultar el user
     const {user} = useSelector((state: AppState) => state)
-    const dispatch = useDispatch()
     const router = useRouter()
+   
+    const dispatch = useDispatch()
+    
 
     const [showAddExpense, setShowAddSpence] = useState(false)
 
@@ -58,10 +60,7 @@ export default function Home() {
     const currentCategories = useSelector((state: AppState) => state.categories)
     const [recentAddedExpenses, setRecentAddedExpenses] = useState<AxiosResponse | undefined>(undefined)
 
-    if (!user) {
-        router.push('/login')
-        return <></>
-    }
+
     const handleAddExpenseModal = () => {
         setShowAddSpence(true)
     }
@@ -69,11 +68,16 @@ export default function Home() {
         setShowAddSpence(false);
     };
 
+    if (!user) {
+        router.push('/login')
+        return <></>
+    }
     return (
         <div className="flex flex-col items-center">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
                 <section className="w-full">
                     <p>Pagina de inicio</p>
+                    <PieChart token={user.token} currentCategories={currentCategories}/>
                     <section className="w-full" >
                         <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
                     </section>

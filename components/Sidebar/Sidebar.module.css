@@ -18,10 +18,34 @@
 .Sidebar__open{
     width: 100vw;
     transform: translateX(0);
+    
+    
+}
+
+.Sidebar__hamburger__container div{
+    background-color: white;
+    padding-inline: 10px;
+    border-radius: 0 15px 15px 0;
+    overflow: hidden;   
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 0px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    
+}
+
+.Sidebar__open .Sidebar__hamburger__container div {
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+
+.Sidebar__open .Sidebar__hamburger__container div:hover {
+    transform: scale(1.1);
 }
 
 .Sidebar__open .Sidebar__hamburger__container{
     transform: translateX(80vw);
+    
+    
 }
 
 .Sidebar__hamburger__container{
@@ -30,6 +54,7 @@
     transform: translateX(99vw);
     left: 0.5em;
     background-color: white;
+
 }
 
 .Sidebar__list{
@@ -127,5 +152,14 @@
         box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 0px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
         
+    }
+
+    .Sidebar__open .Sidebar__hamburger__container div:hover {
+        transform: unset;
+    }
+
+    .Sidebar__open .Sidebar__hamburger__container div {
+        background-color: white;
+        border-radius: 0 15px 15px 0;
     }
 }

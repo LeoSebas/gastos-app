@@ -31,6 +31,7 @@
 .PrivateLayout__footer{
     justify-self: flex-end;
     margin-top: auto;
+    
 }
 
 @media (min-width:762px){

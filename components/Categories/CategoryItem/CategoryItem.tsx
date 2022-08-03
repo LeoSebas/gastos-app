@@ -17,8 +17,9 @@ export default function CategoryItem(props) {
     return (
 
         <div className={style.CategoryItem} style={{"background": color}}>
+            
             <Link href={`/private/categories/${name}`} >
-                <p className="hover:cursor-pointer text-xl p-3">{name}</p>
+                <p className={`hover:cursor-pointer text-xl p-3 CategoryItem__name ${style.CategoryItem__name}`}>{name}</p>
             </Link>
             <div className={style.CategoryItem__options}>
                 <div className={style.CategoryItem__options_item} onClick={() => {

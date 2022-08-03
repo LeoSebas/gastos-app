@@ -71,13 +71,13 @@ export default function BarChart (props){
     return <div className={style.BarChart}>
             <div>
 
-                {(results.length !==0)&&<Chart
+                {(results?.length !==0)?<Chart
                 options={pieOptions}
                 chartType="ColumnChart"
                 width={"550px"}
                 height={"400px"}
                 data={chartData}
-                />}
+                />:<p>Usted no tiene gastos</p>}
             </div>
         </div>
 }

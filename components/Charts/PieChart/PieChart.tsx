@@ -97,7 +97,7 @@ export default function PieChart (props){
       console.log(results)
     return <div className={style.PieChart}>
         <div>
-           {(results.length !==0) && <Chart
+           {(results?.length !==0) ? <Chart
             chartType="PieChart"
             data={chartData.values}
             options={pieOptions}
@@ -106,7 +106,7 @@ export default function PieChart (props){
             className={style.PieChart__chart}
             height={"400px"}
             legend_toggle
-            />}
+            />:<p> No hay gastos que mostrar</p>}
         </div>
     </div>
 }

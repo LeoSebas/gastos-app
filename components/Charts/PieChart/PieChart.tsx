@@ -94,7 +94,6 @@ export default function PieChart (props){
         }
        
       };
-      console.log(results)
     return <div className={style.PieChart}>
         <div>
            {(results?.length !==0) ? <Chart

@@ -66,8 +66,6 @@ export default function BarChart (props){
             backgroundColor: 'transparent'
         } 
       };
-    
-      console.log(results)
     return <div className={style.BarChart}>
             <div>
 

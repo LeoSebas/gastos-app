@@ -68,7 +68,7 @@ export default function Register() {
     const router = useRouter()
 
     if (currentUser) {
-        router.push('/home')
+        router.push('/private/home')
         return <></>
     }
 

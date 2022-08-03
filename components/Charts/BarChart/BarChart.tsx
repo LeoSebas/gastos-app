@@ -9,7 +9,7 @@ export default function BarChart (props){
     const {token, reload} = props
     const [error, setError] = useState("")
     const [results, setResults] = useState<Array<any>>()
-    const [chartData, setChartData] = useState<Array<string|number>>()
+    const [chartData, setChartData] = useState<Array<string|number>>([])
 
 
     const fetchTotals = async (token:string):Promise<any> => {
@@ -24,6 +24,7 @@ export default function BarChart (props){
         }
     }
 
+    
     function arrangeChartData () {
         var array = []
         array.push(['mes', 'Gastos'])
@@ -52,7 +53,7 @@ export default function BarChart (props){
 
     const pieOptions = {
         title: "",
-        backgroundColor: '#cefdfc',
+        backgroundColor: 'transparent',
         legend: {
           position: "bottom",
           alignment: "center",
@@ -62,7 +63,7 @@ export default function BarChart (props){
           }
         }, 
         chartArea: {
-            backgroundColor: '#cefdfc'
+            backgroundColor: 'transparent'
         } 
       };
     

@@ -31,14 +31,9 @@ export default function Profile (){
             setProfile(response.data)
         }
     }
-
-
     useEffect(() => {
       fetchProfile(token)
     }, [])
-    
-
-    console.log(profile)
     return (
         <div className={style.Profile}>
             <p>Nombre: {profile?.name}</p>

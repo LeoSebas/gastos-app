@@ -13,7 +13,6 @@
     padding: 1em;
     margin-block: 2em;
     max-width: 100vw;
-    overflow: hidden;
 }
 
 @media (min-width:950px){

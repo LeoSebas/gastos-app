@@ -53,7 +53,7 @@ export function ExpenseRow(props) {
             <p className={style.Expense__name}>{name}</p>
             <p className={style.Expense__date}>{options ? formattedDate + " " + formattedTime : date}</p>
             <p className={style.Expense__value}>{value}</p>
-            <p className={style.Expense__category} style={{"background": color}}><p>{category}</p></p>
+            <div className={style.Expense__category} style={{"background": color}}><p>{category}</p></div>
             {(options) ?
                 <div className={style.Expense__options}>
                     <div className={style.Expense__edit} onClick={() => handleModify(_id)}><Image src={editIcon}/></div>

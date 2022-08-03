@@ -78,10 +78,10 @@ export default function Home() {
         <div className="flex flex-col items-center -z-10">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
                 <section className="w-full">
-                    <p>Pagina de inicio</p>
+                    <p className={style.Home__title}>Pagina de inicio</p>
                     <div className={style.Home__charts}>
-                        <PieChart token={user.token} currentCategories={currentCategories}/>
-                        <BarChart token={user.token}/>
+                        <PieChart token={user.token} currentCategories={currentCategories} reload={reload}/>
+                        <BarChart token={user.token} reload={reload}/>
                     </div>
                     <section className="w-full" >
                         <h1>Gastos recientes: </h1>

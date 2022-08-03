@@ -24,7 +24,7 @@ a {
   --clr-light: hsl(0, 0%, 98%); /* Color claro */
   --clr-dark: hsl(240, 5%, 11%); /* Color oscuro */
   --clr-main: #61efeb;
-  --clr-mainLight: hsl(179, 92%, 90%);
+  --clr-mainLight: #cefdfc;
 }
 
 

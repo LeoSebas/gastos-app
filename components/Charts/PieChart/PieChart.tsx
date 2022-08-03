@@ -21,7 +21,7 @@ export interface ChartData {
 
 
 export default function PieChart (props){
-    const {currentCategories, token} = props
+    const {currentCategories, token, reload} = props
     const [error, setError] = useState("")
     const [results, setResults] = useState<Array<Results>>()
     const [chartData, setChartData] = useState<ChartData>({colors:[], values:[]})
@@ -64,11 +64,12 @@ export default function PieChart (props){
 
     useEffect(() => {
         fetchTotals(token)
-    }, [])
+    }, [reload])
 
     const pieOptions = {
         title: "",
         pieHole: 0.5,
+        backgroundColor: '#cefdfc',
         slices: chartData.colors,
         legend: {
           position: "bottom",
@@ -83,6 +84,7 @@ export default function PieChart (props){
             isHtml:true
         },
         chartArea: {
+            backgroundColor: '#cefdfc',
             left: 0,
             top: 0,
             width:"100%",

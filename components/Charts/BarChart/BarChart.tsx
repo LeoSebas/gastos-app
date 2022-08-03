@@ -6,7 +6,7 @@ import { getMonth } from "../../../utils/dateUtils"
 import Chart from "react-google-charts";
 
 export default function BarChart (props){
-    const {token} = props
+    const {token, reload} = props
     const [error, setError] = useState("")
     const [results, setResults] = useState<Array<any>>()
     const [chartData, setChartData] = useState<Array<string|number>>()
@@ -26,7 +26,7 @@ export default function BarChart (props){
 
     function arrangeChartData () {
         var array = []
-        array.push(['mes', 'total'])
+        array.push(['mes', 'Gastos'])
         if(results){
         for (var i = 1; i < Object.keys(results).length+1; i++){
             var month = getMonth(i)
@@ -43,7 +43,7 @@ export default function BarChart (props){
 
     useEffect(() => {
         fetchTotals(token)
-    }, [])
+    }, [reload])
 
     
     useEffect(() => {
@@ -52,6 +52,7 @@ export default function BarChart (props){
 
     const pieOptions = {
         title: "",
+        backgroundColor: '#cefdfc',
         legend: {
           position: "bottom",
           alignment: "center",
@@ -59,15 +60,19 @@ export default function BarChart (props){
             color: "233238",
             fontSize: 14
           }
-        },  
+        }, 
+        chartArea: {
+            backgroundColor: '#cefdfc'
+        } 
       };
     
 
     return <div className={style.BarChart}>
             <div>
                 <Chart
+                options={pieOptions}
                 chartType="ColumnChart"
-                width={"103%"}
+                width={"550px"}
                 height={"400px"}
                 data={chartData}
                 />

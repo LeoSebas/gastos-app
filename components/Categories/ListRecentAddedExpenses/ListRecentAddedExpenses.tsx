@@ -28,12 +28,12 @@ export default function ListRecentAddedExpenses({className, category} : {classNa
     }
     const ListBody = ({expenses}) => {
         return expenses ? <div>
-            {expenses.map( (expense) => <ExpenseRow expense={expense} /> )}
+            {expenses.map( (expense) => <ExpenseRow expense={expense} key={expense._id} /> )}
         </div> : <p>Loading...</p>
     }
 
-    const ExpenseRow = ({expense}) => {
-        return <div className="flex ">
+    const ExpenseRow = ({expense, key}) => {
+        return <div className="flex " key={key}>
             <p className="flex-1">{expense.name}</p>
             <p className="flex-1">{expense.value}</p>
             <p className="flex-1">{expense.date}</p>

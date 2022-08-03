@@ -11,8 +11,6 @@
     transition: all 250ms ease-in-out;
     -webkit-box-reflect:below 2px linear-gradient(transparent, transparent, #0004);
     border: 1px solid black;
-    transform-origin:left;
-    transform:perspective(800px) rotateY(0);
     transition:0.5s;
     margin: 1em;
     width: max-content;
@@ -23,13 +21,23 @@
     align-items: center;
     gap: 1em;
     justify-content: flex-end;
+    background: inherit;
 }
 
 .CategoryItem__options_item{
     width: 2.5em;
     cursor: pointer;
+
 }
 
 .CategoryItem:hover{
-    transform: perspective(800px)  rotateY(-25deg) scale(1.05);
+    transform: scale(1.05);
+}
+
+.CategoryItem__name{
+    background: inherit;
+    background-clip: text;
+    color: transparent;
+    filter: invert(1) grayscale(1) contrast(10) brightness(15);
+    
 }

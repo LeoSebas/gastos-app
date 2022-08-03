@@ -23,6 +23,7 @@
     width: 25%;
     text-overflow: ellipsis;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .Expense__date{
@@ -40,7 +41,16 @@
     width: 15%;
     text-align: center;
     border-radius: 15px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
+.Expense__category p {
+    background: inherit;
+    background-clip: text;
+    color: transparent;
+    filter: invert(1) grayscale(1) contrast(10) brightness(15);
 }
 
 .Expense__options{
@@ -64,6 +74,8 @@
 .Expense__delete:hover, .Expense__edit:hover  {
     transform: scale(1.1);
 }
+
+
 
 @media (min-width:762px){
     .Expense{

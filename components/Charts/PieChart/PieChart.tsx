@@ -49,13 +49,15 @@ export default function PieChart (props){
         var array = []
         var color = []
         array.push(["Categoria", "Gastos"])
-        results?.map(element => {
-            let category = getCategory(element._id)
-            array.push([category.name, element.totalExpenses])
-            color.push({color:category.color})
-        })
-        setChartData({values:array, colors:color})
+        if(results){
 
+            results?.map(element => {
+                let category = getCategory(element._id)
+                array.push([category.name, element.totalExpenses])
+                color.push({color:category.color})
+            })
+            setChartData({values:array, colors:color}) 
+        }
 
     }
     useEffect(() => {
@@ -92,10 +94,10 @@ export default function PieChart (props){
         }
        
       };
-
+      console.log(results)
     return <div className={style.PieChart}>
         <div>
-            <Chart
+           {(results.length !==0) && <Chart
             chartType="PieChart"
             data={chartData.values}
             options={pieOptions}
@@ -104,7 +106,7 @@ export default function PieChart (props){
             className={style.PieChart__chart}
             height={"400px"}
             legend_toggle
-            />
+            />}
         </div>
     </div>
 }

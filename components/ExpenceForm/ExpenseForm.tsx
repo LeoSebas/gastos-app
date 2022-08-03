@@ -158,7 +158,7 @@ export default function ExpenseForm({
                                     <label htmlFor="expenseCategoryInput">Categoria</label>
                                     <CustomField id="expenseCategoryInput" name="categoryName" value={values.categoryName}
                                                  onChange={handleChange} component="select">
-                                        {categories.map((category, index) => {
+                                        {categories?.map((category, index) => {
                                             return <option value={category.name} key={index}>{category.name}</option>
                                         })
                                         }

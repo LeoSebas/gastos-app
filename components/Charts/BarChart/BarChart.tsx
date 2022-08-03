@@ -67,16 +67,17 @@ export default function BarChart (props){
         } 
       };
     
-
+      console.log(results)
     return <div className={style.BarChart}>
             <div>
-                <Chart
+
+                {(results.length !==0)&&<Chart
                 options={pieOptions}
                 chartType="ColumnChart"
                 width={"550px"}
                 height={"400px"}
                 data={chartData}
-                />
+                />}
             </div>
         </div>
 }

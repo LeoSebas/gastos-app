@@ -15,7 +15,7 @@
     max-width: 100vw;
 }
 
-@media (min-width:950px){
+@media (min-width:1025px){
     .Home__charts{ flex-direction: row;}
     
 }

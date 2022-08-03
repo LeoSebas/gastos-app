@@ -56,7 +56,7 @@ export default function ListExpenses(props) {
         <div className={style.ListExpenses}>
             <div className={style.ListExpenses__list}>
                 <ExpenseHeader/>
-                {results?.expenses.map((expense) => <ExpenseRow
+                {results?.expenses?.map((expense) => <ExpenseRow
                     open={(showDeleteExpense || showModifyExpense) && expense._id === selectedExpense._id}
                     key={expense._id} _id={expense._id} name={expense.name} date={expense.date} value={expense.value}
                     options={true} category={getCategory(expense.categoryID).name}

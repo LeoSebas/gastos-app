@@ -28,11 +28,14 @@ export default function Login() {
 
     const signIn = async (credentials: Credentials) => {
         const response = await loginUser(credentials)
-        if("error" in response.data) {
+        if(!response){
+            console.log("Cargando")
+        } else
+        {if("error" in response.data) {
             console.log(response.data.msg)
         } else {
             dispatch(appSlice.actions.userChanged(response.data))
-        }
+        }}
     }
 
     const LoginForm = () => {

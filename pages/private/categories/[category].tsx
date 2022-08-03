@@ -5,6 +5,7 @@ import CategoryPageHeader from "../../../components/Categories/CategoryPageHeade
 import {add, sub} from "date-fns";
 import {getTotalExpenses} from "../../../services/expenses";
 import {useEffect, useState} from "react";
+import ListRecentAddedExpenses from "../../../components/Categories/ListRecentAddedExpenses";
 
 export default function Category({ categoryName }) {
     const {categories, user} = useSelector((state : AppState) => state)
@@ -48,7 +49,7 @@ export default function Category({ categoryName }) {
             <section className="w-full">
                 <p>Pagina de categoria { category.name }</p>
                 <CategoryPageHeader category={category} totalSemanal={totalWeek} totalMensual={totalMonth}/>
-
+                <ListRecentAddedExpenses className="" category={category}/>
             </section>
         </main>
     </div>

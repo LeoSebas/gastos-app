@@ -9,7 +9,7 @@ import {Fab, Dialog} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ListExpenses from "../../../components/ListExpenses";
 import {AxiosResponse} from "axios";
-import {searchExpenses} from "../../../services/expenses";
+import {searchExpenses, ServerResponse} from "../../../services/expenses";
 import PieChart from "../../../components/Charts/PieChart/PieChart";
 import BarChart from "../../../components/Charts/BarChart/BarChart";
 import style from "./Home.module.css"
@@ -60,7 +60,7 @@ export default function Home() {
     }, [reload, user.token])
 
     const currentCategories = useSelector((state: AppState) => state.categories)
-    const [recentAddedExpenses, setRecentAddedExpenses] = useState<AxiosResponse | undefined>(undefined)
+    const [recentAddedExpenses, setRecentAddedExpenses] = useState<ServerResponse | undefined>(undefined)
 
 
     const handleAddExpenseModal = () => {
@@ -74,6 +74,8 @@ export default function Home() {
         router.push('/login')
         return <></>
     }
+    console.log(recentAddedExpenses)
+
     return (
         <div className="flex flex-col items-center -z-10">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
@@ -85,7 +87,12 @@ export default function Home() {
                     </div>
                     <section className="w-full" >
                         <h1>Gastos recientes: </h1>
-                        <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
+
+                        {   (recentAddedExpenses?.error)
+                            ? <p className="w-full text-center p-3">{recentAddedExpenses.msg}</p>
+                            : <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
+                        }
+
                     </section>
                     <div className="w-full flex justify-end z-10">
                             

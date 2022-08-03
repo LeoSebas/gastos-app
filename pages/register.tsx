@@ -9,6 +9,9 @@ import * as Yup from 'yup'
 import {useSelector} from "react-redux";
 import {AppState} from "../redux";
 import CustomHead from "../components/CustomHead";
+import Image from "next/image";
+import iconShowPassword from "/public/icons/icons8-eye-30.png";
+import iconHidePassword from "/public/icons/icons8-closed-eye-50.png";
 
 interface Inputs {
     "name": string
@@ -60,6 +63,8 @@ export default function Register() {
 
     /* State que controla el flujo de registro */
     const [registerState, setRegisterState]: [RegisterState, Dispatch<SetStateAction<RegisterState>>] = useState()
+
+
 
     /// Selector para consultar el user
     const currentUser = useSelector((state: AppState) => state.user)
@@ -120,6 +125,16 @@ export default function Register() {
     /// Componente Formulario para el registro con Formik.
     const RegisterForm = (initialValues: InputValues) => {
 
+        ///Toggle para showpassword
+        const [showPassword, setShowPassword] = useState(false)
+        const toggleShowPassword = () => {
+            setShowPassword(!showPassword);
+        }
+        const [showRepeatPassword, setShowRepeatPassword] = useState(false)
+        const toggleShowRepeatPassword = () => {
+            setShowRepeatPassword(!showRepeatPassword);
+        }
+
         const registerSchema = Yup.object().shape({
             name: Yup.string().min(2, 'Muy corto!').max(50, 'Muy largo!').required('Este campo es obligatorio')
                 .matches(/(^[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+))(\s[A-ZÁÉÍÓÚ]{1}([a-zñáéíóú]+))?$/, 'Sin números'),
@@ -173,13 +188,21 @@ export default function Register() {
                     <InputBox>
                         <label htmlFor="password">Contraseña:</label>
                         <Field className="text-xl p-3 bg-blue-200 rounded-lg" id="password" name="password"
-                               placeholder="Ingrese una contraseña de 6 a 30 caracteres."/>
+                               placeholder="Ingrese una contraseña de 6 a 30 caracteres." type={showPassword ? 'text' : 'password'}/>
+                        <div onClick={toggleShowPassword}
+                             className="absolute self-end mt-6 p-[14px] hover:cursor-pointer">
+                            <Image src={showPassword ? iconShowPassword : iconHidePassword} width={30} height={30}/>
+                        </div>
                         {errors.password && touched.password && <div className="text-red-500">{errors.password}</div>}
                     </InputBox>
                     <InputBox>
                         <label htmlFor="repeatPassword">Repetir contraseña:</label>
                         <Field className="text-xl p-3 bg-blue-200 rounded-lg" id="repeatPassword" name="repeatPassword"
-                               placeholder="Repita la contraseña"/>
+                               placeholder="Repita la contraseña" type={showRepeatPassword ? 'text' : 'password'}/>
+                        <div onClick={toggleShowRepeatPassword}
+                             className="absolute self-end mt-6 p-[14px] hover:cursor-pointer">
+                            <Image src={showRepeatPassword ? iconShowPassword : iconHidePassword} width={30} height={30}/>
+                        </div>
                         {errors.repeatPassword && touched.repeatPassword &&
                             <div className="text-red-500">{errors.repeatPassword}</div>}
                     </InputBox>

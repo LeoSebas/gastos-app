@@ -14,6 +14,7 @@ import {Form, Formik} from "formik";
 import CustomField from "../../CustomField";
 import {useDispatch, useSelector} from "react-redux";
 import {appSlice, AppState} from "../../../redux";
+import * as Yup from "yup";
 
 
 enum CategoryFormStatus {
@@ -51,6 +52,11 @@ export default function CategoryForm({
 
     const CategoryFormInput = () => {
 
+        const CategorySchema = Yup.object().shape({
+            categoryName: Yup.string().min(2, 'El nombre es muy corto').max(30, 'Creo que ya es muy largo, no?'),
+            categoryColor: Yup.string(),
+        })
+
         const initialValues: CategoryInput = {
             categoryName: category ? category.name : '',
             categoryColor: category ? category.color : '',
@@ -76,28 +82,31 @@ export default function CategoryForm({
             dispatch(appSlice.actions.setCategories(updatedCategories.data.categories))
         }
 
-        return <Formik initialValues={initialValues} onSubmit={(values) => {
-            action === CategoryFormAction.create ? handleAddCategory({
+        return <Formik initialValues={initialValues} onSubmit={ async (values) => {
+            action === CategoryFormAction.create ? await handleAddCategory({
                 categoryName: values.categoryName,
                 categoryColor: values.categoryColor
-            }) : handleModifyCategory((category.name !== values.categoryName) ? {
+            }) : await handleModifyCategory((category.name !== values.categoryName) ? {
                 categoryName: category.name,
                 newCategoryName: values.categoryName,
                 newCategoryColor: values.categoryColor
             } : {categoryName: category.name, newCategoryColor: values.categoryColor    })
-        }}>
+        }
+        } validationSchema={CategorySchema}>
             {
-                ({isSubmitting, values, handleChange}) => (
+                ({isSubmitting, values,errors , touched, handleChange}) => (
                     <Form className="flex flex-col">
                         <InputBox>
                             <label>Nombre de la categoria</label>
                             <CustomField id="categoryName" name="categoryName" value={values.categoryName}
                                          onChange={handleChange} type="text" required={true}/>
+                            {errors.categoryName && touched.categoryName && <div className="text-red-400">{errors.categoryName}</div>}
                         </InputBox>
                         <InputBox >
                             <label>Color</label>
                             <CustomField className="w-full h-16" id="categoryColor" name="categoryColor" value={values.categoryColor}
                                          onChange={handleChange} type="color" required={true}/>
+                            {errors.categoryColor && touched.categoryColor && <div className="text-red-400">{errors.categoryColor}</div>}
                         </InputBox>
                         <InputBox>
                             <ActionButton type="submit" className="bg-primary"

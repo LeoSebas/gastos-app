@@ -118,3 +118,11 @@ export function getTotalPerMonth(token:string) : Promise<AxiosResponse> {
     }
     return HEROKU_API.get(`api/expenses/getExpensesPerMonth`, config)
 }
+
+export function getTotalLimit(token:string) : Promise<AxiosResponse> {
+
+    let config = {
+        headers:{"Authorization": "Bearer " + token}
+    }
+    return HEROKU_API.get(`api/expenses/limit`, config)
+}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import BgFooter from "/public/bg-footer.svg"
 
 export default function Footer() {
-    return (<footer className="w-full">
+    return (<footer className="w-full bottom-0 mt-auto">
             <div className="relative h-full">
                 <div className="w-full absolute z-10 h-full flex flex-col justify-evenly">
                     <div className="flex justify-center items-center">

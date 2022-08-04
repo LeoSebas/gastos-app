@@ -1,0 +1,6 @@
+.CategoryText{
+    background: inherit;
+    background-clip: text;
+    color: transparent;
+    filter: invert(1) grayscale(1) contrast(10) brightness(15);
+}

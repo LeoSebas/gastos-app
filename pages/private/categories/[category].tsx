@@ -3,8 +3,10 @@ import {useSelector} from "react-redux";
 import {AppState} from "../../../redux";
 import CategoryPageHeader from "../../../components/Categories/CategoryPageHeader";
 import {add, sub} from "date-fns";
-import {getTotalExpenses} from "../../../services/expenses";
+import {Expense, getTotalExpenses, searchExpenses} from "../../../services/expenses";
 import {useEffect, useState} from "react";
+import ListRecentAddedExpenses from "../../../components/Categories/ListRecentAddedExpenses";
+import GraphExpensesAcumulated from "../../../components/Categories/GraphExpencesAcumulated";
 
 export default function Category({ categoryName }) {
     const {categories, user} = useSelector((state : AppState) => state)
@@ -13,6 +15,8 @@ export default function Category({ categoryName }) {
 
     const [totalWeek, setTotalWeek] = useState<number>()
     const [totalMonth, setTotalMonth] = useState<number>()
+
+    const [expensesMonth, setExpensesMonth] = useState<Array<Expense>>(null)
 
 
     const setTotales = async () => {
@@ -38,9 +42,29 @@ export default function Category({ categoryName }) {
         }
     }
 
+    const getMonthlyExpenses = async () => {
+        const today = add(new Date(Date.now()),{days:1})
+        const minDate = new Date(today.getFullYear(),today.getMonth(),1,0,0)
+        const response = await searchExpenses(user.token,{
+            search: '',
+            category: category._id,
+            sortBy: "date",
+            page: '',
+            itemsPerPage: 10000,
+            desc: 1,
+            minValue: '',
+            maxValue: '',
+            minDate: minDate.toISOString().slice(0,10),
+            maxDate: today.toISOString().slice(0,10)
+        } )
+        console.log(response.data)
+        setExpensesMonth(response.data.expenses)
+    }
+
     useEffect(() => {
         setTotales()
-    } , [ setTotales ,categoryName])
+        getMonthlyExpenses()
+    } , [ categoryName])
 
 
     return <div className="flex flex-col items-center">
@@ -48,6 +72,13 @@ export default function Category({ categoryName }) {
             <section className="w-full">
                 <p>Pagina de categoria { category.name }</p>
                 <CategoryPageHeader category={category} totalSemanal={totalWeek} totalMensual={totalMonth}/>
+                <div className="flex flex-col lg:flex-row">
+                    <ListRecentAddedExpenses className="w-12/12 lg:w-6/12" category={category}/>
+                    {
+                        expensesMonth ? <GraphExpensesAcumulated expenses={expensesMonth} className="w-12/12 lg:w-6/12"/> : <></>
+                    }
+                </div>
+
 
             </section>
         </main>

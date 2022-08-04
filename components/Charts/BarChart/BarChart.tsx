@@ -4,6 +4,7 @@ import style from "./BarChart.module.css"
 import { Results } from "../PieChart/PieChart"
 import { getMonth } from "../../../utils/dateUtils"
 import Chart from "react-google-charts";
+import SetTotalLimit from "../../SetTotalLimit/SetTotalLimit"
 
 export default function BarChart (props){
     const {token, reload} = props
@@ -39,14 +40,14 @@ export default function BarChart (props){
 
     
     function arrangeChartData () {
-        var array = []
+        var array:Array<any> = []
         array.push(['mes',  'Gastos Mensuales', "Límite Mensual"])
         if(results){
         for (var i = 1; i < Object.keys(results).length+1; i++){
             var month = getMonth(i)
             if(results[i] && results[i].length!==0){
                 if(limit) {
-                    array.push([month, results[i][0].totalExpenses, 25000])
+                    array.push([month, results[i][0].totalExpenses, limit])
                 } else {
                     array.push([month,  results[i][0].totalExpenses, 0])
                 }
@@ -68,7 +69,7 @@ export default function BarChart (props){
     
     useEffect(() => {
        arrangeChartData()
-    }, [results])
+    }, [results, limit])
 
     const pieOptions = {
         title: "",
@@ -93,6 +94,7 @@ export default function BarChart (props){
         fetchLimit(token)
      }, [])
     return <div className={style.BarChart}>
+            <SetTotalLimit token={token} setLimit={setLimit}/>
             <div>
                 {(results?.length !==0)?<Chart
                 options={pieOptions}

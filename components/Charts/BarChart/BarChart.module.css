@@ -4,8 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-right: -4em;
-    overflow: hidden;
     background-color: #ffffff00;
+    padding-bottom: 2em;
 }
 

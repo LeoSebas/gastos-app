@@ -126,3 +126,11 @@ export function getTotalLimit(token:string) : Promise<AxiosResponse> {
     }
     return HEROKU_API.get(`api/expenses/limit`, config)
 }
+
+export function setTotalLimit (token:string, limit:number) : Promise<AxiosResponse> {
+
+    let config = {
+        headers:{"Authorization": "Bearer " + token}
+    }
+    return HEROKU_API.post(`api/expenses/limit`, {totalLimit:limit},config)
+}

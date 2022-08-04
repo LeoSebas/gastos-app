@@ -77,8 +77,8 @@ export default function Home() {
 
     return (
         <div className="flex flex-col items-center -z-10">
-            <main className="container p-4 flex flex-1 flex-col items-center justify-center">
-                <section className="w-full">
+            <main className="container p-4 flex flex-1 flex-col items-center justify-center w-full">
+                <section className={style.Home__main} >
                     <p className={style.Home__title}>Pagina de inicio</p>
                     <div className={style.Home__charts}>
                         <PieChart token={user.token} currentCategories={currentCategories} reload={reload}/>

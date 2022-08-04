@@ -65,11 +65,8 @@
     width: fit-content;
     overflow: visible;
     z-index: 5;
+    min-width: 15%;
    
-    
-}
-
-.Expense__category:hover p{
     
 }
 

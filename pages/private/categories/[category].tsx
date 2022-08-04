@@ -50,7 +50,7 @@ export default function Category({ categoryName }) {
             category: category._id,
             sortBy: "date",
             page: '',
-            itemsPerPage: '',
+            itemsPerPage: 10000,
             desc: 1,
             minValue: '',
             maxValue: '',
@@ -73,9 +73,9 @@ export default function Category({ categoryName }) {
                 <p>Pagina de categoria { category.name }</p>
                 <CategoryPageHeader category={category} totalSemanal={totalWeek} totalMensual={totalMonth}/>
                 <div className="flex flex-col lg:flex-row">
-                    <ListRecentAddedExpenses className="w-6/12" category={category}/>
+                    <ListRecentAddedExpenses className="w-12/12 lg:w-6/12" category={category}/>
                     {
-                        expensesMonth ? <GraphExpensesAcumulated expenses={expensesMonth} className="w-6/12"/> : <></>
+                        expensesMonth ? <GraphExpensesAcumulated expenses={expensesMonth} className="w-12/12 lg:w-6/12"/> : <></>
                     }
                 </div>
 

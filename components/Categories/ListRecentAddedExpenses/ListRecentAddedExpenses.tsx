@@ -37,14 +37,14 @@ export default function ListRecentAddedExpenses({className, category}: { classNa
     }
     const ListBody = ({expenses}) => {
         return expenses ? <div>
-            {expenses.map((expense) => <ExpenseRow expense={expense} key={expense._id}/>)}
+            {expenses.map((expense) => <ExpenseRow expense={expense} id={expense._id} key={expense._id}/>)}
         </div> : <p>Loading...</p>
     }
 
-    const ExpenseRow = ({expense, key}) => {
+    const ExpenseRow = ({expense, id}) => {
         const formattedTime = new Date(expense.date).toISOString().slice(11,16);
         const formattedDate = new Date(expense.date).toISOString().slice(0,10).replace('-','/').replace('-','/')
-        return <div className="flex rounded-2xl p-1 bg-black bg-opacity-10 m-1" key={key}>
+        return <div className="flex rounded-2xl p-1 bg-black bg-opacity-10 m-1" key={id}>
             <p className="flex-1 p-1 font-light">{expense.name}</p>
             <p className="flex-1 p-1 font-light">${expense.value}</p>
             <p className="flex-1 p-1 font-light">{formattedDate + ' - ' + formattedTime}</p>

@@ -35,9 +35,9 @@ export default function GraphExpensesAcumulated({expenses , className}: { expens
 
         for (let i = 1; i <= actualDays; i++) {
             let filtered = expenses?.filter((value) => {
-                const date = new Date(new Date(value.date).toISOString())
+                const date = new Date(new Date(value.date).toString())
                 console.log(date)
-                return date.getDay() === i
+                return date.getDate() === i
             })
             let acum = 0;
             filtered?.forEach((element) => {
@@ -45,19 +45,20 @@ export default function GraphExpensesAcumulated({expenses , className}: { expens
                 acum = element.value + acum
             })
             let prev = values.length >= 1 ? values.at(i - 1).at(1) ?? 0 : 0
-            values.push([`${i}/${today.getMonth()}`, prev + acum ?? 0])
+            values.push([`${i}/${today.getUTCMonth() +1}`, prev + acum ?? 0])
+
         }
         values.shift()
-        console.log(values)
         data = [...data, ...values]
         console.log(data)
+        console.log(actualDays)
         setStateGraph({status: GraphStatus.success, data: data})
     }
     useEffect(() => {
         loadDataGraph()
     }, [])
 
-    return (<div className={`p-3 rounded-2xl m-5 bg-cyan-100 ${className}`}>
+    return (<div className={`p-3 rounded-2xl m-5 bg-cyan-100  ${className}`}>
             <h1 className="text-2xl">Gastos del mes acumulados</h1>
         {
             stateGraph.status === GraphStatus.success ? <Chart

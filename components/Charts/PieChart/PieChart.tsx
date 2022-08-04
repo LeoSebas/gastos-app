@@ -40,9 +40,7 @@ export default function PieChart (props){
     }
 
     function getCategory(id:string){
-        return currentCategories[currentCategories.findIndex(category =>{
-            return category._id === id
-        })]
+        return currentCategories.find((element) => element._id === id)
     }
 
     function createChartData (){

@@ -8,7 +8,6 @@ import {ExpenseFormAction} from "../../../components/ExpenceForm/ExpenseForm";
 import {Fab, Dialog} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ListExpenses from "../../../components/ListExpenses";
-import {AxiosResponse} from "axios";
 import {searchExpenses, ServerResponse} from "../../../services/expenses";
 import PieChart from "../../../components/Charts/PieChart/PieChart";
 import BarChart from "../../../components/Charts/BarChart/BarChart";
@@ -19,9 +18,9 @@ export default function Home() {
     /// Selector para consultar el user
     const {user} = useSelector((state: AppState) => state)
     const router = useRouter()
-   
+
     const dispatch = useDispatch()
-    
+
 
     const [showAddExpense, setShowAddSpence] = useState(false)
 
@@ -43,16 +42,16 @@ export default function Home() {
     useEffect(() => {
         const getRecentAddedExpensesList = async () => {
             const response = await searchExpenses(user.token, {
-                search:'',
+                search: '',
                 minValue: '',
-                maxValue:'',
-                minDate:'',
+                maxValue: '',
+                minDate: '',
                 maxDate: '',
-                category:'',
+                category: '',
                 page: 1,
-                itemsPerPage:10,
+                itemsPerPage: 10,
                 sortBy: "date",
-                desc:-1
+                desc: -1
             })
             setRecentAddedExpenses(response?.data)
         }
@@ -85,26 +84,26 @@ export default function Home() {
                         <PieChart token={user.token} currentCategories={currentCategories} reload={reload}/>
                         <BarChart token={user.token} reload={reload}/>
                     </div>
-                    <section className="w-full" >
+                    <section className="w-full">
                         <h1>Gastos recientes: </h1>
 
-                        {   (recentAddedExpenses?.error)
+                        {(recentAddedExpenses?.error)
                             ? <p className="w-full text-center p-3">{recentAddedExpenses.msg}</p>
-                            : <ListExpenses results={recentAddedExpenses} userCategories={currentCategories} setReload={setReload} reload={reload}></ListExpenses>
+                            : <ListExpenses results={recentAddedExpenses} userCategories={currentCategories}
+                                            setReload={setReload} reload={reload}></ListExpenses>
                         }
 
                     </section>
-                    <div className="w-full flex justify-end z-10">
-                            
+                    <div className="w-full flex justify-end z-10 p-10">
                         <Fab color="primary" variant="extended" aria-label="add" onClick={handleAddExpenseModal}>
                             <AddIcon/> Agregar Gasto
                         </Fab>
-
-
                     </div>
                     <Dialog open={showAddExpense} aria-labelledby="parent-modal-title"
                             aria-describedby="parent-modal-description" onClose={handleClose}>
-                        <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose}  handleReload={() => {setReload(!reload)}}></ExpenseForm>
+                        <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose} handleReload={() => {
+                            setReload(!reload)
+                        }}></ExpenseForm>
                     </Dialog>
 
                 </section>

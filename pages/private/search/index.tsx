@@ -5,6 +5,10 @@ import { Pagination } from "../../../components/ListExpenses/Pagination";
 import SearchBar from "../../../components/SearchBar";
 import { AppState } from "../../../redux";
 import style from "./search.module.css"
+import {Dialog, Fab} from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import ExpenseForm from "../../../components/ExpenceForm";
+import {ExpenseFormAction} from "../../../components/ExpenceForm/ExpenseForm";
 
 
 
@@ -15,6 +19,14 @@ export default function Search (){
     const userCategories = useSelector((state: AppState) => state.categories)
     const [reload, setReload] = useState(false)
 
+    const [showAddExpense, setShowAddSpence] = useState(false)
+
+    const handleAddExpenseModal = () => {
+        setShowAddSpence(true)
+    }
+    const handleClose = () => {
+        setShowAddSpence(false);
+    };
 
 
 
@@ -32,6 +44,17 @@ export default function Search (){
 
                     </section>
                 }
+                <div className="w-full flex justify-end z-10 p-10">
+                    <Fab color="primary" variant="extended" aria-label="add" onClick={handleAddExpenseModal}>
+                        <AddIcon/> Agregar Gasto
+                    </Fab>
+                </div>
+                <Dialog open={showAddExpense} aria-labelledby="parent-modal-title"
+                        aria-describedby="parent-modal-description" onClose={handleClose}>
+                    <ExpenseForm action={ExpenseFormAction.create} dismiss={handleClose} handleReload={() => {
+                        setReload(!reload)
+                    }}></ExpenseForm>
+                </Dialog>
             </div>
 
     )

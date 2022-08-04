@@ -37,12 +37,3 @@
     bottom:0;
     
 }
-
-@media (min-width:762px){
-    .PrivateLayout__footer{
-        overflow-y: hidden;
-        max-height: 20vh;
-        min-height: 18vh
-    }
-
-}

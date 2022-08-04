@@ -74,6 +74,9 @@ export default function BarChart (props){
     const pieOptions = {
         title: "",
         backgroundColor: 'transparent',
+        vAxis:{
+            format:"short"
+        },
         legend: {
           position: "bottom",
           alignment: "center",
@@ -83,9 +86,12 @@ export default function BarChart (props){
           }
         },
         seriesType:"bars",
-        series:{1:{type:"line"}}, 
+        series:{
+            1:{type:"line"}
+        }, 
         chartArea: {
-            backgroundColor: 'transparent'
+            backgroundColor: 'transparent',
+            width:"80%"
         } 
       };
       console.log(limit)
@@ -99,7 +105,7 @@ export default function BarChart (props){
                 {(results?.length !==0)?<Chart
                 options={pieOptions}
                 chartType="ComboChart"
-                width={"550px"}
+                width={"100%"}
                 height={"400px"}
                 data={chartData}
                 />:<p>Usted no tiene gastos</p>}

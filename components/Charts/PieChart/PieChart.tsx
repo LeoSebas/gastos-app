@@ -99,7 +99,7 @@ export default function PieChart (props){
             data={chartData.values}
             options={pieOptions}
             graph_id="PieChart"
-            width="100%"
+            width="max-content"
             className={style.PieChart__chart}
             height={"400px"}
             legend_toggle

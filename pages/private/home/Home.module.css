@@ -3,12 +3,12 @@
     font-size: x-large;
 }
 .Home__main{
-
+    padding: 0 !important;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
+  
 }
 .Home__charts{
     display: flex;

@@ -18,7 +18,7 @@ export default function PrivateLayout({children}) {
         if (!currentUser || !currentUser.token) {
             router.push('/login')
             return <></>
-        }
+        } else {
         const userStatus = async () => {
             const response = await checkToken(currentUser.token)
             if (!response) {
@@ -31,6 +31,7 @@ export default function PrivateLayout({children}) {
             }
         }
         userStatus()
+        }
 
     }
 

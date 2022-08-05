@@ -49,10 +49,10 @@ export default function BarChart (props){
                 if(limit) {
                     array.push([month, results[i][0].totalExpenses, limit])
                 } else {
-                    array.push([month,  results[i][0].totalExpenses, 0])
+                    array.push([month,  results[i][0].totalExpenses, limit])
                 }
         } else {
-            array.push([month, 0, 0])
+            array.push([month, 0, limit])
         }
         }
         

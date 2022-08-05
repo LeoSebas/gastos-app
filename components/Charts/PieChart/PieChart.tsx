@@ -69,7 +69,7 @@ export default function PieChart (props){
     const pieOptions = {
         title: "",
         pieHole: 0.5,
-        backgroundColor: '#cefdfc',
+        backgroundColor: 'transparent',
         slices: chartData.colors,
         legend: {
           position: "bottom",
@@ -84,7 +84,7 @@ export default function PieChart (props){
             isHtml:true
         },
         chartArea: {
-            backgroundColor: '#cefdfc',
+            backgroundColor: 'transparent',
             left: 0,
             top: 0,
             width:"100%",

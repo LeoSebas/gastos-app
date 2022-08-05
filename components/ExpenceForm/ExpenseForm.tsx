@@ -55,7 +55,7 @@ export default function ExpenseForm({
 
     ///Setear valores iniciales del form para edicion
     const initialValues: ExpenseInput = {
-        categoryName: expense ? categories.find((value) => value._id === expense.categoryID).name : '',
+        categoryName: expense ? categories.find((value) => value._id === expense.categoryID).name : categories[0].name,
         expenseDate: expense ? expense.date : new Date(),
         expenseName: expense ? expense.name : '',
         expenseValue: expense ? expense.value : 0

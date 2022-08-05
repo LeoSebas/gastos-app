@@ -1,0 +1,22 @@
+
+.SetTotalLimit{
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+    background-color: var(--clr-main);
+    border-radius: 5px;
+    gap: 0.5em;
+}
+
+
+.SetTotalLimit__button{
+   padding-inline: 1em;
+   background-color: lightseagreen;
+   border-radius: 15px;
+   color: var(--clr-light);
+
+}
+
+.SetTotalLimit__button:hover{ 
+    transform: scale(1.05);
+}

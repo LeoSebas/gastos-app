@@ -1,0 +1,161 @@
+
+
+.SearchBar{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1em;
+    overflow: hidden;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 80vw;
+    position: sticky;
+    z-index: 0;
+    border-radius: 15px;
+}
+
+.resultSorter{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    padding-inline: 0.5em;
+    margin: 0.5em;
+    font-weight: 400;
+}
+
+.SearchBar__values{
+    width: 3em;
+}
+
+.arrowSort{
+    cursor: pointer;
+}
+
+.arrowSortDown{
+    transform: rotate(180deg);
+    cursor: pointer;
+}
+.arrowSortDown:hover{
+    transform: scale(1.1) rotate(180deg);
+}
+.arrowSort:hover {
+    transform: scale(1.1);
+}
+
+.searchIcon{
+    cursor: pointer;
+    fill: black;
+    color: black;
+}
+
+
+.SearchBar__main{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: lightseagreen;
+    border-radius: 15px;
+    padding: 0.5em;
+    z-index: 2;
+}
+
+.SearchBar__searchInput{
+    display: flex;
+    align-items: center;
+    width: 95%;
+    background-color: white;
+    margin: 1em;
+    border-radius: 10px;
+    gap: 2px;
+    grid-area: search;
+    
+}
+
+.SearchBar__searchInput input{
+    all: unset;
+    width: 100%;
+    font-family:'Fira Sans', sans-serif;
+    font-weight: 400;
+}
+
+.SearchBar__more{
+    grid-area: more;
+    font-size: xx-large;
+    cursor: pointer;
+}
+
+/* Inicio estilo AdvancedSearch*/
+
+.SearchBar__advanced{
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 250ms ease-in-out;
+    background-color: var(--clr-main);
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: -10.5em;
+    gap: 1em;
+    margin-bottom: 1em;
+}
+
+.SearchBar__open{
+    margin-top: -2em;
+}
+
+.SearchBar__advanced_values{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.SearchBar__value{
+    border-radius: 10px;
+    padding: 0.2em;
+    width: 100%;
+    min-width: 4em;
+}
+
+.SearchBar__advanced_dates{
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    max-width: 100%;
+}
+
+.SearchBar__date{
+    border-radius: 8px;
+    max-width: 100%;
+}
+
+.SearchBar__categories{
+    border-radius: 8px;
+    padding: 0.2em;
+}
+
+
+@media (min-width:762px){
+    .SearchBar__advanced{
+        flex-direction: row;
+        margin-top: -5.5em;
+    }
+
+    .SearchBar__open{
+        margin-top: -2.2em;
+    }
+
+    .SearchBar__advanced_dates{
+        margin-top: 1em;
+    }
+
+    .SearchBar__categories{
+        margin-top: 1em;
+    }
+}

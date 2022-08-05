@@ -1,9 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system,  'Fira Sans', sans-serif,'Fredoka One', cursive;
+  font-weight: 600;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -13,4 +18,41 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+:root {
+  --clr-light: hsl(0, 0%, 98%); /* Color claro */
+  --clr-dark: hsl(240, 5%, 11%); /* Color oscuro */
+  --clr-main: #61efeb;
+  --clr-mainLight: #cefdfc;
+}
+
+
+
+
+
+@layer components {
+  .bg-primary {
+    @apply bg-cyan-300
+  }
+}
+
+/* Ancho */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Base */
+::-webkit-scrollbar-track {
+  background: var(--clr-mainLight);
+}
+
+/* Scroll */
+::-webkit-scrollbar-thumb {
+  background: lightseagreen;
+}
+
+/* Hover */
+::-webkit-scrollbar-thumb:hover {
+  background: darkcyan;
 }

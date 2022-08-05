@@ -1,0 +1,16 @@
+
+.ListExpenses {
+    width: 100%;
+}
+.ListExpenses__list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 400;
+    color: black;
+}
+
+.ListExpenses__list:first-of-type(div) {
+   font-weight: 600;
+}
+

@@ -1,0 +1,165 @@
+
+.Sidebar{
+    position: fixed;
+    width: 0px;
+    height: 100vh;
+    transform: translateX(-100vw);
+    transition: all 400ms ease-in-out;
+    z-index: 2000;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.20) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.2) 0px 18px 36px -18px inset;
+}
+
+.pusher{
+    display: none;
+    width: 250px;
+}
+
+.Sidebar__open{
+    width: 100vw;
+    transform: translateX(0);
+    
+    
+}
+
+.Sidebar__hamburger__container div{
+    background-color: white;
+    padding-inline: 10px;
+    border-radius: 0 15px 15px 0;
+    overflow: hidden;   
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 0px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+    
+}
+
+.Sidebar__open .Sidebar__hamburger__container div {
+    background-color: transparent;
+    border-radius: 15px;
+}
+
+
+.Sidebar__open .Sidebar__hamburger__container div:hover {
+    transform: scale(1.1);
+}
+
+.Sidebar__open .Sidebar__hamburger__container{
+    transform: translateX(80vw);
+    
+    
+}
+
+.Sidebar__hamburger__container{
+    position: relative;
+    top: 1em;
+    transform: translateX(99vw);
+    left: 0.5em;
+    background-color: white;
+
+}
+
+.Sidebar__list{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    align-items: center;
+}
+
+
+.Sidebar__list button{
+    background-color: var(--clr-main);
+    border-radius: 15px 15px/ 15px 15px 100% 100% ;
+    padding-inline: 1em ;
+    padding-block: 0.5em;
+    box-shadow: 7px 7px rgba(0,0,0,.25);
+    width: 50%;
+    font-size: x-large;
+    transition: all 100ms ease-in-out;
+}
+
+.Sidebar__list button:hover {
+    transform: scale(1.1);
+    box-shadow: 10px 10px rgba(0,0,0,.15), inset 0 0 0px black;
+}
+
+.Sidebar__list button:active{
+    transform: scale(1.05);
+    box-shadow: 0;
+    box-shadow: 0 0 0px black, inset 7px 7px rgba(0,0,0,.10) ;
+}
+
+
+@media (min-width:762px) {
+
+    .pusherOpen{
+        display: block;
+        width: 250px;
+        visibility: hidden;
+        transition: all 400ms ease-in-out;
+    }
+
+    .pusher{
+        display: block;
+        width: 0;
+        visibility: hidden;
+        transition: all 400ms ease-in-out;
+    }
+
+    .Sidebar{
+        position: fixed;
+        grid-area: sidebar;
+        transform: none;
+        width: 0;
+        overflow-x: hidden;
+    }
+    .Sidebar__open .Sidebar__hamburger__container{
+        transform: translateX(250px);
+        
+    }
+    
+    .Sidebar__open{
+        width: 250px;
+        transform: none;
+    }
+
+    .Sidebar__hamburger__container{
+        transform: translateX(0);
+        position: fixed;
+        margin-left: auto;
+        transition: all 400ms ease-in-out;
+        border-radius: 15px;
+        z-index: 100;
+        background-color: white;
+        box-shadow: 2px 2px;
+        
+        padding: 0;
+        padding-bottom: 10px;
+        left: 0;
+        background-color: transparent;
+    }
+
+    .Sidebar__list button{
+        width: 8em;
+        font-size: medium;
+    }
+
+
+    .Sidebar__hamburger__container div{
+        background-color: white;
+        padding-inline: 10px;
+        border-radius: 0 15px 15px 0;
+        overflow: hidden;   
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 0px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+        
+    }
+
+    .Sidebar__open .Sidebar__hamburger__container div:hover {
+        transform: unset;
+    }
+
+    .Sidebar__open .Sidebar__hamburger__container div {
+        background-color: white;
+        border-radius: 0 15px 15px 0;
+    }
+}

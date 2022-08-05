@@ -7,6 +7,7 @@ import {Expense, getTotalExpenses, searchExpenses} from "../../../services/expen
 import {useEffect, useState} from "react";
 import ListRecentAddedExpenses from "../../../components/Categories/ListRecentAddedExpenses";
 import GraphExpensesAcumulated from "../../../components/Categories/GraphExpencesAcumulated";
+import CustomHead from "../../../components/CustomHead";
 
 export default function Category({ categoryName }) {
     const {categories, user} = useSelector((state : AppState) => state)
@@ -68,6 +69,7 @@ export default function Category({ categoryName }) {
 
 
     return <div className="flex flex-col items-center">
+        <CustomHead title={"Ahorrar+ - Categoria"} />
         <main className="container p-4 flex flex-1 flex-col items-center justify-center">
             <section className="w-full">
                 <p>Pagina de categoria { category.name }</p>

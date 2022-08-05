@@ -12,6 +12,7 @@ import {searchExpenses, ServerResponse} from "../../../services/expenses";
 import PieChart from "../../../components/Charts/PieChart/PieChart";
 import BarChart from "../../../components/Charts/BarChart/BarChart";
 import style from "./Home.module.css"
+import CustomHead from "../../../components/CustomHead";
 
 
 export default function Home() {
@@ -59,7 +60,9 @@ export default function Home() {
     }
  
     return (
+        
         <div className="flex flex-col items-center -z-10">
+            <CustomHead title={"Ahorrar+ - Inicio"} />
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
                 <section className={style.Home__main} >
                     <p className={style.Home__title}>Pagina de inicio</p>

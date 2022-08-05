@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import {useState} from "react";
 import CategoryForm from "../../../components/Categories/CategoryForm";
 import {CategoryFormAction} from "../../../components/Categories/CategoryForm/CategoryForm";
+import CustomHead from "../../../components/CustomHead";
 
 
 export default function Categories (){
@@ -23,7 +24,7 @@ export default function Categories (){
 
     return (
         <div className={style.Categories}>
-
+            <CustomHead title={"Ahorrar+ - Categorias"} />
             <h2 className={style.Categories__title}>Categorias</h2>
             <ListCategories userCategories={userCategories}/>
 

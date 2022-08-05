@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import CustomHead from "../../../components/CustomHead"
 import { AppState } from "../../../redux"
 import { getProfile } from "../../../services/user"
 import style from "./profile.module.css"
@@ -36,6 +37,7 @@ export default function Profile (){
     }, [])
     return (
         <div className={style.Profile}>
+            <CustomHead title={"Ahorrar+ - Perfil"} />
             <p>Nombre: {profile?.name}</p>
             <p>Apellido: {profile?.lastName}</p>
             <p>e-mail: {profile?.email}</p>

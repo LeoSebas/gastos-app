@@ -9,6 +9,7 @@ import {Dialog, Fab} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import ExpenseForm from "../../../components/ExpenceForm";
 import {ExpenseFormAction} from "../../../components/ExpenceForm/ExpenseForm";
+import CustomHead from "../../../components/CustomHead";
 
 
 
@@ -32,6 +33,7 @@ export default function Search (){
 
     return (
             <div className={style.Search}>
+                <CustomHead title={"Ahorrar+ - Tus gastos"} />
                 <SearchBar setResults={setResults} userCategories={userCategories} page={page} setPage={setPage} setError={setError} reload={reload}/>
                 {(error)&& <p>{error}</p>}
                 {   results?.totalPages!==0 && //La paginación no se muestra si no hay páginas. El backend devuelve el resultado de totalItems/limit redondeado hacia arriba. Por ahi es mejor que esto se haga en el frontend, por una cuestion de performance, pero dudo que afecte mucho.

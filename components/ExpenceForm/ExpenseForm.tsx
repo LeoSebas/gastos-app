@@ -15,6 +15,7 @@ import {useState} from "react";
 import ActionButton from "../ActionButton";
 import {DialogContent, DialogTitle} from "@mui/material";
 import {useSelector} from "react-redux";
+import {Done} from "@mui/icons-material";
 
 export enum ExpenseFormAction {
     create,
@@ -70,10 +71,10 @@ export default function ExpenseForm({
             dismiss()
         }
 
-        return <div>
-            <h2>{formState.serverResponse.msg}</h2>
+        return <div className="flex flex-col justify-center">
+            <h2 className="p-3 whitespace-nowrap rounded-xl border border-green-500"><Done color="success" />  {formState.serverResponse.msg}</h2>
             {action === ExpenseFormAction.create ? <>
-                    <ActionButton type="button" onClick={handleResetForm}>Agregar otro gasto</ActionButton>
+                    <ActionButton type="button" onClick={handleResetForm} className="whitespace-nowrap">Agregar otro gasto</ActionButton>
                     <ActionButton type="button" onClick={handleDismiss}>Regresar</ActionButton>
                 </>
                 : <>

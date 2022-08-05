@@ -53,8 +53,8 @@ export interface User {
 export interface AppState{
     user?: User,
     theme: AppTheme,
-    categories: Array<LibraryItem>
-    expensesQueryParams: ExpensesQueryParams
+    categories?: Array<LibraryItem>
+    expensesQueryParams?: ExpensesQueryParams
 }
 
 export const appSlice = createSlice({
@@ -63,7 +63,7 @@ export const appSlice = createSlice({
     reducers: {
         userChanged: (state, action) => {
             const user = action.payload
-            return {...state, user: user}
+            return {...state, user: user, categories: [], expensesQueryParams: {} }
         },
         appThemeChanged: (state) => {
             return {...state, theme: state.theme === AppTheme.light ? AppTheme.dark : AppTheme.light}

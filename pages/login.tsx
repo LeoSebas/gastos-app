@@ -5,9 +5,12 @@ import {loginUser} from "../services/auth";
 import {useDispatch, useSelector} from "react-redux";
 import {appSlice, AppState} from "../redux";
 import * as Yup from 'yup'
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import {useRouter} from "next/router";
 import CustomHead from "../components/CustomHead";
+import iconShowPassword from "/public/icons/icons8-eye-30.png";
+import iconHidePassword from "/public/icons/icons8-closed-eye-50.png";
+import Image from "next/image";
 import { getCategories } from "../services/categories";
 
 interface Credentials {
@@ -29,8 +32,8 @@ export default function Login() {
             dispatch(appSlice.actions.setCategories(response.data.categories))
         }
     }
-   
-    
+
+
 
     if (currentUser) {
         router.push('/private/home')
@@ -83,7 +86,9 @@ export default function Login() {
                             <label htmlFor="passInput">Contraseña</label>
                             <Field className="text-xl p-3 bg-blue-200 rounded-lg" required placeholder="Ingrese su email"
                                    id="passInput" name="password" type={showPassword ? 'text' : 'password'} value={values.password} onChange={handleChange}/>
-                            <span onClick={toggleShowPassword} className="absolute self-end mt-6 p-[14px] hover:cursor-pointer">{showPassword ? 'Ocultar' : 'Ver'}</span>
+                            <div onClick={toggleShowPassword} className="absolute self-end mt-6 p-[14px] hover:cursor-pointer">
+                                <Image alt="show/hide password" src={showPassword ? iconShowPassword : iconHidePassword} width={30} height={30}/>
+                            </div>
                             {errors.password && touched.password && <div className="text-red-500">{errors.password}</div>}
                         </InputBox>
                         <ActionButton type="submit" disabled={isSubmitting}>

@@ -47,7 +47,7 @@ export default function PieChart (props){
         var array = []
         var color = []
         array.push(["Categoria", "Gastos"])
-        if(results && results.length !==0){
+        if(results && results.length !==0 && currentCategories){
 
             results.map(element => {
                 let category = getCategory(element._id)

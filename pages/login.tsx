@@ -8,6 +8,7 @@ import * as Yup from 'yup'
 import {useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import CustomHead from "../components/CustomHead";
+import { getCategories } from "../services/categories";
 
 interface Credentials {
     email: string,
@@ -20,6 +21,16 @@ export default function Login() {
     const router = useRouter()
     /// Dispach para actualizar el user
     const dispatch = useDispatch()
+    const categories = async (token:string) => {
+        const response = await getCategories(token)
+        if (!response || response?.data.error) {
+            console.log(response?.data?.msg)
+        } else {
+            dispatch(appSlice.actions.setCategories(response.data.categories))
+        }
+    }
+   
+    
 
     if (currentUser) {
         router.push('/private/home')
@@ -35,6 +46,7 @@ export default function Login() {
             console.log(response.data.msg)
         } else {
             dispatch(appSlice.actions.userChanged(response.data))
+            categories(response.data.token)
         }}
     }
 

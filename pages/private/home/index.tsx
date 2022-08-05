@@ -17,27 +17,12 @@ import style from "./Home.module.css"
 export default function Home() {
     /// Selector para consultar el user
     const {user} = useSelector((state: AppState) => state)
+    const currentCategories = useSelector((state: AppState) => state.categories)
+    const [recentAddedExpenses, setRecentAddedExpenses] = useState<ServerResponse | undefined>(undefined)
+    const [showAddExpense, setShowAddSpence] = useState(false)
+    const [reload, setReload] = useState(false)
     const router = useRouter()
 
-    const dispatch = useDispatch()
-
-
-    const [showAddExpense, setShowAddSpence] = useState(false)
-
-    const [reload, setReload] = useState(false)
-
-    useEffect(() => {
-        const categories = async () => {
-            const response = await getCategories(user.token)
-            if (!response || response?.data.error) {
-                console.log(response?.data?.msg)
-            } else {
-                dispatch(appSlice.actions.setCategories(response.data.categories))
-            }
-        }
-
-        categories()
-    }, [user, dispatch])
 
     useEffect(() => {
         const getRecentAddedExpensesList = async () => {
@@ -58,8 +43,7 @@ export default function Home() {
         getRecentAddedExpensesList()
     }, [reload, user.token])
 
-    const currentCategories = useSelector((state: AppState) => state.categories)
-    const [recentAddedExpenses, setRecentAddedExpenses] = useState<ServerResponse | undefined>(undefined)
+
 
 
     const handleAddExpenseModal = () => {
@@ -73,8 +57,7 @@ export default function Home() {
         router.push('/login')
         return <></>
     }
-    console.log(recentAddedExpenses)
-
+ 
     return (
         <div className="flex flex-col items-center -z-10">
             <main className="container p-4 flex flex-1 flex-col items-center justify-center">
